@@ -38,7 +38,7 @@ public class PneumaticsResourceSystem extends Subsystem {
 	
 	public double getPressure() {
 		// TODO Add Code
-		return null;
+		return 0.0;
 	}
 	
 	public boolean getCompressorState() {
