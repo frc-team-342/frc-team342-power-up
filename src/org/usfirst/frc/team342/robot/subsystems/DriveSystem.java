@@ -36,7 +36,7 @@ public class DriveSystem extends Subsystem {
 	
 	public double getGyro() {
 		// TODO Add Code
-		return null;
+		return 0.0;
 	}
 	
 	public void resetGyro() {
