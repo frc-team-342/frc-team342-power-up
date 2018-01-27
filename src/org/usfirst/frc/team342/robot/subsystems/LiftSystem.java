@@ -4,12 +4,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class LiftSystem extends Subsystem {
 
+	private static final LiftSystem INSTANCE = new LiftSystem();
+	
 	public LiftSystem() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public LiftSystem(String name) {
-		super(name);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -17,6 +14,10 @@ public class LiftSystem extends Subsystem {
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public static LiftSystem getInstance() {
+		return INSTANCE;
 	}
 	
 	private void initializeLiftSystem() {

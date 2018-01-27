@@ -4,12 +4,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CubeController extends Subsystem {
 
+	private static final CubeController INSTANCE = new CubeController();
+	
 	public CubeController() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public CubeController(String name) {
-		super(name);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -17,6 +14,10 @@ public class CubeController extends Subsystem {
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public static CubeController getInstance() {
+		return INSTANCE;
 	}
 	
 	private void initializeCubeController() {

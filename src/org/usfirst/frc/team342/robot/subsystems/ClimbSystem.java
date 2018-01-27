@@ -3,13 +3,10 @@ package org.usfirst.frc.team342.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ClimbSystem extends Subsystem {
+	
+	private static final ClimbSystem INSTANCE = new ClimbSystem();
 
 	public ClimbSystem() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public ClimbSystem(String name) {
-		super(name);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -17,6 +14,10 @@ public class ClimbSystem extends Subsystem {
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public static ClimbSystem getInstance() {
+		return INSTANCE;
 	}
 	
 	private void initializeClimbSystem() {

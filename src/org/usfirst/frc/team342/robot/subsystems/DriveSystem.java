@@ -4,21 +4,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSystem extends Subsystem {
 
+	private static final DriveSystem INSTANCE = new DriveSystem();
+	
 	private boolean wheel_down;
 	
 	public DriveSystem() {
-		// TODO Auto-generated constructor stub
+		initializeDriveSystem();
 	}
-
-	public DriveSystem(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-
+	}
+	
+	public static DriveSystem getInstance() {
+		return INSTANCE;
 	}
 	
 	private void initializeDriveSystem() {
