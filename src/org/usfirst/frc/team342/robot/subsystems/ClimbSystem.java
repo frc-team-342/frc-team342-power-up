@@ -4,13 +4,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class ClimbSystem extends Subsystem {
 
-	public ClimbSystem() {
-		// TODO Auto-generated constructor stub
-	}
+	private static final ClimbSystem INSTANCE = new ClimbSystem();
 
-	public ClimbSystem(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+	public ClimbSystem() {
+		initializeClimbSystem();
 	}
 
 	@Override
@@ -18,31 +15,35 @@ public class ClimbSystem extends Subsystem {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	public static ClimbSystem getInstance() {
+		return INSTANCE;
+	}
+
 	private void initializeClimbSystem() {
 		// TODO Add Code
 	}
-	
+
 	public void climbUpForce(double speed) {
 		// TODO Add Code
 	}
-	
+
 	public void climbUp(double speed) {
 		// TODO Add Code
 	}
-	
+
 	public void climbDownForce(double speed) {
 		// TODO Add Code
 	}
-	
+
 	public void climbDown(double speed) {
 		// TODO Add Code
 	}
-	
+
 	public void climbStop() {
 		// TODO Add Code
 	}
-	
+
 	public void stopAll() {
 		// TODO Add Code
 	}
