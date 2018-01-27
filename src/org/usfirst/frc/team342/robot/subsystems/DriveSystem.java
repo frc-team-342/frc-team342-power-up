@@ -1,12 +1,31 @@
 package org.usfirst.frc.team342.robot.subsystems;
 
+import org.usfirst.frc.team342.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveSystem extends Subsystem {
 
 	private static final DriveSystem INSTANCE = new DriveSystem();
 
-	private boolean wheel_down;
+	private WPI_TalonSRX leftMaster;
+	private WPI_TalonSRX leftFollow;
+	private WPI_TalonSRX rightMaster;
+	private WPI_TalonSRX rightFollow;
+	private TalonSRX centerWheel;
+	private Solenoid pneumaticSuspension;
+	private AnalogInput ultrasonicOne;
+	private AnalogInput ultrasonicTwo;
+	private AHRS navx;
+	private static final boolean DOWN = true;
+	private static final boolean UP = false;
 
 	public DriveSystem() {
 		initializeDriveSystem();
@@ -22,8 +41,15 @@ public class DriveSystem extends Subsystem {
 	}
 
 	private void initializeDriveSystem() {
-		// TODO Add Code
-		wheel_down = false;
+		leftMaster = new WPI_TalonSRX(RobotMap.LEFTMASTER);
+		leftFollow = new WPI_TalonSRX(RobotMap.LEFTFOLLOW);
+		rightMaster = new WPI_TalonSRX(RobotMap.RIGHTMASTER);
+		rightFollow = new WPI_TalonSRX(RobotMap.RIGHTFOLLOW);
+		centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
+		pneumaticSuspension = new Solenoid(RobotMap.PNEUMATICWHEEL);
+		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
+		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
+		navx = new AHRS(SerialPort.Port.kMXP);
 	}
 
 	public void drive(double X, double Y, double rot) {
@@ -35,8 +61,7 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public double getGyro() {
-		// TODO Add Code
-		return 0.0;
+		return navx.getAngle();
 	}
 
 	public void resetGyro() {
@@ -44,17 +69,15 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void wheelDown() {
-		// TODO Add Code
-		wheel_down = true;
+		pneumaticSuspension.set(DOWN);
 	}
 
 	public void wheelUp() {
-		// TODO Add Code
-		wheel_down = false;
+		pneumaticSuspension.set(UP);
 	}
 
 	public boolean getWheelState() {
-		return wheel_down;
+		return pneumaticSuspension.get();
 	}
 
 	public double getFrontLeftEncoder() {

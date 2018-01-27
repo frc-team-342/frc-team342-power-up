@@ -27,8 +27,8 @@ public class RobotMap {
 	public static final int BLUE = 2;
 	
 	//DigitalInputs
-	public static final int ELEVATORDOWNLIMIT = 0;
-	public static final int ELEVATORUPLIMIT = 1;
+	public static final int LIFTLOWERLIMIT = 0;
+	public static final int LIFTUPPERLIMIT = 1;
 	
 	//MotorControllers
 	public static final int RIGHTMASTER = 1;
@@ -38,8 +38,8 @@ public class RobotMap {
 	public static final int CENTERWHEEL = 5;
 	public static final int INTAKEMASTER = 6;
 	public static final int INTAKEFOLLOW = 7;
-	public static final int ELEVATORMASTER = 8;
-	public static final int ELEVATORFOLLOW = 9;
+	public static final int LIFTMASTER = 8;
+	public static final int LIFTFOLLOW = 9;
 	
 	//Pneumatics
 	public static final int PNEUMATICWHEEL = 0;

@@ -20,7 +20,7 @@ public class CameraVisionSystem extends Subsystem {
 		return INSTANCE;
 	}
 
-	public void initializeCameraVisionSystem() {
+	private void initializeCameraVisionSystem() {
 
 	}
 

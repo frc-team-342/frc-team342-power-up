@@ -62,7 +62,7 @@ public class CubeController extends Subsystem {
 	}
 
 	public void collectorOutForce(double speed) {
-		
+
 		pneumaticClaw.set(OPEN);
 		intakeMaster.set(ControlMode.PercentOutput, speed);
 	}
