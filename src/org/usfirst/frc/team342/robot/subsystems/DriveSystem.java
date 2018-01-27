@@ -57,19 +57,19 @@ public class DriveSystem extends Subsystem {
 		return wheel_down;
 	}
 
-	public double getFrontLeftEncoder() {
+	public double getLeftMasterEncoder() {
 		return 0.0;
 	}
 
-	public double getFrontRightEncoder() {
+	public double getLeftFollowerEncoder() {
 		return 0.0;
 	}
 
-	public double getBackLeftEncoder() {
+	public double getRightMasterEncoder() {
 		return 0.0;
 	}
 
-	public double getBackRightEncoder() {
+	public double getRightFollowerEncoder() {
 		return 0.0;
 	}
 
