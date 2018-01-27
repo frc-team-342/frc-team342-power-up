@@ -39,6 +39,14 @@ public class LiftSystem extends Subsystem {
 	public void liftDown(double speed) {
 		// TODO Add Code
 	}
+	
+	public boolean getUpperLimit() {
+		return false;
+	}
+	
+	public boolean getLowerLimit() {
+		return false;
+	}
 
 	public double getPotentiometer() {
 		return 0.0;
