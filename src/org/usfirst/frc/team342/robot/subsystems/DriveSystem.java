@@ -73,7 +73,11 @@ public class DriveSystem extends Subsystem {
 		return 0.0;
 	}
 
-	public double getUltrasonic() {
+	public double getUltrasonicOne() {
+		return 0.0;
+	}
+	
+	public double getUltrasonicTwo() {
 		return 0.0;
 	}
 
