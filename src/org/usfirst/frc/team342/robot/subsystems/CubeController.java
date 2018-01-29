@@ -4,7 +4,6 @@ import org.usfirst.frc.team342.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -41,8 +40,8 @@ public class CubeController extends Subsystem {
 	private void initializeCubeController() {
 
 		pneumaticClaw = new Solenoid(RobotMap.PNEUMATICCLAW);
-		intakeMaster = new WPI_TalonSRX(RobotMap.INTAKEMASTER);
-		intakeFollow = new WPI_TalonSRX(RobotMap.INTAKEFOLLOW);
+		intakeMaster = new TalonSRX(RobotMap.INTAKEMASTER);
+		intakeFollow = new TalonSRX(RobotMap.INTAKEFOLLOW);
 		infraredSensor = new AnalogInput(RobotMap.INFRAREDSENSOR);
 
 		intakeFollow.follow(intakeMaster);
@@ -85,11 +84,13 @@ public class CubeController extends Subsystem {
 	}
 
 	public void collectorStop() {
+
 		intakeMaster.set(ControlMode.PercentOutput, 0.0);
 		pneumaticClaw.set(CLOSED);
 	}
 
 	public void stopAll() {
+
 		intakeMaster.set(ControlMode.PercentOutput, 0.0);
 		intakeMaster.set(ControlMode.PercentOutput, 0.0);
 		pneumaticClaw.set(getPneumaticClawState());

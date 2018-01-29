@@ -14,23 +14,26 @@ package org.usfirst.frc.team342.robot;
  * floating around.
  */
 public class RobotMap {
-	
-	//Analog Sensors
+
+	// Analog Sensors
 	public static final int INFRAREDSENSOR = 0;
 	public static final int ULTRASONIC_ONE = 1;
 	public static final int ULTRASONIC_TWO = 2;
 	public static final int POTENTIOMETER = 3;
-	
-	//Lights Addresses (PWM)
+
+	// Lights Addresses (PWM)
 	public static final int RED = 0;
 	public static final int GREEN = 1;
 	public static final int BLUE = 2;
-	
-	//DigitalInputs
+	public static final int TWELVEVOLTSONE = 3;
+	public static final int TWELVEVOLTSTWO = 4;
+	public static final int FIVEVOLTS = 5;
+
+	// DigitalInputs
 	public static final int LIFTLOWERLIMIT = 0;
 	public static final int LIFTUPPERLIMIT = 1;
-	
-	//MotorControllers
+
+	// MotorControllers
 	public static final int RIGHTMASTER = 1;
 	public static final int RIGHTFOLLOW = 2;
 	public static final int LEFTMASTER = 3;
@@ -40,8 +43,8 @@ public class RobotMap {
 	public static final int INTAKEFOLLOW = 7;
 	public static final int LIFTMASTER = 8;
 	public static final int LIFTFOLLOW = 9;
-	
-	//Pneumatics
+
+	// Pneumatics
 	public static final int PNEUMATICWHEEL = 0;
 	public static final int PNEUMATICCLAW = 1;
 }

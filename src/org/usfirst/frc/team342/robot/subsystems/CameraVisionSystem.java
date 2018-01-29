@@ -7,6 +7,7 @@ public class CameraVisionSystem extends Subsystem {
 	private static final CameraVisionSystem INSTANCE = new CameraVisionSystem();
 
 	public CameraVisionSystem() {
+
 		initializeCameraVisionSystem();
 	}
 
@@ -17,6 +18,7 @@ public class CameraVisionSystem extends Subsystem {
 	}
 
 	public static CameraVisionSystem getInstance() {
+
 		return INSTANCE;
 	}
 
