@@ -4,18 +4,25 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CameraVisionSystem extends Subsystem {
 
-	public CameraVisionSystem() {
-		// TODO Auto-generated constructor stub
-	}
+	private static final CameraVisionSystem INSTANCE = new CameraVisionSystem();
 
-	public CameraVisionSystem(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+	public CameraVisionSystem() {
+
+		initializeCameraVisionSystem();
 	}
 
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
+
+	}
+
+	public static CameraVisionSystem getInstance() {
+
+		return INSTANCE;
+	}
+
+	private void initializeCameraVisionSystem() {
 
 	}
 

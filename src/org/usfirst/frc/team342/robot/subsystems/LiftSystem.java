@@ -1,16 +1,27 @@
 package org.usfirst.frc.team342.robot.subsystems;
 
+import org.usfirst.frc.team342.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class LiftSystem extends Subsystem {
 
-	public LiftSystem() {
-		// TODO Auto-generated constructor stub
-	}
+	private static final LiftSystem INSTANCE = new LiftSystem();
 
-	public LiftSystem(String name) {
-		super(name);
-		// TODO Auto-generated constructor stub
+	private TalonSRX liftMaster;
+	private TalonSRX liftFollow;
+	private DigitalInput lowerLimit;
+	private DigitalInput upperLimit;
+	private AnalogInput potentiometer;
+
+	public LiftSystem() {
+
+		initializeLiftSystem();
 	}
 
 	@Override
@@ -18,33 +29,68 @@ public class LiftSystem extends Subsystem {
 		// TODO Auto-generated method stub
 
 	}
-	
+
+	public static LiftSystem getInstance() {
+
+		return INSTANCE;
+	}
+
 	private void initializeLiftSystem() {
-		// TODO Add Code
+
+		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
+		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
+		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
+		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
+		potentiometer = new AnalogInput(RobotMap.POTENTIOMETER);
+
+		liftFollow.follow(liftMaster);
 	}
-	
+
 	public void liftUpForce(double speed) {
-		// TODO Add Code
+
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
-	
+
 	public void liftUp(double speed) {
-		// TODO Add Code
+
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
-	
+
 	public void liftDownForce(double speed) {
-		// TODO Add Code
+
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
-	
+
 	public void liftDown(double speed) {
-		// TODO Add Code
+
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
-	
+
+	public boolean getUpperLimit() {
+
+		return upperLimit.get();
+	}
+
+	public boolean getLowerLimit() {
+
+		return lowerLimit.get();
+	}
+
+	public double getPotentiometer() {
+
+		// \/ Is this the right method to use to get an analog output? \/
+		return potentiometer.getAverageVoltage();
+	}
+
 	public void liftStop() {
-		// TODO Add Code
+
+		liftMaster.set(ControlMode.PercentOutput, 0.0);
 	}
-	
+
 	public void stopAll() {
-		// TODO Add Code
+
+		liftMaster.set(ControlMode.PercentOutput, 0.0);
+		liftFollow.set(ControlMode.PercentOutput, 0.0);
 	}
 
 }
