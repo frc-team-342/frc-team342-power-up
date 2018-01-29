@@ -13,7 +13,7 @@ public class LightsSubsystem extends Subsystem {
 
 	private static final LightsSubsystem INSTANCE = new LightsSubsystem();
 	
-	private DriverStation ds;
+	//private DriverStation ds;
 	
 	//private PWM red;
 	//private PWM green;
