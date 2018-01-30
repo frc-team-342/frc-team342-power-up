@@ -10,7 +10,6 @@ public class DispenseCube extends Command {
 	private CubeController cube_controller;
 
 	private static final double SPEED = -1.0;
-	private long start_time;
 
 	public DispenseCube() {
 		
@@ -21,7 +20,6 @@ public class DispenseCube extends Command {
 	protected void initialize() {
 		
 		SmartDashboard.putString("Cube State:", "Dispensing Cube");
-		start_time = System.currentTimeMillis();
 	}
 
 	protected void execute() {
