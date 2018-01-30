@@ -45,6 +45,7 @@ public class CubeController extends Subsystem {
 		infraredSensor = new AnalogInput(RobotMap.INFRAREDSENSOR);
 
 		intakeFollow.follow(intakeMaster);
+		intakeFollow.setInverted(true);
 	}
 
 	public void collectCube(double speed) {
