@@ -3,6 +3,7 @@ package org.usfirst.frc.team342.robot.subsystems;
 import org.usfirst.frc.team342.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -42,6 +43,8 @@ public class LiftSystem extends Subsystem {
 		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
 		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
 		potentiometer = new AnalogInput(RobotMap.POTENTIOMETER);
+		
+		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		liftFollow.follow(liftMaster);
 	}
@@ -58,12 +61,12 @@ public class LiftSystem extends Subsystem {
 
 	public void liftDownForce(double speed) {
 
-		liftMaster.set(ControlMode.PercentOutput, speed);
+		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
 
 	public void liftDown(double speed) {
 
-		liftMaster.set(ControlMode.PercentOutput, speed);
+		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
 
 	public boolean getUpperLimit() {
@@ -74,6 +77,10 @@ public class LiftSystem extends Subsystem {
 	public boolean getLowerLimit() {
 
 		return lowerLimit.get();
+	}
+	
+	public double getLiftEncoder () {
+		return liftMaster.getSelectedSensorPosition(0);
 	}
 
 	public double getPotentiometer() {
