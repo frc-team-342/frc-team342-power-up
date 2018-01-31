@@ -10,30 +10,35 @@ public class StopCubeController extends Command {
 	private CubeController cube_controller;
 
 	public StopCubeController() {
-		
+
 		cube_controller = CubeController.getInstance();
 		requires(cube_controller);
 	}
 
 	protected void initialize() {
+
 		SmartDashboard.putString("Cube State:", "Stopping Cube Collector");
 	}
 
 	protected void execute() {
+
 		cube_controller.collectorStop();
 	}
 
 	@Override
 	protected boolean isFinished() {
+
 		return true;
 	}
 
 	protected void end() {
+
 		cube_controller.collectorStop();
 	}
 
 	@Override
 	protected void interrupted() {
+
 		cube_controller.stopAll();
 	}
 

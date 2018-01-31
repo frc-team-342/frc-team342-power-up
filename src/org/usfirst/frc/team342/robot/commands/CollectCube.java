@@ -13,24 +13,24 @@ public class CollectCube extends Command {
 	private static final double SPEED = 1.0;
 
 	public CollectCube() {
-		
+
 		cube_controller = CubeController.getInstance();
 		requires(cube_controller);
 	}
 
 	protected void initialize() {
-		
+
 		SmartDashboard.putString("Cube State:", "Collecting Cube");
 	}
 
 	protected void execute() {
-		
+
 		cube_controller.collectCube(SPEED);
 	}
 
 	@Override
 	protected boolean isFinished() {
-		
+
 		if (cube_controller.getInfrared() <= COLLECTED_DISTANCE) {
 			return true;
 		} else {
@@ -39,11 +39,14 @@ public class CollectCube extends Command {
 	}
 
 	protected void end() {
+
+		cube_controller.closeClawAndStop();
 		cube_controller.collectorStop();
 	}
 
 	@Override
 	protected void interrupted() {
+
 		cube_controller.stopAll();
 	}
 

@@ -9,35 +9,39 @@ public class DispenseCube extends Command {
 
 	private CubeController cube_controller;
 
-	private static final double SPEED = -1.0;
+	private static final double SPEED = 1.0;
 
 	public DispenseCube() {
-		
+
 		cube_controller = CubeController.getInstance();
 		requires(cube_controller);
 	}
 
 	protected void initialize() {
-		
+
 		SmartDashboard.putString("Cube State:", "Dispensing Cube");
 	}
 
 	protected void execute() {
-		
-		cube_controller.collectCube(SPEED);
+
+		cube_controller.dispenseCube(1.0);
 	}
 
 	@Override
 	protected boolean isFinished() {
+
 		return false;
 	}
 
 	protected void end() {
+
+		cube_controller.closeClawAndStop();
 		cube_controller.collectorStop();
 	}
 
 	@Override
 	protected void interrupted() {
+
 		cube_controller.stopAll();
 	}
 

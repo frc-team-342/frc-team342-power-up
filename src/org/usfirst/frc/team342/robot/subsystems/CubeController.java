@@ -55,10 +55,16 @@ public class CubeController extends Subsystem {
 
 	}
 
+	public void closeClawAndStop() {
+
+		pneumaticClaw.set(CLOSED);
+		intakeMaster.set(ControlMode.PercentOutput, 0.0);
+	}
+
 	public void dispenseCube(double speed) {
 
 		pneumaticClaw.set(OPEN);
-		intakeMaster.set(ControlMode.PercentOutput, speed);
+		intakeMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
 
 	public void collectorOutForce(double speed) {
