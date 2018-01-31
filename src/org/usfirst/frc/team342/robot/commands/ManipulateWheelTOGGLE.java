@@ -1,15 +1,20 @@
 package org.usfirst.frc.team342.robot.commands;
 
+import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class ManipulateWheelTOGGLE extends Command {
+	
+	private DriveSystem drive;
 
     public ManipulateWheelTOGGLE() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	drive = 
     }
 
     // Called just before this Command runs the first time

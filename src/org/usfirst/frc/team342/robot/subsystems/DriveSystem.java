@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -23,7 +24,7 @@ public class DriveSystem extends Subsystem {
 	private WPI_TalonSRX rightMaster;
 	private WPI_TalonSRX rightFollow;
 	private TalonSRX centerWheel;
-	private Solenoid pneumaticSuspension;
+	private DoubleSolenoid pneumaticSuspension;
 	private AnalogInput ultrasonicOne;
 	private AnalogInput ultrasonicTwo;
 	private AHRS navx;
@@ -54,7 +55,7 @@ public class DriveSystem extends Subsystem {
 		rightMaster = new WPI_TalonSRX(RobotMap.RIGHTMASTER);
 		rightFollow = new WPI_TalonSRX(RobotMap.RIGHTFOLLOW);
 		centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
-		pneumaticSuspension = new Solenoid(RobotMap.PNEUMATICWHEEL);
+		pneumaticSuspension = new DoubleSolenoid(RobotMap.PNEUMATICWHEEL_UP, RobotMap.PNEUMATICWHEEL_DOWN);
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
 		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
 		navx = new AHRS(SerialPort.Port.kMXP);
