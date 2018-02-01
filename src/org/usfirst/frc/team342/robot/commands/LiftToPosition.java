@@ -45,7 +45,7 @@ public class LiftToPosition extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (CurrentHeight > (goal - 10.0) && CurrentHeight < (goal + 10.0)) {
+		if (CurrentHeight > (goal - 10.0) && CurrentHeight < (goal + 10.0)) {   //deadzone so that robot doesn't have to keep adjusting
 			return true;
 		} else {
 			return false;

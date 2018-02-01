@@ -11,6 +11,8 @@ import org.usfirst.frc.team342.robot.commands.CollectCube;
 import org.usfirst.frc.team342.robot.commands.DispenseCube;
 import org.usfirst.frc.team342.robot.commands.ManipulateWheelTOGGLE;
 import org.usfirst.frc.team342.robot.commands.StopCubeController;
+import org.usfirst.frc.team342.robot.commands.liftDown;
+import org.usfirst.frc.team342.robot.commands.liftUp;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -65,16 +67,18 @@ public class OI {
 				leftPad_button7 ,
 				leftPad_button8 ;
 		
-		//Various Command to be assigned to buttons
+		//Various Command to be assigned to buttons for manipulator
 		
 		private CollectCube collectcube;
 		private ManipulateWheelTOGGLE manipulatewheeltoggle; 
 		private StopCubeController stopcubecontroller;
 		private DispenseCube dispensecube;
+		private liftUp liftup;
+		private liftDown liftdown;
 
 
 	private OI() {
-		 leftJoy = new Joystick(0);
+		 leftJoy = new Joystick(2);
 		  leftJoy_trigger = new JoystickButton(leftJoy, 1);
 				leftJoy_button2 = new JoystickButton(leftJoy, 2);
 				leftJoy_button3 = new JoystickButton(leftJoy, 3);
@@ -92,7 +96,7 @@ public class OI {
 				rightJoy_button6 = new JoystickButton(rightJoy, 6);
 				rightJoy_button7 = new JoystickButton(rightJoy, 7);
 				rightJoy_button8 = new JoystickButton(rightJoy, 8);
-		 rightPad = new Joystick(2);
+		 rightPad = new Joystick(0);
 		  rightPad_trigger = new JoystickButton(rightPad, 1);
 				rightPad_button2 = new JoystickButton(rightPad, 2);
 				rightPad_button3 = new JoystickButton(rightPad, 3);
@@ -113,11 +117,17 @@ public class OI {
 				leftPad_button7 = new JoystickButton(leftPad, 7);
 				leftPad_button8 = new JoystickButton(leftPad, 8);
 				
+				liftup = new liftUp();
+				liftdown = new liftDown();
+				
+				// manipulator buttons (TEMP) mapped to commands
 				
 				rightPad_trigger.whileHeld(dispensecube);
 				rightPad_button2.whenPressed(stopcubecontroller);
 				rightPad_button3.whenPressed(manipulatewheeltoggle);
 				rightPad_button4.whenPressed(collectcube);
+				rightPad_button5.whileHeld(liftup);
+				rightPad_button6.whileHeld(liftdown);
 				
 				
 				

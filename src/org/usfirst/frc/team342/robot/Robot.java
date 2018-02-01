@@ -7,6 +7,14 @@
 
 package org.usfirst.frc.team342.robot;
 
+import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
+import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
+import org.usfirst.frc.team342.robot.subsystems.CubeController;
+import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
+import org.usfirst.frc.team342.robot.subsystems.LightsSubsystem;
+import org.usfirst.frc.team342.robot.subsystems.PneumaticsResourceSystem;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -24,7 +32,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends TimedRobot {
 	
 	
-	public static OI m_oi;
+	private OI oi;
+	private CameraVisionSystem cameravisionsystem;
+	private ClimbSystem climbsystem;
+	private CubeController cubecontroller;
+	private DriveSystem drivesystem;
+	private LiftSystem liftsystem;
+	private LightsSubsystem lightssubsystem;
+	private PneumaticsResourceSystem pneumaticsresourcesystem;
 
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -35,7 +50,14 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = OI.getInstance();
+		oi = OI.getInstance();
+		cameravisionsystem = CameraVisionSystem.getInstance();
+		climbsystem = ClimbSystem.getInstance();
+		cubecontroller = CubeController.getInstance();
+		drivesystem = DriveSystem.getInstance();
+		liftsystem = LiftSystem.getInstance();
+		lightssubsystem = LightsSubsystem.getInstance();
+		pneumaticsresourcesystem = PneumaticsResourceSystem.getInstance();
 	
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
