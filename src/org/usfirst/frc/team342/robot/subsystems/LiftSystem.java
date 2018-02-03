@@ -28,80 +28,54 @@ public class LiftSystem extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-
 	}
 
 	public static LiftSystem getInstance() {
-
 		return INSTANCE;
 	}
 
 	private void initializeLiftSystem() {
-
 		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
 		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
 		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
-		potentiometer = new AnalogInput(RobotMap.POTENTIOMETER);
-		
 		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-
-		
+		liftFollow.follow(liftMaster);
 	}
 
 	public void liftUpForce(double speed) {
-
 		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
 
 	public void liftUp(double speed) {
-
 		liftMaster.set(ControlMode.PercentOutput, speed);
-		liftFollow.set(ControlMode.PercentOutput, speed);
 	}
 
 	public void liftDownForce(double speed) {
-
 		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
-		liftFollow.set(ControlMode.PercentOutput, speed* -1.0);
 	}
 
 	public void liftDown(double speed) {
-
 		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
-		liftFollow.set(ControlMode.PercentOutput, speed* -1.0);
 	}
 
 	public boolean getUpperLimit() {
-
 		return upperLimit.get();
 	}
 
 	public boolean getLowerLimit() {
-
 		return lowerLimit.get();
 	}
-	
-	public double getLiftEncoder () {
+
+	public double getLiftEncoder() {
 		return liftMaster.getSelectedSensorPosition(0);
-	
-	}
-
-	public double getPotentiometer() {
-
-		// \/ Is this the right method to use to get an analog output? \/
-		return potentiometer.getAverageVoltage();
 	}
 
 	public void liftStop() {
-
 		liftMaster.set(ControlMode.PercentOutput, 0.0);
-		liftFollow.set(ControlMode.PercentOutput, 0.0);
 	}
+
 	public void stopAll() {
-
 		liftMaster.set(ControlMode.PercentOutput, 0.0);
-		liftFollow.set(ControlMode.PercentOutput, 0.0);
 	}
-
 }
