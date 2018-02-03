@@ -10,6 +10,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -90,6 +91,7 @@ public class DriveSystem extends Subsystem {
 		if (getWheelState()) {
 			if (Math.abs(X_left) >= deadzone || Math.abs(X_right) >= deadzone) {
 				centerWheel.set(ControlMode.PercentOutput, X_avg);
+	
 			}
 		}
 
@@ -113,17 +115,21 @@ public class DriveSystem extends Subsystem {
 
 	public void wheelDown() {
 
-		pneumaticSuspension.set(DOWN);
+		pneumaticSuspension.set(Value.kForward);
 	}
 
 	public void wheelUp() {
 
-		pneumaticSuspension.set(UP);
+		pneumaticSuspension.set(Value.kReverse);
 	}
 
 	public boolean getWheelState() {
 
-		return pneumaticSuspension.get();
+		if(pneumaticSuspension.get().equals(Value.kForward)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public double getLeftMasterEncoder() {
@@ -181,7 +187,6 @@ public class DriveSystem extends Subsystem {
 		rightMaster.set(0.0);
 		rightFollow.set(0.0);
 		centerWheel.set(ControlMode.PercentOutput, 0.0);
-		pneumaticSuspension.set(getWheelState());
 	}
 
 }

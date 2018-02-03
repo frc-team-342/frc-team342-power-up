@@ -14,7 +14,7 @@ public class ManipulateWheelTOGGLE extends Command {
     public ManipulateWheelTOGGLE() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	drive = 
+    	 
     }
 
     // Called just before this Command runs the first time

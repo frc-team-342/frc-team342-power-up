@@ -9,29 +9,34 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveWithJoystick extends Command {
 
 	private static final int LEFT_STICK = Joystick.AxisType.kY.value; 
+	private static final int RIGHT_STICK = Joystick.AxisType.kY.value;
 	
 	private double speed_y_left; 
 	private double speed_x_left;
 	private double speed_y_right;
-	private double speed_x_right;	
+	private double speed_x_right;
 		
-	private Joystick joypad; 
+	private Joystick Joypad_Left; 
+	private Joystick Joypad_Right;
 	private OI oi; 
 	private DriveSystem drive; 
 	
 	public DriveWithJoystick() {
 		oi = OI.getInstance(); 
 		drive = DriveSystem.getInstance();
-		joypad = new Joystick(100);
+		Joypad_Left = oi.getJoypadLeftDrive();
+		Joypad_Right = oi.getJoypadRightDrive();
 		//tells robot to get what its trying to do 
 		//tells drive system to drive with the previous instance 
 			
 		//joypad = oi.joyleft;
 		//joypad = oi.joyright;
 		//honestly, no idea what those two things do but they work if joypad doesn't
+	
+	
+		
 	}
-	
-	
+		
 	
 	@Override
 	protected boolean isFinished() {
@@ -45,12 +50,19 @@ public class DriveWithJoystick extends Command {
 	
 	public void execute() { 
 		
-		speed_y_left = joypad.getRawAxis(1);
-		speed_y_right = joypad.getRawAxis(5);
-		speed_x_left = joypad.getRawAxis(1);
-		speed_x_right = joypad.getRawAxis(5);
+		speed_y_left = Joypad_Left.getRawAxis(1);
+		speed_x_left = Joypad_Left.getRawAxis(1);
+		
+		speed_y_right = Joypad_Left.getRawAxis(5);
+		speed_x_right = Joypad_Left.getRawAxis(5);
+		
+		
+		//set to random axis... made them up
 
-		double right = joypad.getRawAxis(LEFT_STICK); 
+		double right = Joypad_Left.getRawAxis(LEFT_STICK); 
+		double left = Joypad_Right.getRawAxis(RIGHT_STICK);
+		 
+		
 		
 		//what happens when the thing starts
 			
