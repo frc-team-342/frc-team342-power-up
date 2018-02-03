@@ -74,27 +74,23 @@ public class DriveSystem extends Subsystem {
 
 	}
 
-	public void drive(double Y_left, double Y_right, double X_left, double X_right, double deadzone) {
+	public void drive(double Left_joy_Y, double Right_joy_Y, double X_average, double deadzone) {
 
-		double X_avg = (X_left + X_right) / 2.0;
-
-		if (!front) {
-			Y_left = Y_left * -1.0;
-			Y_right = Y_right * -1.0;
-			X_avg = X_avg * -1.0;
+		if(!front) {
+			Left_joy_Y = Left_joy_Y * -1.0;
+			Right_joy_Y = Right_joy_Y * -1.0;
+			X_average = X_average * -1.0;
 		}
-
-		if (Math.abs(Y_right) >= deadzone || Math.abs(Y_left) >= deadzone) {
-			drive.tankDrive(Y_left, Y_right);
+		
+		if(Math.abs(Right_joy_Y) > deadzone || Math.abs(Left_joy_Y) > deadzone) {
+			drive.tankDrive(Left_joy_Y, Right_joy_Y);
+		}else {
+			drive.tankDrive(0.0, 0.0);
 		}
-
-		if (getWheelState()) {
-			if (Math.abs(X_left) >= deadzone || Math.abs(X_right) >= deadzone) {
-				centerWheel.set(ControlMode.PercentOutput, X_avg);
-	
-			}
+		
+		if(Math.abs(X_average) > deadzone) {
+			centerWheel.set(ControlMode.PercentOutput, X_average);
 		}
-
 	}
 
 	public void driveKeepHeading(double X, double Y, double rot) {
@@ -166,11 +162,7 @@ public class DriveSystem extends Subsystem {
 
 	public void changeFront() {
 
-		if (front) {
-			front = false;
-		} else {
-			front = true;
-		}
+		front = !front;
 	}
 
 	public void stopDrive() {
