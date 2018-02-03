@@ -3,6 +3,7 @@ package org.usfirst.frc.team342.robot.commands;
 import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -12,14 +13,30 @@ public class LiftToPosition extends Command {
 	private double CurrentHeight;
 	private double goal;
 	private boolean up;
-
-	public LiftToPosition(double height) {
+	
+	public enum LiftHeight{
+		fourthousand,
+		onethousand
+	}
+	
+	public LiftToPosition(LiftHeight height) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		LiftToPosition = LiftSystem.getInstance();
 		requires(LiftToPosition);
-		goal = height;
+		
+		switch (height) {
+		case fourthousand:
+			goal = 4000;
+			break;
+		case onethousand:
+			goal = 1000;
+			break;
+		default:
+		}
 	}
+	
+	
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
@@ -34,18 +51,25 @@ public class LiftToPosition extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (up == true) {
-			LiftToPosition.liftUp(1.0);
+		
+		CurrentHeight = LiftToPosition.getLiftEncoder();
+			if (up == true) {
+				LiftToPosition.liftUp(0.15);
 
-		} else {
-			LiftToPosition.liftDown(1.0);
-		}
+			} else {
+				LiftToPosition.liftDown(0.15);
+			}
+		
+		
+		
+		SmartDashboard.putBoolean("UP:"	,up);
 
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (CurrentHeight > (goal - 10.0) && CurrentHeight < (goal + 10.0)) {   //deadzone so that robot doesn't have to keep adjusting
+		CurrentHeight = LiftToPosition.getLiftEncoder();
+		if (CurrentHeight > (goal - 1000.0) && CurrentHeight < (goal + 1000.0)) {   //deadzone so that robot doesn't have to keep adjusting
 			return true;
 		} else {
 			return false;

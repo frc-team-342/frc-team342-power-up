@@ -26,7 +26,7 @@ public class liftUp extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double speed;
-    	speed= -1.0;
+    	speed= 0.25;
     	  liftUp.liftUp(speed);
     }
 

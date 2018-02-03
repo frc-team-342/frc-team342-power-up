@@ -46,7 +46,7 @@ public class LiftSystem extends Subsystem {
 		
 		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
-		liftFollow.follow(liftMaster);
+		
 	}
 
 	public void liftUpForce(double speed) {
@@ -57,16 +57,19 @@ public class LiftSystem extends Subsystem {
 	public void liftUp(double speed) {
 
 		liftMaster.set(ControlMode.PercentOutput, speed);
+		liftFollow.set(ControlMode.PercentOutput, speed);
 	}
 
 	public void liftDownForce(double speed) {
 
 		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
+		liftFollow.set(ControlMode.PercentOutput, speed* -1.0);
 	}
 
 	public void liftDown(double speed) {
 
 		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
+		liftFollow.set(ControlMode.PercentOutput, speed* -1.0);
 	}
 
 	public boolean getUpperLimit() {
@@ -81,6 +84,7 @@ public class LiftSystem extends Subsystem {
 	
 	public double getLiftEncoder () {
 		return liftMaster.getSelectedSensorPosition(0);
+	
 	}
 
 	public double getPotentiometer() {
@@ -92,8 +96,8 @@ public class LiftSystem extends Subsystem {
 	public void liftStop() {
 
 		liftMaster.set(ControlMode.PercentOutput, 0.0);
+		liftFollow.set(ControlMode.PercentOutput, 0.0);
 	}
-
 	public void stopAll() {
 
 		liftMaster.set(ControlMode.PercentOutput, 0.0);

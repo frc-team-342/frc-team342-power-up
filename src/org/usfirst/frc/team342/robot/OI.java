@@ -9,6 +9,8 @@ package org.usfirst.frc.team342.robot;
 
 import org.usfirst.frc.team342.robot.commands.CollectCube;
 import org.usfirst.frc.team342.robot.commands.DispenseCube;
+import org.usfirst.frc.team342.robot.commands.LiftToPosition;
+import org.usfirst.frc.team342.robot.commands.LiftToPosition.LiftHeight;
 import org.usfirst.frc.team342.robot.commands.ManipulateWheelTOGGLE;
 import org.usfirst.frc.team342.robot.commands.StopCubeController;
 import org.usfirst.frc.team342.robot.commands.liftDown;
@@ -75,6 +77,8 @@ public class OI {
 		private DispenseCube dispensecube;
 		private liftUp liftup;
 		private liftDown liftdown;
+		private LiftToPosition lifttoposition_1;
+		private LiftToPosition lifttoposition_2;
 
 
 	private OI() {
@@ -119,6 +123,11 @@ public class OI {
 				
 				liftup = new liftUp();
 				liftdown = new liftDown();
+				lifttoposition_1= new LiftToPosition(LiftHeight.onethousand);
+				lifttoposition_2= new LiftToPosition(LiftHeight.fourthousand);
+				
+				
+				
 				
 				// manipulator buttons (TEMP) mapped to commands
 				
@@ -128,7 +137,8 @@ public class OI {
 				rightPad_button4.whenPressed(collectcube);
 				rightPad_button5.whileHeld(liftup);
 				rightPad_button6.whileHeld(liftdown);
-				
+				rightPad_button9.whenPressed(lifttoposition_1);
+				rightPad_button10.whenPressed(lifttoposition_2);
 				
 				
 				
