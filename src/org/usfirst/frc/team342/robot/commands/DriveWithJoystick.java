@@ -8,8 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveWithJoystick extends Command {
 
-	private static final int Y_AXIS = Joystick.AxisType.kY.value; 
-	private static final int X_AXIS = Joystick.AxisType.kY.value;
+	private static final int X_LEFT_AXIS = 0; 
+	private static final int Y_LEFT_AXIS = 1;
+	private static final int X_RIGHT_AXIS = 5;
+	private static final int Y_RIGHT_AXIS = 4;
 	
 	private static final double DEADZONE = 0.2;
 	
@@ -19,10 +21,10 @@ public class DriveWithJoystick extends Command {
 	private double speed_x_right;
 	private double x_average;
 	
-	private ManipulateWheelTOGGLE wheelToggle;
+	private ManipulateWheelDOWN wheelDown;
+	private ManipulateWheelUP wheelUp;
 		
-	private Joystick Joypad_Left; 
-	private Joystick Joypad_Right;
+	private Joystick Joypad; 
 	private OI oi; 
 	private DriveSystem drive; 
 	
@@ -30,9 +32,9 @@ public class DriveWithJoystick extends Command {
 		
 		oi = OI.getInstance(); 
 		drive = DriveSystem.getInstance();
-		Joypad_Left = oi.getJoypadLeftDrive();
-		Joypad_Right = oi.getJoypadRightDrive();
-		wheelToggle = new ManipulateWheelTOGGLE();
+		Joypad = oi.getJoystickLeftDrive();
+		wheelDown = new ManipulateWheelDOWN();
+		wheelUp = new ManipulateWheelUP();
 	}
 
 	public void intialize() {
@@ -42,18 +44,19 @@ public class DriveWithJoystick extends Command {
 	
 	public void execute() { 
 		
-		speed_y_left = Joypad_Left.getRawAxis(Y_AXIS);
-		speed_x_left = Joypad_Right.getRawAxis(X_AXIS);
+		speed_y_left = Joypad.getRawAxis(Y_LEFT_AXIS);
+		speed_x_left = Joypad.getRawAxis(X_LEFT_AXIS);
 		
-		speed_y_right = Joypad_Left.getRawAxis(Y_AXIS);
-		speed_x_right = Joypad_Right.getRawAxis(X_AXIS);
+		speed_y_right = Joypad.getRawAxis(Y_RIGHT_AXIS);
+		speed_x_right = Joypad.getRawAxis(X_RIGHT_AXIS);
 		
 		x_average = (speed_x_left + speed_x_right) / 2.0;
 		
-		if(!Joypad_Left.getRawButton(1)) {
+		if(!Joypad.getRawButton(5) && !drive.getWheelState()) {
+			wheelUp.start();
 			x_average = 0.0;
 		}else {
-			wheelToggle.start();
+			wheelDown.start();
 		}
 		
 		drive.drive(speed_y_left, speed_y_right, x_average, DEADZONE);
