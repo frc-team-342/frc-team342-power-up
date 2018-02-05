@@ -71,7 +71,7 @@ public class DriveSystem extends Subsystem {
 		rightFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		drive = new DifferentialDrive(leftMaster, rightMaster);
-
+		drive.setSafetyEnabled(false); 
 	}
 
 	public void drive(double Left_joy_Y, double Right_joy_Y, double X_average, double deadzone) {
@@ -90,7 +90,9 @@ public class DriveSystem extends Subsystem {
 		
 		if(Math.abs(X_average) > deadzone) {
 			centerWheel.set(ControlMode.PercentOutput, X_average);
-		}
+	}
+		
+
 	}
 
 	public void driveKeepHeading(double X, double Y, double rot) {

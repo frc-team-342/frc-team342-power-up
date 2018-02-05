@@ -7,6 +7,8 @@
 
 package org.usfirst.frc.team342.robot;
 
+import org.usfirst.frc.team342.robot.commands.DriveWithJoystick;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -23,6 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	
+	private DriveWithJoystick driveCommand;
 	
 	public static OI m_oi;
 
@@ -39,6 +42,9 @@ public class Robot extends TimedRobot {
 	
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
+		
+		driveCommand = new DriveWithJoystick();
+		
 	}
 
 	/**
@@ -100,7 +106,13 @@ public class Robot extends TimedRobot {
 		// this line or comment it out.
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
+			
+			
+			
 		}
+		
+		driveCommand.start();
+		
 	}
 
 	/**
@@ -109,6 +121,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**

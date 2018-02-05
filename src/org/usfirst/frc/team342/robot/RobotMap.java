@@ -35,7 +35,7 @@ public class RobotMap {
 
 	// MotorControllers
 	public static final int RIGHTMASTER = 1;
-	public static final int RIGHTFOLLOW = 2;
+	public static final int RIGHTFOLLOW = 16;
 	public static final int LEFTMASTER = 3;
 	public static final int LEFTFOLLOW = 4;
 	public static final int CENTERWHEEL = 5;
