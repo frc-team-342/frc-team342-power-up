@@ -6,14 +6,16 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class CubeController extends Subsystem {
 
 	private static final CubeController INSTANCE = new CubeController();
 
-	private Solenoid pneumaticClaw;
+	private DoubleSolenoid pneumaticClaw;
 	private TalonSRX intakeMaster;
 	private TalonSRX intakeFollow;
 	private AnalogInput infraredSensor;
@@ -39,7 +41,7 @@ public class CubeController extends Subsystem {
 
 	private void initializeCubeController() {
 
-		pneumaticClaw = new Solenoid(RobotMap.PNEUMATICCLAW);
+		pneumaticClaw = new DoubleSolenoid(RobotMap.PNEUMATICCLAW_OPEN, RobotMap.PNEUMATICCLAW_CLOSED);
 		intakeMaster = new TalonSRX(RobotMap.INTAKEMASTER);
 		intakeFollow = new TalonSRX(RobotMap.INTAKEFOLLOW);
 		infraredSensor = new AnalogInput(RobotMap.INFRAREDSENSOR);
@@ -50,38 +52,44 @@ public class CubeController extends Subsystem {
 
 	public void collectCube(double speed) {
 
-		pneumaticClaw.set(OPEN);
+		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(ControlMode.PercentOutput, speed);
 
 	}
 
 	public void closeClawAndStop() {
 
-		pneumaticClaw.set(CLOSED);
+		pneumaticClaw.set(Value.kReverse);
 		intakeMaster.set(ControlMode.PercentOutput, 0.0);
 	}
 
 	public void dispenseCube(double speed) {
 
-		pneumaticClaw.set(OPEN);
+		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
-
+	
+	//UNUSED \/
 	public void collectorOutForce(double speed) {
 
-		pneumaticClaw.set(OPEN);
+		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(ControlMode.PercentOutput, speed);
 	}
-
+	
+	//UNUSED \/
 	public void collectorInForce(double speed) {
 
-		pneumaticClaw.set(CLOSED);
+		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(ControlMode.PercentOutput, speed);
 	}
 
 	public boolean getPneumaticClawState() {
 
-		return pneumaticClaw.get();
+		if(pneumaticClaw.get().equals(Value.kForward)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public double getInfrared() {
@@ -93,14 +101,12 @@ public class CubeController extends Subsystem {
 	public void collectorStop() {
 
 		intakeMaster.set(ControlMode.PercentOutput, 0.0);
-		pneumaticClaw.set(CLOSED);
 	}
 
 	public void stopAll() {
 
 		intakeMaster.set(ControlMode.PercentOutput, 0.0);
 		intakeMaster.set(ControlMode.PercentOutput, 0.0);
-		pneumaticClaw.set(getPneumaticClawState());
 	}
 
 }
