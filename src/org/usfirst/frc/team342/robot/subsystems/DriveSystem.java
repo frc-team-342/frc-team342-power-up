@@ -10,6 +10,7 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -59,7 +60,7 @@ public class DriveSystem extends Subsystem {
 		pneumaticSuspension = new DoubleSolenoid(RobotMap.PNEUMATICWHEEL_UP, RobotMap.PNEUMATICWHEEL_DOWN);
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
 		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
-		navx = new AHRS(SerialPort.Port.kMXP);
+		navx = new AHRS(SPI.Port.kMXP);
 		front = true;
 
 		leftFollow.follow(leftMaster);
@@ -71,7 +72,7 @@ public class DriveSystem extends Subsystem {
 		rightFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		drive = new DifferentialDrive(leftMaster, rightMaster);
-		drive.setSafetyEnabled(false); 
+
 	}
 
 	public void drive(double Left_joy_Y, double Right_joy_Y, double X_average, double deadzone) {
@@ -90,9 +91,7 @@ public class DriveSystem extends Subsystem {
 		
 		if(Math.abs(X_average) > deadzone) {
 			centerWheel.set(ControlMode.PercentOutput, X_average);
-	}
-		
-
+		}
 	}
 
 	public void driveKeepHeading(double X, double Y, double rot) {

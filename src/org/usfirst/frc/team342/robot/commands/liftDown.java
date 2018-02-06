@@ -29,14 +29,14 @@ private LiftSystem liftDown;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double speed;
-    	speed= -1.0;
+    	speed= 0.25;
     	liftDown.liftDown(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	
-        return liftDown.getLowerLimit();
+        return false;
     }
 
     // Called once after isFinished returns true
