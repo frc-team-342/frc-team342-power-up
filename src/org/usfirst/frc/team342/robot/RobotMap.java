@@ -45,13 +45,8 @@ public class RobotMap {
 	public static final int LIFTFOLLOW = 6;
 
 	// Pneumatics
-<<<<<<< HEAD
 	public static final int PNEUMATICWHEEL_DOWN = 0;
 	public static final int PNEUMATICWHEEL_UP = 1;
 	public static final int PNEUMATICCLAW = 2;
-=======
-	public static final int PNEUMATICWHEEL = 0;
-	public static final int PNEUMATICCLAW = 1;
-	
->>>>>>> dev-eo
+
 }

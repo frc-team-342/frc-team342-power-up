@@ -7,10 +7,8 @@
 
 package org.usfirst.frc.team342.robot;
 
-<<<<<<< HEAD
+
 import org.usfirst.frc.team342.robot.commands.DriveWithJoystick;
-=======
->>>>>>> dev-eo
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team342.robot.subsystems.CubeController;
@@ -42,31 +40,13 @@ public class Robot extends TimedRobot {
 	private static PneumaticsResourceSystem pneumaticsresourcesystem;
 	private static DriveWithJoystick drivewithjoystick;
 	
-<<<<<<< HEAD
-=======
-	private OI oi;
-	private CameraVisionSystem cameravisionsystem;
-	private ClimbSystem climbsystem;
-	private CubeController cubecontroller;
-	private DriveSystem drivesystem;
-	private LiftSystem liftsystem;
-	private LightsSubsystem lightssubsystem;
-	private PneumaticsResourceSystem pneumaticsresourcesystem;
-
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
-
->>>>>>> dev-eo
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-<<<<<<< HEAD
-		
-=======
->>>>>>> dev-eo
+
 		oi = OI.getInstance();
 		cameravisionsystem = CameraVisionSystem.getInstance();
 		climbsystem = ClimbSystem.getInstance();
@@ -75,15 +55,7 @@ public class Robot extends TimedRobot {
 		liftsystem = LiftSystem.getInstance();
 		lightssubsystem = LightsSubsystem.getInstance();
 		pneumaticsresourcesystem = PneumaticsResourceSystem.getInstance();
-<<<<<<< HEAD
 		drivewithjoystick = new DriveWithJoystick();
-		
-		
-=======
-	
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
->>>>>>> dev-eo
 	}
 
 	/**
@@ -139,7 +111,6 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 		
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Lift Encoder: ", liftsystem.getLiftEncoder());
 	}
 
 	/**

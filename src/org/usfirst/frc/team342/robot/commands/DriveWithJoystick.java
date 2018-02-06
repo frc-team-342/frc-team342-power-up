@@ -33,7 +33,7 @@ public class DriveWithJoystick extends Command {
 		
 		oi = OI.getInstance(); 
 		drive = DriveSystem.getInstance();
-		Joypad = oi.getJoystickLeftDrive();
+		Joypad = oi.getJoystickDrive();
 		wheelDown = new ManipulateWheelDOWN();
 		wheelUp = new ManipulateWheelUP();
 	}
