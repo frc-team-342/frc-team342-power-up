@@ -24,7 +24,7 @@ public class DispenseCube extends Command {
 
 	protected void execute() {
 
-		cube_controller.dispenseCube(1.0);
+		cube_controller.dispenseCube(SPEED);
 	}
 
 	@Override

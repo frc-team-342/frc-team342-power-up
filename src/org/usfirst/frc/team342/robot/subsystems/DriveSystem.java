@@ -10,10 +10,8 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.SerialPort;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
@@ -26,14 +24,17 @@ public class DriveSystem extends Subsystem {
 	private WPI_TalonSRX rightMaster;
 	private WPI_TalonSRX rightFollow;
 	private TalonSRX centerWheel;
+	
 	private DoubleSolenoid pneumaticSuspension;
+	
 	private AnalogInput ultrasonicOne;
 	private AnalogInput ultrasonicTwo;
+	
 	private AHRS navx;
+	
 	private boolean front;
+	
 	private DifferentialDrive drive;
-	private static final boolean DOWN = true;
-	private static final boolean UP = false;
 
 	public DriveSystem() {
 

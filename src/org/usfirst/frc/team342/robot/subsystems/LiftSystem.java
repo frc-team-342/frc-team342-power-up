@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -16,9 +15,9 @@ public class LiftSystem extends Subsystem {
 
 	private TalonSRX liftMaster;
 	private TalonSRX liftFollow;
+	
 	private DigitalInput lowerLimit;
 	private DigitalInput upperLimit;
-	private AnalogInput potentiometer;
 
 	public LiftSystem() {
 

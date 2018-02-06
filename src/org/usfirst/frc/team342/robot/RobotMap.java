@@ -19,7 +19,6 @@ public class RobotMap {
 	public static final int INFRAREDSENSOR = 0;
 	public static final int ULTRASONIC_ONE = 1;
 	public static final int ULTRASONIC_TWO = 2;
-	public static final int POTENTIOMETER = 3;
 
 	// Lights Addresses (PWM)
 	public static final int RED = 0;

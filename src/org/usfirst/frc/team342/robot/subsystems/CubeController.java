@@ -7,7 +7,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,9 +18,6 @@ public class CubeController extends Subsystem {
 	private TalonSRX intakeMaster;
 	private TalonSRX intakeFollow;
 	private AnalogInput infraredSensor;
-
-	private static final boolean OPEN = true;
-	private static final boolean CLOSED = false;
 
 	public CubeController() {
 
@@ -68,15 +64,15 @@ public class CubeController extends Subsystem {
 		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
-	
-	//UNUSED \/
+
+	// UNUSED \/
 	public void collectorOutForce(double speed) {
 
 		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(ControlMode.PercentOutput, speed);
 	}
-	
-	//UNUSED \/
+
+	// UNUSED \/
 	public void collectorInForce(double speed) {
 
 		pneumaticClaw.set(Value.kForward);
@@ -85,9 +81,9 @@ public class CubeController extends Subsystem {
 
 	public boolean getPneumaticClawState() {
 
-		if(pneumaticClaw.get().equals(Value.kForward)) {
+		if (pneumaticClaw.get().equals(Value.kForward)) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}

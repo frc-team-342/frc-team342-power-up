@@ -1,13 +1,6 @@
 package org.usfirst.frc.team342.robot.subsystems;
 
-import org.usfirst.frc.team342.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.AllianceStationID;
-import edu.wpi.first.wpilibj.hal.HAL;
 
 public class LightsSubsystem extends Subsystem {
 
