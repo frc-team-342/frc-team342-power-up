@@ -42,8 +42,6 @@ public class RobotMap {
 	public static final int INTAKEFOLLOW = 7;
 	public static final int LIFTMASTER = 8;
 	public static final int LIFTFOLLOW = 9;
-
-	//test
 	
 	// Pneumatics
 	public static final int PNEUMATICWHEEL_DOWN = 0;
