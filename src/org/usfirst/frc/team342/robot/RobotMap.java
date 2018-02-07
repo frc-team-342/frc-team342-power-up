@@ -33,15 +33,15 @@ public class RobotMap {
 	public static final int LIFTUPPERLIMIT = 1;
 
 	// MotorControllers
-	public static final int RIGHTMASTER = 1;
-	public static final int RIGHTFOLLOW = 2;
-	public static final int LEFTMASTER = 3;
-	public static final int LEFTFOLLOW = 4;
+	public static final int RIGHTMASTER = 4;
+	public static final int RIGHTFOLLOW = 3;
+	public static final int LEFTMASTER = 16;
+	public static final int LEFTFOLLOW = 1;
 	public static final int CENTERWHEEL = 5;
-	public static final int INTAKEMASTER = 6;
-	public static final int INTAKEFOLLOW = 7;
-	public static final int LIFTMASTER = 8;
-	public static final int LIFTFOLLOW = 9;
+	public static final int INTAKEMASTER = 12;
+	public static final int INTAKEFOLLOW = 21;
+	public static final int LIFTMASTER = 10;
+	public static final int LIFTFOLLOW = 6;
 
 	// Pneumatics
 	public static final int PNEUMATICWHEEL_DOWN = 0;
