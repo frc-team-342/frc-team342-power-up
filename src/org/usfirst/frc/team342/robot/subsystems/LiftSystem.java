@@ -14,10 +14,16 @@ public class LiftSystem extends Subsystem {
 	private static final LiftSystem INSTANCE = new LiftSystem();
 
 	private TalonSRX liftMaster;
+	
 	private TalonSRX liftFollow;
 	
 	private DigitalInput lowerLimit;
 	private DigitalInput upperLimit;
+	
+	// variables for current limits
+	private int amps= 1;
+	private int timeout= 10;
+	private int milliseconds= 200;
 
 	public LiftSystem() {
 
@@ -40,6 +46,21 @@ public class LiftSystem extends Subsystem {
 		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
 		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		liftFollow.follow(liftMaster);
+		
+		
+		// current limits for liftMaster
+		liftMaster.configPeakCurrentLimit(amps, timeout);
+		liftMaster.configPeakCurrentDuration(milliseconds, timeout);
+		liftMaster.configContinuousCurrentLimit(amps, timeout);
+		liftMaster.enableCurrentLimit(true);
+		
+		// current limits for liftFollow
+		liftFollow.configPeakCurrentLimit(amps, timeout);
+		liftFollow.configPeakCurrentDuration(milliseconds, timeout);
+		liftFollow.configContinuousCurrentLimit(amps, timeout);
+		liftFollow.enableCurrentLimit(true);
+		
+		
 	}
 
 	public void liftUpForce(double speed) {
