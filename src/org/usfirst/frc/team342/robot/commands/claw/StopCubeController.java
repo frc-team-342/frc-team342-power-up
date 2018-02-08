@@ -1,17 +1,15 @@
-package org.usfirst.frc.team342.robot.commands;
+package org.usfirst.frc.team342.robot.commands.claw;
 
 import org.usfirst.frc.team342.robot.subsystems.CubeController;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DispenseCube extends Command {
+public class StopCubeController extends Command {
 
 	private CubeController cube_controller;
 
-	private static final double SPEED = 1.0;
-
-	public DispenseCube() {
+	public StopCubeController() {
 
 		cube_controller = CubeController.getInstance();
 		requires(cube_controller);
@@ -19,23 +17,23 @@ public class DispenseCube extends Command {
 
 	protected void initialize() {
 
-		SmartDashboard.putString("Cube State:", "Dispensing Cube");
+		SmartDashboard.putString("Cube State:", "Stopping Cube Collector");
 	}
 
 	protected void execute() {
-
-		cube_controller.dispenseCube(SPEED);
+		
+		cube_controller.closeClawAndStop();
+		cube_controller.collectorStop();
 	}
 
 	@Override
 	protected boolean isFinished() {
 
-		return false;
+		return true;
 	}
 
 	protected void end() {
 
-		cube_controller.closeClawAndStop();
 		cube_controller.collectorStop();
 	}
 

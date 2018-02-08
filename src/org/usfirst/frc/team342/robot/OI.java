@@ -7,14 +7,14 @@
 
 package org.usfirst.frc.team342.robot;
 
-import org.usfirst.frc.team342.robot.commands.CollectCube;
-import org.usfirst.frc.team342.robot.commands.DispenseCube;
-import org.usfirst.frc.team342.robot.commands.LiftToPosition;
-import org.usfirst.frc.team342.robot.commands.LiftToPosition.LiftHeight;
-import org.usfirst.frc.team342.robot.commands.ManipulateWheelTOGGLE;
-import org.usfirst.frc.team342.robot.commands.StopCubeController;
-import org.usfirst.frc.team342.robot.commands.liftDown;
-import org.usfirst.frc.team342.robot.commands.liftUp;
+import org.usfirst.frc.team342.robot.commands.claw.CollectCube;
+import org.usfirst.frc.team342.robot.commands.claw.DispenseCube;
+import org.usfirst.frc.team342.robot.commands.claw.StopCubeController;
+import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelTOGGLE;
+import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
+import org.usfirst.frc.team342.robot.commands.lift.liftDown;
+import org.usfirst.frc.team342.robot.commands.lift.liftUp;
+import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
