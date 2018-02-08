@@ -15,9 +15,15 @@ public class CubeController extends Subsystem {
 	private static final CubeController INSTANCE = new CubeController();
 
 	private DoubleSolenoid pneumaticClaw;
+	
 	private TalonSRX intakeMaster;
 	private TalonSRX intakeFollow;
+	
 	private AnalogInput infraredSensor;
+	
+	private static final int AMPS = 35;
+	private static final int TIMEOUT_MS = 10;
+	private static final int PEAK_DURATION = 200;
 
 	public CubeController() {
 
@@ -44,6 +50,16 @@ public class CubeController extends Subsystem {
 
 		intakeFollow.follow(intakeMaster);
 		intakeFollow.setInverted(true);
+		
+		intakeMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
+		intakeMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		intakeMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		intakeMaster.enableCurrentLimit(true);
+		
+		intakeFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
+		intakeFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		intakeFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		intakeFollow.enableCurrentLimit(true);
 	}
 
 	public void collectCube(double speed) {
