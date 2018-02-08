@@ -7,6 +7,7 @@ public class ClimbSystem extends Subsystem {
 	private static final ClimbSystem INSTANCE = new ClimbSystem();
 
 	public ClimbSystem() {
+
 		initializeClimbSystem();
 	}
 
@@ -17,6 +18,7 @@ public class ClimbSystem extends Subsystem {
 	}
 
 	public static ClimbSystem getInstance() {
+
 		return INSTANCE;
 	}
 

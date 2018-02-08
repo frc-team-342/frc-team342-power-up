@@ -7,11 +7,18 @@
 
 package org.usfirst.frc.team342.robot;
 
+
+import org.usfirst.frc.team342.robot.commands.DriveWithJoystick;
+import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
+import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
+import org.usfirst.frc.team342.robot.subsystems.CubeController;
+import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
+import org.usfirst.frc.team342.robot.subsystems.LightsSubsystem;
+import org.usfirst.frc.team342.robot.subsystems.PneumaticsResourceSystem;
+
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -23,22 +30,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
 	
+	private static OI oi;
+	private static CameraVisionSystem cameravisionsystem;
+	private static ClimbSystem climbsystem;
+	private static CubeController cubecontroller;
+	private static DriveSystem drivesystem;
+	private static LiftSystem liftsystem;
+	private static LightsSubsystem lightssubsystem;
+	private static PneumaticsResourceSystem pneumaticsresourcesystem;
+	private static DriveWithJoystick drivewithjoystick;
 	
-	public static OI m_oi;
-
-	Command m_autonomousCommand;
-	SendableChooser<Command> m_chooser = new SendableChooser<>();
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		m_oi = new OI();
-	
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", m_chooser);
+
+		oi = OI.getInstance();
+		cameravisionsystem = CameraVisionSystem.getInstance();
+		climbsystem = ClimbSystem.getInstance();
+		cubecontroller = CubeController.getInstance();
+		drivesystem = DriveSystem.getInstance();
+		liftsystem = LiftSystem.getInstance();
+		lightssubsystem = LightsSubsystem.getInstance();
+		pneumaticsresourcesystem = PneumaticsResourceSystem.getInstance();
+		drivewithjoystick = new DriveWithJoystick();
 	}
 
 	/**
@@ -53,6 +70,7 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		
 		Scheduler.getInstance().run();
 	}
 
@@ -69,19 +87,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = m_chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.start();
-		}
+		
 	}
 
 	/**
@@ -94,13 +100,8 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
+		
+		drivewithjoystick.start();
 	}
 
 	/**
@@ -108,6 +109,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		
 		Scheduler.getInstance().run();
 	}
 
@@ -116,5 +118,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		
 	}
 }

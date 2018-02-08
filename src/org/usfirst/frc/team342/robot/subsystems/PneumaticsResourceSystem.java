@@ -1,14 +1,16 @@
 package org.usfirst.frc.team342.robot.subsystems;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class PneumaticsResourceSystem extends Subsystem {
 
 	private static final PneumaticsResourceSystem INSTANCE = new PneumaticsResourceSystem();
 
-	private boolean compressor_state;
+	private Compressor compressor;
 
 	public PneumaticsResourceSystem() {
+
 		initializePneumaticsResourceSystem();
 	}
 
@@ -17,34 +19,36 @@ public class PneumaticsResourceSystem extends Subsystem {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	public static PneumaticsResourceSystem getInstance() {
+
 		return INSTANCE;
 	}
 
 	private void initializePneumaticsResourceSystem() {
-		// TODO Add Code
-		compressor_state = false;
+
+		compressor = new Compressor();
 	}
 
 	public void startCompressor() {
-		// TODO Add Code
-		compressor_state = true;
+
+		compressor.start();
 	}
 
 	public void stopCompressor() {
-		// TODO Add Code
-		compressor_state = false;
+
+		compressor.stop();
 	}
 
 	public double getPressure() {
-		// TODO Add Code
+
+		// \/ How Do We Do this? \/
 		return 0.0;
 	}
 
 	public boolean getCompressorState() {
-		// TODO Add Code
-		return compressor_state;
+
+		return compressor.enabled();
 	}
 
 }
