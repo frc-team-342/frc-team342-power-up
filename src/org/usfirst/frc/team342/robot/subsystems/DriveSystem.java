@@ -81,6 +81,7 @@ public class DriveSystem extends Subsystem {
 		drive = new DifferentialDrive(leftMaster, rightMaster);
 		
 //This is to control the current. If you want to change any of the bellow variables go to where it is declared
+// tested on and works WOOP!!!
 		leftMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
 		leftMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		leftMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
