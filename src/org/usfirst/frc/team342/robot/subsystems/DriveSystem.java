@@ -36,7 +36,7 @@ public class DriveSystem extends Subsystem {
 	
 	private DifferentialDrive drive;
 	
-// Here are the current variables. Change them at will. 
+	// Here are the current variables. Change them at will. 
 	private static final int AMPS = 10; 
 	private static final int TIMEOUT_MS = 10;
 	private static final int PEAK_DURATION = 200; 
@@ -80,7 +80,7 @@ public class DriveSystem extends Subsystem {
 
 		drive = new DifferentialDrive(leftMaster, rightMaster);
 		
-//This is to control the current. If you want to change any of the bellow variables go to where it is declared
+		//This is to control the current. If you want to change any of the bellow variables go to where it is declared
 		leftMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
 		leftMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		leftMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);

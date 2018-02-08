@@ -51,6 +51,7 @@ public class CubeController extends Subsystem {
 		intakeFollow.follow(intakeMaster);
 		intakeFollow.setInverted(true);
 		
+		//Set up current limiting for the two motor controllers
 		intakeMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
 		intakeMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		intakeMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
