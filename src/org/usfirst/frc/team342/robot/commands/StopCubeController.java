@@ -21,7 +21,8 @@ public class StopCubeController extends Command {
 	}
 
 	protected void execute() {
-
+		
+		cube_controller.closeClawAndStop();
 		cube_controller.collectorStop();
 	}
 

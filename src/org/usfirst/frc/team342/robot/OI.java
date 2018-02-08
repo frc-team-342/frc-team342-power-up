@@ -88,19 +88,24 @@ public class OI {
 				xbox_drive_button9 = new JoystickButton(xbox_drive, 9);
 				xbox_drive_button10 = new JoystickButton(xbox_drive, 10);
 				
-				liftup = new liftUp();
-				liftdown = new liftDown();
+				
+				collectcube= new CollectCube ();
+				manipulatewheeltoggle= new ManipulateWheelTOGGLE ();
+				stopcubecontroller= new StopCubeController ();
+				dispensecube= new DispenseCube ();
+				liftup= new liftUp ();
+				liftdown= new liftDown ();
 				lifttoposition_1= new LiftToPosition(LiftHeight.onethousand);
 				lifttoposition_2= new LiftToPosition(LiftHeight.fourthousand);
 				
 				
 				// manipulator buttons (TEMP) mapped to commands
 				manipulator_trigger.whileHeld(dispensecube);
+				manipulator_trigger.whenReleased(stopcubecontroller);
 				manipulator_button2.whenPressed(stopcubecontroller);
 				manipulator_button3.whenPressed(manipulatewheeltoggle);
 				manipulator_button4.whenPressed(collectcube);
-				manipulator_button5.whileHeld(liftup);
-				manipulator_button6.whileHeld(liftdown);
+				
 				manipulator_button9.whenPressed(lifttoposition_1);
 				manipulator_button10.whenPressed(lifttoposition_2);
 				
