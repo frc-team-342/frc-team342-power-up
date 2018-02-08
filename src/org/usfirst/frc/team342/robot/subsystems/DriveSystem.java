@@ -35,6 +35,12 @@ public class DriveSystem extends Subsystem {
 	private boolean front;
 	
 	private DifferentialDrive drive;
+	
+	// Here are the current variables. Change them at will. 
+	private static final int AMPS = 10; 
+	private static final int TIMEOUT_MS = 10;
+	private static final int PEAK_DURATION = 200; 
+	private static final int AMPSCENTER = 35;
 
 	public DriveSystem() {
 
@@ -73,7 +79,33 @@ public class DriveSystem extends Subsystem {
 		rightFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		drive = new DifferentialDrive(leftMaster, rightMaster);
+		
+		//This is to control the current. If you want to change any of the bellow variables go to where it is declared
+		leftMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+		leftMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		leftMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		leftMaster.enableCurrentLimit(true);
+		
+		leftFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+		leftFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		leftFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		leftFollow.enableCurrentLimit(true);
+		
+		rightMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+		rightMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		rightMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		rightMaster.enableCurrentLimit(true);
+		
+		rightFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+		rightFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		rightFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		rightFollow.enableCurrentLimit(true);
 
+		centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS); 
+		centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
+		centerWheel.enableCurrentLimit(true);
+		
 	}
 
 	public void drive(double Left_joy_Y, double Right_joy_Y, double X_average, double deadzone) {
