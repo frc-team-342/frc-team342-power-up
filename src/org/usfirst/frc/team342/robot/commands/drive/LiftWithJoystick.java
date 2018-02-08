@@ -1,4 +1,4 @@
-package org.usfirst.frc.team342.robot.commands;
+package org.usfirst.frc.team342.robot.commands.drive;
 
 import org.usfirst.frc.team342.robot.OI;
 import org.usfirst.frc.team342.robot.subsystems.LiftSystem;

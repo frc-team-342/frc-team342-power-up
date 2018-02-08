@@ -1,4 +1,4 @@
-package org.usfirst.frc.team342.robot.commands;
+package org.usfirst.frc.team342.robot.commands.claw;
 
 import org.usfirst.frc.team342.robot.subsystems.CubeController;
 
