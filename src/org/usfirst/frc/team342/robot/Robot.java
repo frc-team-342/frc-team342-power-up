@@ -18,7 +18,9 @@ import org.usfirst.frc.team342.robot.subsystems.LightsSubsystem;
 import org.usfirst.frc.team342.robot.subsystems.PneumaticsResourceSystem;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 
 /**
@@ -40,6 +42,16 @@ public class Robot extends TimedRobot {
 	private static PneumaticsResourceSystem pneumaticsresourcesystem;
 	private static DriveWithJoystick drivewithjoystick;
 	
+	private static final int LEFT = 1;
+	private static final int CENTER = 2;
+	private static final int RIGHT = 3;
+	private static final int SWITCH = 1;
+	private static final int SCALE = 2;
+	private static final int DRIVE_FORWARD = 3;
+	
+	SendableChooser<Integer> location = new SendableChooser<>();
+	SendableChooser<Integer> action = new SendableChooser<>();
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -56,6 +68,14 @@ public class Robot extends TimedRobot {
 		lightssubsystem = LightsSubsystem.getInstance();
 		pneumaticsresourcesystem = PneumaticsResourceSystem.getInstance();
 		drivewithjoystick = new DriveWithJoystick();
+		
+		location.addDefault("Left", LEFT);
+		location.addObject("Center", CENTER);
+		location.addObject("Right", RIGHT);
+		
+		action.addDefault("Switch", SWITCH);
+		action.addDefault("Scale", SCALE);
+		action.addDefault("Drive Forward", DRIVE_FORWARD);
 	}
 
 	/**
