@@ -41,7 +41,9 @@ public class DriveSystem extends Subsystem {
 	private static final int TIMEOUT_MS = 10;
 	private static final int PEAK_DURATION = 200; 
 	private static final int AMPSCENTER = 35;
-
+	
+	private boolean slow; 
+	
 	public DriveSystem() {
 
 		initializeDriveSystem();
@@ -58,6 +60,8 @@ public class DriveSystem extends Subsystem {
 	}
 
 	private void initializeDriveSystem() {
+		
+		slow = false; 
 
 		leftMaster = new WPI_TalonSRX(RobotMap.LEFTMASTER);
 		leftFollow = new WPI_TalonSRX(RobotMap.LEFTFOLLOW);
@@ -110,18 +114,29 @@ public class DriveSystem extends Subsystem {
 		
 	}
 
-	public void drive(double Left_joy_Y, double Right_joy_Y, double X_average, double deadzone) {
+	public void setslow(boolean slow) {
+		this.slow = slow; 
+	}
+	
+	public void drive(double Left_joy_Y, double Right_joy_Y, double center, double deadzone) {
 
+		if(slow) {
+			Left_joy_Y /= 2.0;
+			Right_joy_Y /= 2.0; 
+		}
+		
 		if(!front) {
 			Left_joy_Y = Left_joy_Y * -1.0;
 			Right_joy_Y = Right_joy_Y * -1.0;
-			X_average = X_average * -1.0;
+			center = center * -1.0;
 		}
 		
 		if(Math.abs(Right_joy_Y) > deadzone || Math.abs(Left_joy_Y) > deadzone) {
 			/* -1.0 temp to test right going backwards. */
 			rightMaster.set(-1.0 * Right_joy_Y);
 			rightFollow.set(-1.0 * Right_joy_Y);
+			//rightMaster.set(Right_joy_Y);
+			//rightMaster.set(Right_joy_Y);
 			
 			leftMaster.set(Left_joy_Y);
 			leftFollow.set(Left_joy_Y);
@@ -132,8 +147,8 @@ public class DriveSystem extends Subsystem {
 			leftFollow.set(0.0);
 		}
 		
-		if(Math.abs(X_average) > deadzone) {
-			centerWheel.set(ControlMode.PercentOutput, X_average);
+		if(Math.abs(center) > deadzone) {
+			centerWheel.set(ControlMode.PercentOutput, center);
 		} else {
 			centerWheel.set(ControlMode.PercentOutput, 0.0);
 		}
@@ -179,20 +194,12 @@ public class DriveSystem extends Subsystem {
 		return leftMaster.getSelectedSensorPosition(0);
 	}
 
-	public double getLeftFollowerEncoder() {
-
-		return leftFollow.getSelectedSensorPosition(0);
-	}
 
 	public double getRightMasterEncoder() {
 
 		return rightMaster.getSelectedSensorPosition(0);
 	}
 
-	public double getRightFollowerEncoder() {
-
-		return rightFollow.getSelectedSensorPosition(0);
-	}
 
 	public double getUltrasonicOne() {
 
