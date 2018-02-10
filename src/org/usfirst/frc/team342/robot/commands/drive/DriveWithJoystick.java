@@ -26,16 +26,11 @@ public class DriveWithJoystick extends Command {
 	private DriveSystem drive;
 	private Joystick Joypad;
 
-	private ManipulateWheelDOWN wheelDown;
-	private ManipulateWheelUP wheelUp;
-
 	public DriveWithJoystick() {
 
 		oi = OI.getInstance();
 		drive = DriveSystem.getInstance();
 		Joypad = oi.getJoystickDrive();
-		wheelDown = new ManipulateWheelDOWN();
-		wheelUp = new ManipulateWheelUP();
 	}
 
 	public void intialize() {
@@ -52,12 +47,9 @@ public class DriveWithJoystick extends Command {
 
 		x_average = (speed_x_left + speed_x_right) / 2.0;
 		
-		/* TODO Took out commands to simplify debugginh */
-		if (Joypad.getRawButton(5)) {
-			drive.wheelUp();
-		} else {
-			drive.wheelDown();
-		}
+		if (!Joypad.getRawButton(5)) {
+			x_average = 0.0;
+		} 
 
 		SmartDashboard.putNumber("Left Y", speed_y_left);
 		SmartDashboard.putNumber("Left X", speed_x_left);
