@@ -51,6 +51,7 @@ public class DriveWithJoystick extends Command {
 		speed_x_right = Joypad.getRawAxis(X_RIGHT_AXIS);
 
 		x_average = (speed_x_left + speed_x_right) / 2.0;
+		
 		/* TODO Took out commands to simplify debugginh */
 		if (Joypad.getRawButton(5)) {
 			drive.wheelUp();

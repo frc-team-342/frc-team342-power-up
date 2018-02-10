@@ -98,11 +98,9 @@ public class DriveSystem extends Subsystem {
 		rightFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		rightFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightFollow.enableCurrentLimit(true);
-
-		rightMaster.setInverted(true);
-		rightMaster.setInverted(true);
-
+		
 		rightMaster.configOpenloopRamp(0.1, 50);
+		leftMaster.configOpenloopRamp(0.1, 50);
 
 		centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS);
 		centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
@@ -120,6 +118,7 @@ public class DriveSystem extends Subsystem {
 		}
 
 		if (Math.abs(Right_joy_Y) > deadzone || Math.abs(Left_joy_Y) > deadzone) {
+			
 			/* -1.0 temp to test right going backwards. */
 			rightMaster.set(-1.0 * Right_joy_Y);
 			rightFollow.set(-1.0 * Right_joy_Y);
@@ -127,6 +126,7 @@ public class DriveSystem extends Subsystem {
 			leftMaster.set(Left_joy_Y);
 			leftFollow.set(Left_joy_Y);
 		} else {
+			
 			rightMaster.set(0.0);
 			rightFollow.set(0.0);
 			leftMaster.set(0.0);
