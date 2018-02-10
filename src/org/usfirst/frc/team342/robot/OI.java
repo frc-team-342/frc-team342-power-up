@@ -97,7 +97,7 @@ public class OI {
 			//Drive
 				manipulatewheelup = new ManipulateWheelUP();
 				manipulatewheeldown = new ManipulateWheelDOWN();
-						slowdrive = new SlowDrive();
+				slowdrive = new SlowDrive();
 			//Manipulator
 				collectcube= new CollectCube ();
 				stopcubecontroller= new StopCubeController ();
@@ -109,6 +109,7 @@ public class OI {
 		xbox_drive_button5.whenPressed(manipulatewheeldown);
 		xbox_drive_button5.whenReleased(manipulatewheelup);
 		xbox_drive_button6.whileHeld(slowdrive);
+		manipulator_button6.whenReleased(FastDrive);
 				
 		// Manipulator Buttons
 		manipulator_button1.whileHeld(dispensecube);
@@ -117,7 +118,9 @@ public class OI {
 		manipulator_button4.whenPressed(collectcube);
 		manipulator_button9.whenPressed(lifttoposition_1);
 		manipulator_button10.whenPressed(lifttoposition_2);
-				
+		manipulator_button6.whenPressed(slowdrive);
+	
+		
 }
 	public static OI getInstance () {
 		return instance;

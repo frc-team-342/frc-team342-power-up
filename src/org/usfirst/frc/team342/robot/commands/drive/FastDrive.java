@@ -1,28 +1,23 @@
 package org.usfirst.frc.team342.robot.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
-/**
- *make robot go slow
- */
-public class SlowDrive extends Command {
-	
-	
 
-    public SlowDrive() {
+/**
+ *
+ */
+public class FastDrive extends Command {
+
+    public FastDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

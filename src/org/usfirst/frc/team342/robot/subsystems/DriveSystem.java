@@ -41,6 +41,7 @@ public class DriveSystem extends Subsystem {
 	private static final int TIMEOUT_MS = 10;
 	private static final int PEAK_DURATION = 200; 
 	private static final int AMPSCENTER = 35;
+	private static final double RAMP_TIME = 0.1; 
 	
 	private boolean slow; 
 	
@@ -102,11 +103,11 @@ public class DriveSystem extends Subsystem {
 		rightFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightFollow.enableCurrentLimit(true);
 		
-		rightMaster.setInverted(true);
-		rightMaster.setInverted(true);
+		rightMaster.configOpenloopRamp(RAMP_TIME, 0);
+		rightFollow.configOpenloopRamp(RAMP_TIME, 0);
+		leftFollow.configOpenloopRamp(RAMP_TIME, 0); 
+		leftMaster.configOpenloopRamp(RAMP_TIME, 0); 
 		
-		rightMaster.configOpenloopRamp(0.1, 50);
-
 		centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS); 
 		centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
