@@ -8,21 +8,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class Switch extends CommandGroup {
 
     public Switch(char location, char switch_position) {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+        
+    	if(location == 'L' && switch_position == 'L') {
+    		
+    		//Switch auto left
+    		
+    	}else if(location == 'C' && switch_position == 'L') {
+    		
+    		//Switch auto center left
+    		
+    	}else if(location == 'C' && switch_position == 'R') {
+    		
+    		//Switch auto center right
+    		
+    	}else if(location == 'R' && switch_position == 'R') {
+    		
+    		//Switch auto right
+    		
+    	}
     }
 }

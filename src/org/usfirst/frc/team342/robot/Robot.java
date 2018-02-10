@@ -8,6 +8,9 @@
 package org.usfirst.frc.team342.robot;
 
 
+import org.usfirst.frc.team342.robot.commands.autonomous.DriveForward;
+import org.usfirst.frc.team342.robot.commands.autonomous.Scale;
+import org.usfirst.frc.team342.robot.commands.autonomous.Switch;
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
@@ -17,10 +20,11 @@ import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 import org.usfirst.frc.team342.robot.subsystems.LightsSubsystem;
 import org.usfirst.frc.team342.robot.subsystems.PneumaticsResourceSystem;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -41,6 +45,28 @@ public class Robot extends TimedRobot {
 	private static LightsSubsystem lightssubsystem;
 	private static PneumaticsResourceSystem pneumaticsresourcesystem;
 	private static DriveWithJoystick drivewithjoystick;
+	
+	private Switch switchauto;
+	private Scale scaleauto;
+	private DriveForward driveforwardauto;
+	
+	private String gamedata;
+	
+	private static final String AUTO_MESSAGE_SWITCH_LEFT = "Attempting Switch On The Left From The Left Position.";
+	private static final String AUTO_MESSAGE_SWITCH_CENTER_LEFT = "Attempting Switch On The Left From The Center Position.";
+	private static final String AUTO_MESSAGE_SWITCH_CENTER_RIGHT = "Attempting Switch On The Right From The Center Position.";
+	private static final String AUTO_MESSAGE_SWITCH_RIGHT = "Attempting Switch On The Right From The Right Position.";
+	
+	private static final String AUTO_MESSAGE_SCALE_LEFT = "Attempting Scale On The Left From The Left Position";
+	private static final String AUTO_MESSAGE_SCALE_RIGHT = "Attempting Scale On The Right From The Right Position";
+	
+	private static final String AUTO_MESSAGE_DRIVE_FORWARD_LEFT = "Attempting To Drive Forward From The Left Position";
+	private static final String AUTO_MESSAGE_DRIVE_FORWARD_CENTER = "Attempting To Drive Forward From The Center Position";
+	private static final String AUTO_MESSAGE_DRIVE_FORWARD_RIGHT = "Attempting To Drive Forward From The Right Position";
+	
+	private static final String AUTO_MESSAGE_FAILURE = "THIS MESSAGE SHOULD NOT APPEAR, IF IT DOES AUTONOMOUS LOGIC IS BROKE";
+	
+	
 	
 	private static final int LEFT = 1;
 	private static final int CENTER = 2;
@@ -107,6 +133,199 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		
+		gamedata = DriverStation.getInstance().getGameSpecificMessage();
+		
+		SmartDashboard.putString("Game Message: ", gamedata);
+		
+		//This is used at the end of auto initialize and is used to determine what autonomous we should run
+		int whattorun = 0;
+		
+		//Position on the Left
+		if(location.getSelected() == 1) {
+			
+			//Switch is selected
+			if(action.getSelected() == 1) {
+				
+				//If the switch is on the left
+				if(gamedata.charAt(0) == 'L') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_LEFT);
+					switchauto = new Switch('L', gamedata.charAt(0));
+					whattorun = 1;
+					
+				//If the switch is not on the left but the scale is
+				}else if(gamedata.charAt(0) != 'L' && gamedata.charAt(1) == 'L') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
+					scaleauto = new Scale('L');
+					whattorun = 2;
+					
+				//If all else fails
+				}else {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_LEFT);
+					driveforwardauto = new DriveForward('L');
+					whattorun = 3;
+					
+				}
+			
+			//Scale is selected
+			}else if(action.getSelected() == 2) {
+				
+				//If the scale is on the left
+				if(gamedata.charAt(1) == 'L') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
+					scaleauto = new Scale('L');
+					whattorun = 2;
+					
+				//If the scale is not on the left but the switch is
+				}else if(gamedata.charAt(1) != 'L' && gamedata.charAt(0) == 'L') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_LEFT);
+					switchauto = new Switch('L', gamedata.charAt(0));
+					whattorun = 1;
+					
+				//If all else fails
+				}else {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_LEFT);
+					driveforwardauto = new DriveForward('L');
+					whattorun = 3;
+					
+				}
+				
+			//Drive Forward is selected
+			}else if(action.getSelected() == 3) {
+				
+				SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_LEFT);
+				driveforwardauto = new DriveForward('L');
+				whattorun = 3;
+				
+			}
+		
+		//Position in the Center
+		}else if(location.getSelected() == 2) {
+			
+			//Switch is selected
+			if(action.getSelected() == 1) {
+				
+				//If the switch is on the left
+				if(gamedata.charAt(0) == 'L') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_CENTER_LEFT);
+					switchauto = new Switch('C', gamedata.charAt(0));
+					whattorun = 1;
+					
+				//If the switch is on the right
+				}else if(gamedata.charAt(0) == 'R') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_CENTER_RIGHT);
+					switchauto = new Switch('C', gamedata.charAt(0));
+					whattorun = 1;
+					
+				//If all else fails
+				}else {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_CENTER);
+					driveforwardauto = new DriveForward('C');
+					whattorun = 3;
+					
+				}
+			
+			//Scale is selected
+			}else if(action.getSelected() == 2) {
+				
+				//SCALE IS NOT PROGRAMMED TO BE ACCOMPLISHED WHEN WE ARE IN THE CENTER POSITION
+				
+				SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_CENTER);
+				driveforwardauto = new DriveForward('C');
+				whattorun = 3;
+				
+			//Drive Forward is selected
+			}else if(action.getSelected() == 3) {
+				
+				SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_CENTER);
+				driveforwardauto = new DriveForward('C');
+				whattorun = 3;
+				
+			}
+			
+		//Position on the Right
+		}else if(location.getSelected() == 3) {
+			
+			//Switch is selected
+			if(action.getSelected() == 1) {
+				
+				//If the switch is on the left
+				if(gamedata.charAt(0) == 'R') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_RIGHT);
+					switchauto = new Switch('R', gamedata.charAt(0));
+					whattorun = 1;
+					
+				//If the switch is not on the left but the scale is
+				}else if(gamedata.charAt(0) != 'R' && gamedata.charAt(1) == 'R') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
+					scaleauto = new Scale('R');
+					whattorun = 2;
+					
+				//If all else fails
+				}else {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_RIGHT);
+					driveforwardauto = new DriveForward('R');
+					whattorun = 3;
+					
+				}
+			
+			//Scale is selected
+			}else if(action.getSelected() == 2) {
+				
+				//If the scale is on the left
+				if(gamedata.charAt(1) == 'R') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
+					scaleauto = new Scale('R');
+					whattorun = 2;
+					
+				//If the scale is not on the left but the switch is
+				}else if(gamedata.charAt(1) != 'R' && gamedata.charAt(0) == 'R') {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_RIGHT);
+					switchauto = new Switch('R', gamedata.charAt(0));
+					whattorun = 1;
+					
+				//If all else fails
+				}else {
+					
+					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_RIGHT);
+					driveforwardauto = new DriveForward('R');
+					whattorun = 3;
+					
+				}
+				
+			//Drive Forward is selected
+			}else if(action.getSelected() == 3) {
+				
+				SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_RIGHT);
+				driveforwardauto = new DriveForward('R');
+				whattorun = 3;
+				
+			}
+		}
+		
+		if(whattorun == 1) {
+			switchauto.start();
+		}else if (whattorun == 2) {
+			scaleauto.start();
+		}else if(whattorun == 3) {
+			driveforwardauto.start();
+		}else {
+			SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_FAILURE);
+		}
 		
 	}
 
