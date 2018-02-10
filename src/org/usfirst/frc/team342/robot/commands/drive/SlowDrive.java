@@ -3,15 +3,16 @@ package org.usfirst.frc.team342.robot.commands.drive;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 /**
- *make robot go slow
+ *Makes robot go slow
  */
 public class SlowDrive extends Command {
 	
-	
+	private DriveSystem drive;
 
     public SlowDrive() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    	drive = DriveSystem.getInstance();
     	
     }
 
@@ -22,12 +23,12 @@ public class SlowDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	drive.setslow(true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
