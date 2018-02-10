@@ -37,7 +37,7 @@ public class DriveSystem extends Subsystem {
 	private DifferentialDrive drive;
 	
 	// Here are the current variables. Change them at will. 
-	private static final int AMPS = 10; 
+	private static final int AMPS = 200; 
 	private static final int TIMEOUT_MS = 10;
 	private static final int PEAK_DURATION = 200; 
 	private static final int AMPSCENTER = 35;
@@ -68,15 +68,12 @@ public class DriveSystem extends Subsystem {
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
 		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
 		navx = new AHRS(SPI.Port.kMXP);
-		front = true;
-
-		leftFollow.follow(leftMaster);
-		rightFollow.follow(rightMaster);
+		front = false;
 
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		leftFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		//leftFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		rightFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		//rightFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 
 		drive = new DifferentialDrive(leftMaster, rightMaster);
 		
@@ -100,6 +97,11 @@ public class DriveSystem extends Subsystem {
 		rightFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		rightFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightFollow.enableCurrentLimit(true);
+		
+		rightMaster.setInverted(true);
+		rightMaster.setInverted(true);
+		
+		rightMaster.configOpenloopRamp(0.1, 50);
 
 		centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS); 
 		centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
@@ -117,13 +119,23 @@ public class DriveSystem extends Subsystem {
 		}
 		
 		if(Math.abs(Right_joy_Y) > deadzone || Math.abs(Left_joy_Y) > deadzone) {
-			drive.tankDrive(Left_joy_Y, Right_joy_Y);
+			/* -1.0 temp to test right going backwards. */
+			rightMaster.set(-1.0 * Right_joy_Y);
+			rightFollow.set(-1.0 * Right_joy_Y);
+			
+			leftMaster.set(Left_joy_Y);
+			leftFollow.set(Left_joy_Y);
 		}else {
-			drive.tankDrive(0.0, 0.0);
+			rightMaster.set(0.0);
+			rightFollow.set(0.0);
+			leftMaster.set(0.0);
+			leftFollow.set(0.0);
 		}
 		
 		if(Math.abs(X_average) > deadzone) {
 			centerWheel.set(ControlMode.PercentOutput, X_average);
+		} else {
+			centerWheel.set(ControlMode.PercentOutput, 0.0);
 		}
 	}
 
@@ -201,8 +213,10 @@ public class DriveSystem extends Subsystem {
 
 	public void stopDrive() {
 
-		leftMaster.set(0.0);
 		rightMaster.set(0.0);
+		rightFollow.set(0.0);
+		leftMaster.set(0.0);
+		leftFollow.set(0.0);
 		centerWheel.set(ControlMode.PercentOutput, 0.0);
 	}
 

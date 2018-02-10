@@ -14,7 +14,7 @@ public class DriveWithJoystick extends Command {
 	private static final int X_RIGHT_AXIS = 4;
 	private static final int Y_RIGHT_AXIS = 5;
 	
-	private static final double DEADZONE = 0.2;
+	private static final double DEADZONE = 0.4;
 	
 	private double speed_y_left; 
 	private double speed_x_left;
@@ -53,12 +53,12 @@ public class DriveWithJoystick extends Command {
 		x_average = (speed_x_left + speed_x_right) / 2.0;
 		
 		
-		if(!Joypad.getRawButton(5)) {
-			wheelUp.start();
-			x_average = 0.0;
-		}else {
-			wheelDown.start();
-		}
+//		if(!Joypad.getRawButton(5)) {
+//			wheelUp.start();
+//			x_average = 0.0;
+//		}else {
+//			wheelDown.start();
+//		}
 		
 		
 		SmartDashboard.putNumber("Left Y", speed_y_left);
