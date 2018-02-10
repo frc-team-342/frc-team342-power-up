@@ -112,8 +112,8 @@ public class OI {
 		// Drive Controller Buttons
 		xbox_drive_button5.whenPressed(manipulatewheeldown);
 		xbox_drive_button5.whenReleased(manipulatewheelup);
-		xbox_drive_button6.whileHeld(slowdrive);
-		manipulator_button6.whenReleased(fastdrive);
+		xbox_drive_button6.whenPressed(slowdrive);
+		xbox_drive_button6.whenReleased(fastdrive);
 				
 		// Manipulator Buttons
 		manipulator_button1.whileHeld(dispensecube);

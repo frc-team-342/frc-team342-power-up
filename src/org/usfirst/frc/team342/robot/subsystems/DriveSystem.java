@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveSystem extends Subsystem {
 
@@ -133,6 +134,8 @@ public class DriveSystem extends Subsystem {
 
 			Left_joy_Y /= 2.0;
 			Right_joy_Y /= 2.0;
+			SmartDashboard.putNumber("Test_1", Left_joy_Y);
+			SmartDashboard.putNumber("Test_2", Right_joy_Y);
 		}
 
 		// Check if the front boolean is false to change the direction of the Inputs.
