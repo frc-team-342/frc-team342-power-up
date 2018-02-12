@@ -47,6 +47,7 @@ public class DriveSystem extends Subsystem {
 	private static final int PEAK_DURATION = 200;
 	private static final int AMPSCENTER = 35;
 	private static final double RAMP_TIME = 0.1;
+	private  double scaleFactor = 1 / 4000; 
 
 	public DriveSystem() {
 
@@ -160,7 +161,7 @@ public class DriveSystem extends Subsystem {
 			leftFollow.set(0.0);
 		}
 
-		if (Math.abs(center) > deadzone) {
+		if (Math.abs(center) > deadzone && getWheelState()) {
 
 			centerWheel.set(ControlMode.PercentOutput, center);
 		} else {
@@ -249,5 +250,13 @@ public class DriveSystem extends Subsystem {
 		rightFollow.set(0.0);
 		centerWheel.set(ControlMode.PercentOutput, 0.0);
 	}
+	
+	public double getDistance(double encoder) {
+		double feet; 
+		feet = encoder * scaleFactor; 
+		return feet; 
+	}
+	
+	
 
 }

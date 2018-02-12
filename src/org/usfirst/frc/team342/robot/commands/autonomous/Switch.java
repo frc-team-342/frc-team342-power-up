@@ -1,5 +1,6 @@
 package org.usfirst.frc.team342.robot.commands.autonomous;
 
+import org.usfirst.frc.team342.robot.commands.autonomous.DriveToDistance.Distance;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -33,10 +34,10 @@ public class Switch extends CommandGroup {
     		SmartDashboard.putString("Switch Value: ", "CL");
     		
     		rotatetoangle = new RotateToAngle(CENTER_LEFT_ANGLE);
-    		drivetimed = new DriveTimed(3, SPEED);
+    		drivetodistance = new DriveToDistance(Distance.distance1);
     		
     		addSequential(rotatetoangle);
-    		addSequential(drivetimed);
+    		addSequential(drivetodistance);
     		
     		
     	}else if(location == 'C' && switch_position == 'R') {
@@ -45,10 +46,10 @@ public class Switch extends CommandGroup {
     		SmartDashboard.putString("Switch Value: ", "CR");
     		
     		rotatetoangle = new RotateToAngle(CENTER_RIGHT_ANGLE);
-    		drivetimed = new DriveTimed(3, SPEED);
+    		drivetodistance = new DriveToDistance(Distance.distance1);
     		
     		addSequential(rotatetoangle);
-    		addSequential(drivetimed);
+    		addSequential(drivetodistance);
     		
     		
     	}else if(location == 'R' && switch_position == 'R') {
