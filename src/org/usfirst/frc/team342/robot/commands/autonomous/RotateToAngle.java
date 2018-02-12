@@ -9,13 +9,9 @@ public class RotateToAngle extends Command {
 	private DriveSystem RotateToAngle;
 	private double angle;
 	private boolean TurnRight;
-<<<<<<< HEAD
-	private static final double RotateSpeed= 0.5;
-=======
 	private static final double RotateSpeed= 0.4;
 	
 	private double angleinitial;
->>>>>>> 5619b30ec293703b09fcdcaaad352b5f0c0c1c43
 	
 
 	/**
