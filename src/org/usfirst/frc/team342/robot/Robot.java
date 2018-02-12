@@ -7,8 +7,12 @@
 
 package org.usfirst.frc.team342.robot;
 
+<<<<<<< HEAD
 
 import org.usfirst.frc.team342.robot.commands.autonomous.RotateToAngle;
+=======
+import org.usfirst.frc.team342.robot.commands.autonomous.AutoChooser;
+>>>>>>> 5619b30ec293703b09fcdcaaad352b5f0c0c1c43
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
@@ -18,9 +22,11 @@ import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 import org.usfirst.frc.team342.robot.subsystems.LightsSubsystem;
 import org.usfirst.frc.team342.robot.subsystems.PneumaticsResourceSystem;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,7 +36,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * project.
  */
 public class Robot extends TimedRobot {
-	
+
 	private static OI oi;
 	private static CameraVisionSystem cameravisionsystem;
 	private static ClimbSystem climbsystem;
@@ -40,10 +46,26 @@ public class Robot extends TimedRobot {
 	private static LightsSubsystem lightssubsystem;
 	private static PneumaticsResourceSystem pneumaticsresourcesystem;
 	private static DriveWithJoystick drivewithjoystick;
-	
+
+	private AutoChooser chooser;
+
+	private static final String AUTO_MESSAGE_FAILURE = "THIS MESSAGE SHOULD NOT APPEAR, IF IT DOES AUTONOMOUS LOGIC IS BROKE";
+
+	private String gamedata;
+
+	private static final int LEFT = 1;
+	private static final int CENTER = 2;
+	private static final int RIGHT = 3;
+	private static final int SWITCH = 1;
+	private static final int SCALE = 2;
+	private static final int DRIVE_FORWARD = 3;
+
+	SendableChooser<Integer> location = new SendableChooser<>();
+	SendableChooser<Integer> action = new SendableChooser<>();
+
 	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
+	 * This function is run when the robot is first started up and should be used
+	 * for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
@@ -57,12 +79,25 @@ public class Robot extends TimedRobot {
 		lightssubsystem = LightsSubsystem.getInstance();
 		pneumaticsresourcesystem = PneumaticsResourceSystem.getInstance();
 		drivewithjoystick = new DriveWithJoystick();
+
+		chooser = new AutoChooser();
+
+		location.addDefault("Left", LEFT);
+		location.addObject("Center", CENTER);
+		location.addObject("Right", RIGHT);
+
+		action.addDefault("Switch", SWITCH);
+		action.addDefault("Scale", SCALE);
+		action.addDefault("Drive Forward", DRIVE_FORWARD);
+
+		SmartDashboard.putData("Location: ", location);
+		SmartDashboard.putData("Auto Action: ", action);
 	}
 
 	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
+	 * This function is called once each time the robot enters Disabled mode. You
+	 * can use it to reset any subsystem information you want to clear when the
+	 * robot is disabled.
 	 */
 	@Override
 	public void disabledInit() {
@@ -71,24 +106,45 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		
+
 		Scheduler.getInstance().run();
 	}
 
 	/**
 	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
+	 * between different autonomous modes using the dashboard. The sendable chooser
+	 * code works with the Java SmartDashboard. If you prefer the LabVIEW Dashboard,
+	 * remove all of the chooser code and uncomment the getString code to get the
+	 * auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
+	 * <p>
+	 * You can add additional auto modes by adding additional commands to the
+	 * chooser code above (like the commented example) or additional comparisons to
+	 * the switch structure below with additional strings & commands.
 	 */
 	@Override
 	public void autonomousInit() {
+<<<<<<< HEAD
 		new RotateToAngle(90).start();
+=======
+
+		gamedata = DriverStation.getInstance().getGameSpecificMessage();
+
+		SmartDashboard.putString("Game Message: ", gamedata);
+
+		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected());
+
+		if (whattodo == 1) {
+			chooser.switchauto.start();
+		} else if (whattodo == 2) {
+			chooser.scaleauto.start();
+		} else if (whattodo == 3) {
+			chooser.driveforwardauto.start();
+		} else {
+			SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_FAILURE);
+		}
+
+>>>>>>> 5619b30ec293703b09fcdcaaad352b5f0c0c1c43
 	}
 
 	/**
@@ -96,12 +152,13 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		SmartDashboard.putNumber("ANGLE: ", drivesystem.getGyro());
 		Scheduler.getInstance().run();
 	}
 
 	@Override
 	public void teleopInit() {
-		
+
 		drivewithjoystick.start();
 	}
 
@@ -110,7 +167,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		
+		SmartDashboard.putNumber("ANGLE: ", drivesystem.getGyro());
 		Scheduler.getInstance().run();
 	}
 
@@ -119,6 +176,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		
+
 	}
 }

@@ -3,12 +3,19 @@ package org.usfirst.frc.team342.robot.commands.autonomous;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RotateToAngle extends Command {
 	private DriveSystem RotateToAngle;
 	private double angle;
 	private boolean TurnRight;
+<<<<<<< HEAD
 	private static final double RotateSpeed= 0.5;
+=======
+	private static final double RotateSpeed= 0.4;
+	
+	private double angleinitial;
+>>>>>>> 5619b30ec293703b09fcdcaaad352b5f0c0c1c43
 	
 
 	/**
@@ -26,8 +33,10 @@ public class RotateToAngle extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		RotateToAngle.resetGyro();
-		if (angle > 180) {
+		
+		angleinitial = RotateToAngle.getGyro();
+		
+		if (Math.abs(angle - angleinitial) > 180) {
 
 			TurnRight = false;
 		} else {
@@ -39,9 +48,9 @@ public class RotateToAngle extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (TurnRight) {
-			RotateToAngle.drive(RotateSpeed, RotateSpeed*-1.0, 0, 0);
+			RotateToAngle.drive(RotateSpeed, RotateSpeed*-1.0, 0, 0.0);
 		} else {
-			RotateToAngle.drive(RotateSpeed*-1.0, RotateSpeed, 0, 0);
+			RotateToAngle.drive(RotateSpeed*-1.0, RotateSpeed, 0, 0.0);
 		}
 
 	}
@@ -49,7 +58,10 @@ public class RotateToAngle extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		double gyro_angle = RotateToAngle.getGyro();
-		if (gyro_angle >= angle) {
+		
+		SmartDashboard.putNumber("ANGLE: ", gyro_angle);
+		
+		if (Math.abs(gyro_angle) >= Math.abs(angle - angleinitial)) {
 			return true;
 		} else {
 			return false;
