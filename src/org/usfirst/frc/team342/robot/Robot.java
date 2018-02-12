@@ -8,6 +8,7 @@
 package org.usfirst.frc.team342.robot;
 
 
+import org.usfirst.frc.team342.robot.commands.autonomous.RotateToAngle;
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
@@ -87,7 +88,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		
+		new RotateToAngle(90).start();
 	}
 
 	/**

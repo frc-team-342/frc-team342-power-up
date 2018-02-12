@@ -8,7 +8,7 @@ public class RotateToAngle extends Command {
 	private DriveSystem RotateToAngle;
 	private double angle;
 	private boolean TurnRight;
-	private static final double RotateSpeed= 0.7;
+	private static final double RotateSpeed= 0.5;
 	
 
 	/**
