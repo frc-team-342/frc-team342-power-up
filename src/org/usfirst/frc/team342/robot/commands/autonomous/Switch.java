@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Switch extends CommandGroup {
 	
-	private static final int CENTER_RIGHT_ANGLE = 90;
-	private static final int CENTER_LEFT_ANGLE = 180;
+	private static final int CENTER_RIGHT_ANGLE = 45;
+	private static final int CENTER_LEFT_ANGLE = 315;
 	
 	private static final double SPEED = -0.35;
 	
