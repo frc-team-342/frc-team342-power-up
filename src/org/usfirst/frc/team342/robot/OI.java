@@ -10,6 +10,7 @@ package org.usfirst.frc.team342.robot;
 import org.usfirst.frc.team342.robot.commands.claw.CollectCube;
 import org.usfirst.frc.team342.robot.commands.claw.DispenseCube;
 import org.usfirst.frc.team342.robot.commands.claw.StopCubeController;
+import org.usfirst.frc.team342.robot.commands.drive.FastDrive;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelDOWN;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelUP;
 import org.usfirst.frc.team342.robot.commands.drive.SlowDrive;
@@ -56,6 +57,7 @@ public class OI {
 		private ManipulateWheelUP manipulatewheelup;
 		private ManipulateWheelDOWN manipulatewheeldown;
 		private SlowDrive slowdrive;
+		private FastDrive fastdrive;
 		
 		//Various Commands to be assigned to buttons for manipulator
 		private CollectCube collectcube; 
@@ -97,7 +99,9 @@ public class OI {
 			//Drive
 				manipulatewheelup = new ManipulateWheelUP();
 				manipulatewheeldown = new ManipulateWheelDOWN();
-						slowdrive = new SlowDrive();
+				slowdrive = new SlowDrive();
+				fastdrive = new FastDrive();
+				
 			//Manipulator
 				collectcube= new CollectCube ();
 				stopcubecontroller= new StopCubeController ();
@@ -108,7 +112,8 @@ public class OI {
 		// Drive Controller Buttons
 		xbox_drive_button5.whenPressed(manipulatewheeldown);
 		xbox_drive_button5.whenReleased(manipulatewheelup);
-		xbox_drive_button6.whileHeld(slowdrive);
+		xbox_drive_button6.whenPressed(slowdrive);
+		xbox_drive_button6.whenReleased(fastdrive);
 				
 		// Manipulator Buttons
 		manipulator_button1.whileHeld(dispensecube);
@@ -117,7 +122,9 @@ public class OI {
 		manipulator_button4.whenPressed(collectcube);
 		manipulator_button9.whenPressed(lifttoposition_1);
 		manipulator_button10.whenPressed(lifttoposition_2);
-				
+		manipulator_button6.whenPressed(slowdrive);
+	
+		
 }
 	public static OI getInstance () {
 		return instance;
