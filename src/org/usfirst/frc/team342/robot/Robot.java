@@ -7,12 +7,7 @@
 
 package org.usfirst.frc.team342.robot;
 
-<<<<<<< HEAD
-
-import org.usfirst.frc.team342.robot.commands.autonomous.RotateToAngle;
-=======
 import org.usfirst.frc.team342.robot.commands.autonomous.AutoChooser;
->>>>>>> 5619b30ec293703b09fcdcaaad352b5f0c0c1c43
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
@@ -124,9 +119,6 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-<<<<<<< HEAD
-		new RotateToAngle(90).start();
-=======
 
 		gamedata = DriverStation.getInstance().getGameSpecificMessage();
 
@@ -144,7 +136,6 @@ public class Robot extends TimedRobot {
 			SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_FAILURE);
 		}
 
->>>>>>> 5619b30ec293703b09fcdcaaad352b5f0c0c1c43
 	}
 
 	/**
