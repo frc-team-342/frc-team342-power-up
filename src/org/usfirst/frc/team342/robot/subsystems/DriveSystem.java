@@ -81,6 +81,10 @@ public class DriveSystem extends Subsystem {
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
 		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
 		navx = new AHRS(SPI.Port.kMXP);
+		
+		// Inverts the right set of motors to make the wheels travel in same direction
+		rightMaster.setInverted(true);
+		rightFollow.setInverted(true);
 
 		// Configures the encoder onto the master motor controllers.
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
@@ -149,8 +153,8 @@ public class DriveSystem extends Subsystem {
 
 		if (Math.abs(Right_joy_Y) > deadzone || Math.abs(Left_joy_Y) > deadzone) {
 
-			rightMaster.set(-1.0 * Right_joy_Y);
-			rightFollow.set(-1.0 * Right_joy_Y);
+			rightMaster.set(Right_joy_Y);
+			rightFollow.set(Right_joy_Y);
 			leftMaster.set(Left_joy_Y);
 			leftFollow.set(Left_joy_Y);
 		} else {

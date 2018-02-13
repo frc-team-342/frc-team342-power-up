@@ -10,17 +10,21 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveTimed extends Command {
 
 	private DriveSystem drive;
+	
+	private static final long TIME_DEADZONE = 500;
+	private static final double SLOW_SPEED = 0.3;
 
 	private double speed;
-	private int time;
+	private double time;
 	private long starttime;
+	private long endtime;
 
-	public DriveTimed(int time, double speed) {
+	public DriveTimed(double time, double speed) {
 
 		drive = DriveSystem.getInstance();
 		requires(drive);
 
-		this.time = time * 1000;
+		this.time = time * 1000.0;
 		this.speed = speed;
 	}
 
@@ -28,18 +32,23 @@ public class DriveTimed extends Command {
 	protected void initialize() {
 		
 		starttime = System.currentTimeMillis();
+		endtime = starttime + (int)time;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-
-		drive.drive(speed, speed, 0.0, 0.0);
+		
+		if(System.currentTimeMillis() > (endtime - TIME_DEADZONE)){
+			drive.drive(SLOW_SPEED, SLOW_SPEED, 0.0, 0.0);
+		}else {
+			drive.drive(speed, speed, 0.0, 0.0);
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		
-		if(System.currentTimeMillis() >= (starttime + time)) {
+		if(System.currentTimeMillis() >= endtime) {
 			return true;
 		}else {
 			return false;
