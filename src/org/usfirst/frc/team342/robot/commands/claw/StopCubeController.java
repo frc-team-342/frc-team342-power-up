@@ -40,7 +40,7 @@ public class StopCubeController extends Command {
 	@Override
 	protected void interrupted() {
 
-		end();
+		cube_controller.stopAll();
 	}
 
 }
