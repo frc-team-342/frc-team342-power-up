@@ -9,13 +9,13 @@ package org.usfirst.frc.team342.robot;
 
 import org.usfirst.frc.team342.robot.commands.autonomous.AutoChooser;
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
-import org.usfirst.frc.team342.robot.commands.drive.LiftWithJoystick;
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team342.robot.subsystems.CubeController;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 import org.usfirst.frc.team342.robot.subsystems.LightsSubsystem;
+import org.usfirst.frc.team342.robot.subsystems.PneumaticsResourceSystem;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -39,8 +39,8 @@ public class Robot extends TimedRobot {
 	private static DriveSystem drivesystem;
 	private static LiftSystem liftsystem;
 	private static LightsSubsystem lightssubsystem;
+	private static PneumaticsResourceSystem pneumaticsresourcesystem;
 	private static DriveWithJoystick drivewithjoystick;
-	private static LiftWithJoystick liftwithjoystick;
 
 	private AutoChooser chooser;
 
@@ -72,8 +72,8 @@ public class Robot extends TimedRobot {
 		drivesystem = DriveSystem.getInstance();
 		liftsystem = LiftSystem.getInstance();
 		lightssubsystem = LightsSubsystem.getInstance();
+		pneumaticsresourcesystem = PneumaticsResourceSystem.getInstance();
 		drivewithjoystick = new DriveWithJoystick();
-		liftwithjoystick = new LiftWithJoystick();
 
 		chooser = new AutoChooser();
 
@@ -143,7 +143,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		
+		SmartDashboard.putNumber("ANGLE: ", drivesystem.getGyro());
 		Scheduler.getInstance().run();
 	}
 
@@ -151,7 +151,6 @@ public class Robot extends TimedRobot {
 	public void teleopInit() {
 
 		drivewithjoystick.start();
-		liftwithjoystick.start();
 	}
 
 	/**
@@ -159,7 +158,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		
+		SmartDashboard.putNumber("ANGLE: ", drivesystem.getGyro());
 		Scheduler.getInstance().run();
 	}
 
