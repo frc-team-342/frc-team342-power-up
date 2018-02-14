@@ -51,7 +51,7 @@ public class DriveSystem extends Subsystem {
 	private static final double DEADZONE = 0.2;
 
 	// Scale factor for calculating autonomous
-	private static final double SCALE_FACTOR = (1 / 4000);
+	private static final double SCALE_FACTOR = (1 / 4096);
 
 	public DriveSystem() {
 
@@ -72,7 +72,7 @@ public class DriveSystem extends Subsystem {
 
 		// Configures various booleans for drive.
 		// EX: If slow is true, the robot goes slow.
-		front = true;
+		front = false;
 		slow = false;
 
 		// Instantiate Motor Controllers, Sensors, Pneumatics, and the NavX.
