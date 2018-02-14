@@ -39,9 +39,9 @@ public class DriveTimed extends Command {
 	protected void execute() {
 		
 		if(System.currentTimeMillis() > (endtime - TIME_DEADZONE)){
-			drive.drive(SLOW_SPEED, SLOW_SPEED, 0.0, 0.0);
+			drive.drive(SLOW_SPEED, SLOW_SPEED, 0.0);
 		}else {
-			drive.drive(speed, speed, 0.0, 0.0);
+			drive.drive(speed, speed, 0.0);
 		}
 	}
 
@@ -65,6 +65,6 @@ public class DriveTimed extends Command {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		
-		drive.stopAll();
+		end();
 	}
 }
