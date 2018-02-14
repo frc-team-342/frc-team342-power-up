@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveSystem extends Subsystem {
 
@@ -21,10 +20,10 @@ public class DriveSystem extends Subsystem {
 	private static final DriveSystem INSTANCE = new DriveSystem();
 
 	// Motor Controllers.
-	private WPI_TalonSRX leftMaster;
-	private WPI_TalonSRX leftFollow;
-	private WPI_TalonSRX rightMaster;
-	private WPI_TalonSRX rightFollow;
+	private TalonSRX leftMaster;
+	private TalonSRX leftFollow;
+	private TalonSRX rightMaster;
+	private TalonSRX rightFollow;
 	private TalonSRX centerWheel;
 
 	// Pneumatic Solenoid.
@@ -47,7 +46,12 @@ public class DriveSystem extends Subsystem {
 	private static final int PEAK_DURATION = 200;
 	private static final int AMPSCENTER = 35;
 	private static final double RAMP_TIME = 0.1;
-	private  double scaleFactor = 1 / 4000; 
+
+	// Deadzone for the drive method
+	private static final double DEADZONE = 0.2;
+
+	// Scale factor for calculating autonomous
+	private static final double SCALE_FACTOR = (1 / 4000);
 
 	public DriveSystem() {
 
@@ -68,7 +72,7 @@ public class DriveSystem extends Subsystem {
 
 		// Configures various booleans for drive.
 		// EX: If slow is true, the robot goes slow.
-		front = false;
+		front = true;
 		slow = false;
 
 		// Instantiate Motor Controllers, Sensors, Pneumatics, and the NavX.
@@ -82,9 +86,17 @@ public class DriveSystem extends Subsystem {
 		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
 		navx = new AHRS(SPI.Port.kMXP);
 
+		// Inverts the right set of motors to make sure the robot drives in the right
+		// direction.
+		leftMaster.setInverted(true);
+		leftFollow.setInverted(true);
+		
+		rightFollow.follow(rightMaster);
+		leftFollow.follow(leftMaster);
+
 		// Configures the encoder onto the master motor controllers.
-		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 
 		// Controls the current. To change any of these change the constants at the top
 		// of the class.
@@ -125,18 +137,17 @@ public class DriveSystem extends Subsystem {
 	}
 
 	public void setslow(boolean slow) {
+
 		this.slow = slow;
 	}
 
-	public void drive(double Left_joy_Y, double Right_joy_Y, double center, double deadzone) {
+	public void drive(double Left_joy_Y, double Right_joy_Y, double center) {
 
 		// Check if the slow boolean is set to true to cut the robot's speed in half.
 		if (slow) {
 
 			Left_joy_Y /= 2.0;
 			Right_joy_Y /= 2.0;
-			SmartDashboard.putNumber("Test_1", Left_joy_Y);
-			SmartDashboard.putNumber("Test_2", Right_joy_Y);
 		}
 
 		// Check if the front boolean is false to change the direction of the Inputs.
@@ -147,21 +158,17 @@ public class DriveSystem extends Subsystem {
 			center = center * -1.0;
 		}
 
-		if (Math.abs(Right_joy_Y) > deadzone || Math.abs(Left_joy_Y) > deadzone) {
+		if (Math.abs(Right_joy_Y) > DEADZONE || Math.abs(Left_joy_Y) > DEADZONE) {
 
-			rightMaster.set(-1.0 * Right_joy_Y);
-			rightFollow.set(-1.0 * Right_joy_Y);
-			leftMaster.set(Left_joy_Y);
-			leftFollow.set(Left_joy_Y);
+			rightMaster.set(ControlMode.PercentOutput, Right_joy_Y);
+			leftMaster.set(ControlMode.PercentOutput, Left_joy_Y);
 		} else {
 
-			rightMaster.set(0.0);
-			rightFollow.set(0.0);
-			leftMaster.set(0.0);
-			leftFollow.set(0.0);
+			rightMaster.set(ControlMode.PercentOutput, 0.0);
+			leftMaster.set(ControlMode.PercentOutput, 0.0);
 		}
 
-		if (Math.abs(center) > deadzone && getWheelState()) {
+		if (Math.abs(center) > DEADZONE && getWheelState()) {
 
 			centerWheel.set(ControlMode.PercentOutput, center);
 		} else {
@@ -206,14 +213,14 @@ public class DriveSystem extends Subsystem {
 		}
 	}
 
-	public double getLeftMasterEncoder() {
+	public int getLeftMasterEncoder() {
 
-		return leftMaster.getSelectedSensorPosition(0);
+		return leftMaster.getSensorCollection().getPulseWidthPosition();
 	}
 
-	public double getRightMasterEncoder() {
+	public int getRightMasterEncoder() {
 
-		return rightMaster.getSelectedSensorPosition(0);
+		return rightMaster.getSensorCollection().getPulseWidthPosition();
 	}
 
 	public double getUltrasonicOne() {
@@ -233,30 +240,30 @@ public class DriveSystem extends Subsystem {
 		front = !front;
 	}
 
-	public void stopDrive() {
+	public boolean getFront() {
 
-		rightMaster.set(0.0);
-		rightFollow.set(0.0);
-		leftMaster.set(0.0);
-		leftFollow.set(0.0);
-		centerWheel.set(ControlMode.PercentOutput, 0.0);
+		return front;
 	}
 
-	public void stopAll() {
-
-		leftMaster.set(0.0);
-		leftFollow.set(0.0);
-		rightMaster.set(0.0);
-		rightFollow.set(0.0);
-		centerWheel.set(ControlMode.PercentOutput, 0.0);
+	public boolean getSlow() {
+		
+		return slow;
 	}
 	
 	public double getDistance(double encoder) {
-		double feet; 
-		feet = encoder * scaleFactor; 
-		return feet; 
+
+		return encoder * SCALE_FACTOR;
 	}
 	
+	public void stopDrive() {
+
+		rightMaster.set(ControlMode.PercentOutput, 0.0);
+		rightFollow.set(ControlMode.PercentOutput, 0.0);
+		leftMaster.set(ControlMode.PercentOutput, 0.0);
+		leftFollow.set(ControlMode.PercentOutput, 0.0);
+		centerWheel.set(ControlMode.PercentOutput, 0.0);
+	}
+
 	
 
 }

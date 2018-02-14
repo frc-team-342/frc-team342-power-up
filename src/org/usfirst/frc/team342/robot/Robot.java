@@ -101,7 +101,9 @@ public class Robot extends TimedRobot {
 
 	@Override
 	public void disabledPeriodic() {
-
+		
+		SmartDashboard.putNumber("ENCODER LEFT", drivesystem.getLeftMasterEncoder());
+		
 		Scheduler.getInstance().run();
 	}
 

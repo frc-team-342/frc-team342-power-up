@@ -33,7 +33,7 @@ public class DriveTimed extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 
-		drive.drive(speed, speed, 0.0, 0.0);
+		drive.drive(speed, speed, 0.0);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -56,6 +56,6 @@ public class DriveTimed extends Command {
 	// subsystems is scheduled to run
 	protected void interrupted() {
 		
-		drive.stopAll();
+		end();
 	}
 }

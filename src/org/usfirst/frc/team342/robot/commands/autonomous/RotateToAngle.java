@@ -44,9 +44,9 @@ public class RotateToAngle extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		if (TurnRight) {
-			RotateToAngle.drive(RotateSpeed, RotateSpeed*-1.0, 0, 0.0);
+			RotateToAngle.drive(RotateSpeed, RotateSpeed*-1.0, 0.0);
 		} else {
-			RotateToAngle.drive(RotateSpeed*-1.0, RotateSpeed, 0, 0.0);
+			RotateToAngle.drive(RotateSpeed*-1.0, RotateSpeed, 0.0);
 		}
 
 	}
@@ -67,7 +67,7 @@ public class RotateToAngle extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		RotateToAngle.stopAll();
+		RotateToAngle.stopDrive();;
 	}
 
 	// Called when another command which requires one or more of the same

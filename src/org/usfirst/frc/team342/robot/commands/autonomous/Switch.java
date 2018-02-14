@@ -14,7 +14,7 @@ public class Switch extends CommandGroup {
 	private static final int CENTER_RIGHT_ANGLE = 90;
 	private static final int CENTER_LEFT_ANGLE = 180;
 	
-	private static final double SPEED = -0.35;
+	private static final double SPEED = 0.35;
 	
 	private RotateToAngle rotatetoangle;
 	private DriveToDistance drivetodistance;
@@ -33,24 +33,18 @@ public class Switch extends CommandGroup {
     		//Switch auto center left
     		SmartDashboard.putString("Switch Value: ", "CL");
     		
-    		rotatetoangle = new RotateToAngle(CENTER_LEFT_ANGLE);
     		drivetodistance = new DriveToDistance(Distance.distance1);
-    		
-    		addSequential(rotatetoangle);
+    	
     		addSequential(drivetodistance);
-    		
     		
     	}else if(location == 'C' && switch_position == 'R') {
     		
     		//Switch auto center right
     		SmartDashboard.putString("Switch Value: ", "CR");
     		
-    		rotatetoangle = new RotateToAngle(CENTER_RIGHT_ANGLE);
     		drivetodistance = new DriveToDistance(Distance.distance1);
     		
-    		addSequential(rotatetoangle);
     		addSequential(drivetodistance);
-    		
     		
     	}else if(location == 'R' && switch_position == 'R') {
     		//Switch auto right
