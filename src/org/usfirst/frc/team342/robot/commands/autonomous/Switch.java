@@ -1,5 +1,6 @@
 package org.usfirst.frc.team342.robot.commands.autonomous;
 
+import org.usfirst.frc.team342.robot.commands.autonomous.DriveToDistance.Distance;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -10,10 +11,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Switch extends CommandGroup {
 	
-	private static final int CENTER_RIGHT_ANGLE = 45;
-	private static final int CENTER_LEFT_ANGLE = 315;
+	private static final int CENTER_RIGHT_ANGLE = 90;
+	private static final int CENTER_LEFT_ANGLE = 180;
 	
-	private static final double SPEED = -0.25;
+	private static final double SPEED = 0.35;
 	
 	private RotateToAngle rotatetoangle;
 	private DriveToDistance drivetodistance;
@@ -32,24 +33,18 @@ public class Switch extends CommandGroup {
     		//Switch auto center left
     		SmartDashboard.putString("Switch Value: ", "CL");
     		
-    		rotatetoangle = new RotateToAngle(CENTER_LEFT_ANGLE);
-    		drivetimed = new DriveTimed(3, SPEED);
-    		
-    		addSequential(rotatetoangle);
-    		addSequential(drivetimed);
-    		
+    		drivetodistance = new DriveToDistance(Distance.distance1);
+    	
+    		addSequential(drivetodistance);
     		
     	}else if(location == 'C' && switch_position == 'R') {
     		
     		//Switch auto center right
     		SmartDashboard.putString("Switch Value: ", "CR");
     		
-    		rotatetoangle = new RotateToAngle(CENTER_RIGHT_ANGLE);
-    		drivetimed = new DriveTimed(3, SPEED);
+    		drivetodistance = new DriveToDistance(Distance.distance1);
     		
-    		addSequential(rotatetoangle);
-    		addSequential(drivetimed);
-    		
+    		addSequential(drivetodistance);
     		
     	}else if(location == 'R' && switch_position == 'R') {
     		//Switch auto right

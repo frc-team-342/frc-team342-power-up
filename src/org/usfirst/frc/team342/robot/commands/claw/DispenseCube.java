@@ -42,7 +42,7 @@ public class DispenseCube extends Command {
 	@Override
 	protected void interrupted() {
 
-		cube_controller.stopAll();
+		end();
 	}
 
 }

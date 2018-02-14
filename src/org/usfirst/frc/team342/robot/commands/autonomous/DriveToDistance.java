@@ -1,6 +1,8 @@
 package org.usfirst.frc.team342.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 /**
@@ -10,18 +12,27 @@ import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 public class DriveToDistance extends Command {
 
 	private DriveSystem DriveToDistance;
+	
+	private boolean leftisnegative;
+	private boolean rightisnegative;
+	
 	private double goal;
-	private double currentDistance;
-	//TODO assign a value to current distance or find some other way to make it work
+	private double currentDistance_Left;
+	private double currentDistance_Right;
+	private double distanceleft_Left;
+	private double distanceleft_Right;
 
-	private double totalAverage;
-	private double distanceLeft;
-	//TODO also assign this a value 
-	//NOTE: it is distance left, as in distance left to drive
-
+	private static final double LEFT_SPEED = 0.5;
+	private static final double RIGHT_SPEED = 0.5;
+	private static final double CENTER_SPEED = 0.0;
+	
+	private static final double GOAL_DEADZONE = 0.015;
+	
 	public enum Distance {
+
 		// put in numbers once we get them
-		distance1(0), distance2(0);
+		distance1(5), distance2(5);
+
 		public final int value;
 
 		Distance(int initValue) {
@@ -30,45 +41,89 @@ public class DriveToDistance extends Command {
 	}
 
 	public DriveToDistance(Distance distance) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+
 		DriveToDistance = DriveSystem.getInstance();
 		requires(DriveToDistance);
 
 		goal = distance.value;
 	}
 
-	// Called just before this Command runs the first time
 	protected void initialize() {
-		totalAverage = (DriveToDistance.getLeftMasterEncoder() + DriveToDistance.getRightMasterEncoder()) / 2;
-		currentDistance = totalAverage;
-	}
-
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
 		
-		if (totalAverage > goal) {
-			distanceLeft = Math.abs(/* the distance left to go */ - totalAverage);
-			DriveToDistance.drive(0.5, 0.5, 0.0, 0.2); 
-		} else {
-			DriveToDistance.stopDrive();
+		if(DriveToDistance.getRightMasterEncoder() <= 0.0) {
+			rightisnegative = true;
+		}else {
+			rightisnegative = false;
+		}
+		
+		if(DriveToDistance.getLeftMasterEncoder() <= 0.0) {
+			leftisnegative = true;
+		}else {
+			leftisnegative = false;
 		}
 	}
 
-	// Make this return true when this Command no longer needs to run execute()
+	protected void execute() {
+		
+		if(DriveToDistance.getRightMasterEncoder() <= 0.0) {
+			rightisnegative = true;
+		}else {
+			rightisnegative = false;
+		}
+		
+		if(DriveToDistance.getLeftMasterEncoder() <= 0.0) {
+			leftisnegative = true;
+		}else {
+			leftisnegative = false;
+		}
+		
+		currentDistance_Left = DriveToDistance.getDistance((DriveToDistance.getLeftMasterEncoder()));
+		currentDistance_Right = DriveToDistance.getDistance((DriveToDistance.getRightMasterEncoder()));
+		
+		if(leftisnegative) {
+			
+			distanceleft_Left = currentDistance_Left + goal;
+		}else {
+			
+			distanceleft_Left = currentDistance_Left - goal;
+		}
+		
+		if(rightisnegative) {
+			
+			distanceleft_Right = currentDistance_Right + goal;
+		}else {
+			
+			distanceleft_Right = currentDistance_Right - goal;
+		}
+		
+		SmartDashboard.putNumber("Raw Encoder Value LEFT", DriveToDistance.getLeftMasterEncoder());
+		SmartDashboard.putNumber("Raw Encoder Value RIGHT", DriveToDistance.getRightMasterEncoder());
+		SmartDashboard.putNumber("Current Distance LEFT", currentDistance_Left);
+		SmartDashboard.putNumber("Current Distance RIGHT", currentDistance_Right);
+		SmartDashboard.putNumber("Distance Left LEFT", distanceleft_Left);
+		SmartDashboard.putNumber("Distance Left RIGHT", distanceleft_Right);
+		
+		DriveToDistance.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
+	}
+
 	protected boolean isFinished() {
-		boolean isInDeadzone = currentDistance > (goal - 1000.0) && currentDistance < (goal + 1000.0); 
-		return isInDeadzone;
+		
+		if((distanceleft_Left > 0.0 - GOAL_DEADZONE || distanceleft_Left < 0.0 + GOAL_DEADZONE) || (distanceleft_Right > 0.0 - GOAL_DEADZONE || distanceleft_Right < 0.0 + GOAL_DEADZONE)) {
+			
+			return true;
+		}else {
+			
+			return false;
+		}
 	}
 
-	// Called once after isFinished returns true
 	protected void end() {
-		DriveToDistance.stopDrive();  
+
+		DriveToDistance.stopDrive();
 	}
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
 	protected void interrupted() {
-		DriveToDistance.stopAll();
+
+		end();
 	}
 }
