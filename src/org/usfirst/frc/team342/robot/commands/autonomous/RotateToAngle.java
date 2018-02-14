@@ -9,7 +9,12 @@ public class RotateToAngle extends Command {
 	private DriveSystem RotateToAngle;
 	private double angle;
 	private boolean TurnRight;
-	private static final double RotateSpeed = 0.4;
+	private static final double RotateSpeed = 0.5;
+	private static final double RotateSlowSpeed=0.2;
+	static final double margin = 10;
+	static final double slowmargin=50;
+	double gyro_angle = RotateToAngle.getGyro();
+	
 
 	private double angleinitial;
 
@@ -42,31 +47,41 @@ public class RotateToAngle extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (TurnRight) {
-			RotateToAngle.drive(RotateSpeed, RotateSpeed * -1.0, 0, 0.0);
-		} else {
-			RotateToAngle.drive(RotateSpeed * -1.0, RotateSpeed, 0, 0.0);
-		}
+		double CurrentDriveSpeed;
+		gyro_angle =RotateToAngle.getGyro();
+		boolean slowdown = (gyro_angle) <= (angle)+slowmargin && (gyro_angle) >= (angle)-slowmargin;
+		if (slowdown) {
+			CurrentDriveSpeed=RotateSlowSpeed;
+			
 
+	}else {
+		CurrentDriveSpeed=RotateSpeed;
 	}
+	
+		if (TurnRight) {
+			RotateToAngle.drive(CurrentDriveSpeed, CurrentDriveSpeed * -1.0, 0, 0.0);
+		} else {
+			RotateToAngle.drive(CurrentDriveSpeed * -1.0, CurrentDriveSpeed, 0, 0.0);
+		}
+	}
+		
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		double gyro_angle = RotateToAngle.getGyro();
-
+	
+		
+		SmartDashboard.putNumber(" TARGET ANGLE: ", angle);
 		SmartDashboard.putNumber("ANGLE: ", gyro_angle);
+		
 
-		if (TurnRight) {
-			if (Math.abs(gyro_angle) >= Math.abs(angle)) {
+		
+			boolean isFinished = (gyro_angle) <= (angle)+margin && (gyro_angle) >= (angle)-margin;
+			if (isFinished) {
+				SmartDashboard.putBoolean("isfinished: ", isFinished);
 				return true;
 			} else {
 				return false;
 			}
-
-		} else if (Math.abs(gyro_angle) <= Math.abs(angle)) {
-			return true;
-		} else
-			return false;
 	}
 
 	// Called once after isFinished returns true
