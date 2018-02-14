@@ -186,7 +186,7 @@ public class DriveSystem extends Subsystem {
 
 	public double getGyro() {
 
-		return navx.getAngle();
+		return (((navx.getAngle() % 360) + 360) % 360);
 	}
 
 	public void resetGyro() {
