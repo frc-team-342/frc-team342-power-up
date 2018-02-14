@@ -27,6 +27,7 @@ public class DriveWithJoystick extends Command {
 
 	public DriveWithJoystick() {
 
+	//gets drive. oi, and the oi joystick
 		oi = OI.getInstance();
 		drive = DriveSystem.getInstance();
 		Joypad = oi.getJoystickDrive();
@@ -38,17 +39,22 @@ public class DriveWithJoystick extends Command {
 
 	public void execute() {
 
-		speed_y_left = Joypad.getRawAxis(Y_LEFT_AXIS);
+	//gets and assigns the speeds and values of the axis's and out puts it
+		speed_y_left = Joypad.getRawAxis(Y_LEFT_AXIS) * -1.0;
 		speed_x_left = Joypad.getRawAxis(X_LEFT_AXIS);
 
-		speed_y_right = Joypad.getRawAxis(Y_RIGHT_AXIS);
+		speed_y_right = Joypad.getRawAxis(Y_RIGHT_AXIS) * -1.0;
 		speed_x_right = Joypad.getRawAxis(X_RIGHT_AXIS);
 
-		x_average = ((speed_x_left + speed_x_right) / 2.0) * -1.0;
+		x_average = ((speed_x_left + speed_x_right) / 2.0);
 		
 		if(Math.abs(speed_y_left) > DEADZONE || Math.abs(speed_y_right) > DEADZONE || Math.abs(x_average) > DEADZONE) {
 			drive.drive(speed_y_left, speed_y_right, x_average);
 		}
+
+	//actually drives with the robot 
+		drive.drive(speed_y_left, speed_y_right, x_average);
+
 	}
 
 	@Override
