@@ -12,6 +12,8 @@ public class DriveWithJoystick extends Command {
 	private static final int Y_LEFT_AXIS = 1;
 	private static final int X_RIGHT_AXIS = 4;
 	private static final int Y_RIGHT_AXIS = 5;
+	
+	private static final double DEADZONE = 0.2;
 
 	private double speed_y_left;
 	private double speed_x_left;
@@ -43,8 +45,10 @@ public class DriveWithJoystick extends Command {
 		speed_x_right = Joypad.getRawAxis(X_RIGHT_AXIS);
 
 		x_average = ((speed_x_left + speed_x_right) / 2.0) * -1.0;
-
-		drive.drive(speed_y_left, speed_y_right, x_average);
+		
+		if(Math.abs(speed_y_left) > DEADZONE || Math.abs(speed_y_right) > DEADZONE || Math.abs(x_average) > DEADZONE) {
+			drive.drive(speed_y_left, speed_y_right, x_average);
+		}
 	}
 
 	@Override
