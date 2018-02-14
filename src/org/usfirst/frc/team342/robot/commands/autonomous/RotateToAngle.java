@@ -13,7 +13,7 @@ public class RotateToAngle extends Command {
 	private static final double RotateSlowSpeed=0.2;
 	static final double margin = 10;
 	static final double slowmargin=50;
-	double gyro_angle = RotateToAngle.getGyro();
+	double gyro_angle;
 	
 
 	private double angleinitial;
@@ -33,6 +33,7 @@ public class RotateToAngle extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		 gyro_angle = RotateToAngle.getGyro();
 
 		angleinitial = RotateToAngle.getGyro();
 
