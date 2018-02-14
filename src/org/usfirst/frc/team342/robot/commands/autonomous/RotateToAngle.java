@@ -60,9 +60,9 @@ public class RotateToAngle extends Command {
 	}
 	
 		if (TurnRight) {
-			RotateToAngle.drive(CurrentDriveSpeed, CurrentDriveSpeed * -1.0, 0, 0.0);
+			RotateToAngle.drive(CurrentDriveSpeed, CurrentDriveSpeed * -1.0, 0.0);
 		} else {
-			RotateToAngle.drive(CurrentDriveSpeed * -1.0, CurrentDriveSpeed, 0, 0.0);
+			RotateToAngle.drive(CurrentDriveSpeed * -1.0, CurrentDriveSpeed, 0.0);
 		}
 	}
 		
@@ -87,7 +87,7 @@ public class RotateToAngle extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		RotateToAngle.stopAll();
+		RotateToAngle.stopDrive();
 	}
 
 	// Called when another command which requires one or more of the same
