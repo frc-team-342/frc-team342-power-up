@@ -14,8 +14,6 @@ public class Switch extends CommandGroup {
 	private static final int CENTER_RIGHT_ANGLE = 45;
 	private static final int CENTER_LEFT_ANGLE = 315;
 	
-	private static final double SPEED = 0.35;
-	
 	private RotateToAngle rotatetoangle;
 	private DriveToDistance drivetodistance;
 	private DriveTimed drivetimed;
