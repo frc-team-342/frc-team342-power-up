@@ -76,10 +76,10 @@ public class DriveSystem extends Subsystem {
 		slow = false;
 
 		// Instantiate Motor Controllers, Sensors, Pneumatics, and the NavX.
-		leftMaster = new WPI_TalonSRX(RobotMap.LEFTMASTER);
-		leftFollow = new WPI_TalonSRX(RobotMap.LEFTFOLLOW);
-		rightMaster = new WPI_TalonSRX(RobotMap.RIGHTMASTER);
-		rightFollow = new WPI_TalonSRX(RobotMap.RIGHTFOLLOW);
+		leftMaster = new TalonSRX(RobotMap.LEFTMASTER);
+		leftFollow = new TalonSRX(RobotMap.LEFTFOLLOW);
+		rightMaster = new TalonSRX(RobotMap.RIGHTMASTER);
+		rightFollow = new TalonSRX(RobotMap.RIGHTFOLLOW);
 		centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
 		pneumaticSuspension = new DoubleSolenoid(RobotMap.PNEUMATICWHEEL_UP, RobotMap.PNEUMATICWHEEL_DOWN);
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
@@ -90,9 +90,6 @@ public class DriveSystem extends Subsystem {
 		// direction.
 		leftMaster.setInverted(true);
 		leftFollow.setInverted(true);
-		
-		rightFollow.follow(rightMaster);
-		leftFollow.follow(leftMaster);
 
 		// Configures the encoder onto the master motor controllers.
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
@@ -109,7 +106,7 @@ public class DriveSystem extends Subsystem {
 		leftFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		leftFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		leftFollow.enableCurrentLimit(true);
-
+		
 		rightMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
 		rightMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		rightMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
@@ -119,7 +116,7 @@ public class DriveSystem extends Subsystem {
 		rightFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		rightFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightFollow.enableCurrentLimit(true);
-
+	
 		// Configures the open loop ramp to set the motor to ramp up to speed after a
 		// specified time other than jerking to full speed.
 		rightMaster.configOpenloopRamp(RAMP_TIME, 0);
@@ -133,7 +130,14 @@ public class DriveSystem extends Subsystem {
 		centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
 		centerWheel.enableCurrentLimit(true);
-
+		
+		rightMaster.set(ControlMode.PercentOutput, 0.0);
+		rightFollow.set(ControlMode.PercentOutput, 0.0);
+		rightFollow.follow(rightMaster);
+		
+		leftMaster.set(ControlMode.PercentOutput, 0.0);
+		leftFollow.set(ControlMode.PercentOutput, 0.0);
+		leftFollow.follow(leftMaster);
 	}
 
 	public void setslow(boolean slow) {
@@ -186,7 +190,7 @@ public class DriveSystem extends Subsystem {
 
 	public double getGyro() {
 
-		return ((((navx.getAngle()+180) % 360) + 360) % 360);
+		return ((((navx.getAngle()) % 360) + 360) % 360);
 	}
 
 	public void resetGyro() {

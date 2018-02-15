@@ -29,7 +29,7 @@ public class DriveToDistance extends Command {
 	public enum Distance {
 
 		// put in numbers once we get them
-		distance1(10), distance2(5);
+		distance1(10), distance2(5), distance3(1);
 
 		public final int value;
 

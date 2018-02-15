@@ -16,6 +16,7 @@ public class Switch extends CommandGroup {
 	
 	private RotateToAngle rotatetoangle;
 	private DriveToDistance drivetodistance;
+	private DriveToDistance driveout;
 	private DriveTimed drivetimed;
 	private LiftToPosition lifttoposition;
 	
@@ -31,9 +32,11 @@ public class Switch extends CommandGroup {
     		//Switch auto center left
     		SmartDashboard.putString("Switch Value: ", "CL");
     		
+    		driveout = new DriveToDistance(Distance.distance3);
     		rotatetoangle = new RotateToAngle(CENTER_LEFT_ANGLE);
     		drivetodistance = new DriveToDistance(Distance.distance1);
-    	
+    		
+    		addSequential(driveout);
     		addSequential(rotatetoangle);
     		addSequential(drivetodistance);
     		
@@ -42,9 +45,11 @@ public class Switch extends CommandGroup {
     		//Switch auto center right
     		SmartDashboard.putString("Switch Value: ", "CR");
     		
+    		driveout = new DriveToDistance(Distance.distance3);
     		rotatetoangle = new RotateToAngle(CENTER_RIGHT_ANGLE);
     		drivetodistance = new DriveToDistance(Distance.distance1);
     		
+    		addSequential(driveout);
     		addSequential(rotatetoangle);
     		addSequential(drivetodistance);
     		
