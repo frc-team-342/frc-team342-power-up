@@ -5,6 +5,7 @@ import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveWithJoystick extends Command {
 
@@ -53,6 +54,7 @@ public class DriveWithJoystick extends Command {
 		}
 
 	//actually drives with the robot 
+		SmartDashboard.putNumber("ANGLE: ", drive.getGyro());
 		drive.drive(speed_y_left, speed_y_right, x_average);
 
 	}

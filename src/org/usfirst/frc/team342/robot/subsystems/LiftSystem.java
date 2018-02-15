@@ -44,7 +44,7 @@ public class LiftSystem extends Subsystem {
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
 		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
 		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
-		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		liftFollow.follow(liftMaster);
 		
 		
@@ -60,6 +60,7 @@ public class LiftSystem extends Subsystem {
 		liftFollow.configContinuousCurrentLimit(amps, timeout);
 		liftFollow.enableCurrentLimit(true);
 		
+		liftMaster.setInverted(true);
 		
 	}
 
@@ -88,7 +89,7 @@ public class LiftSystem extends Subsystem {
 	}
 
 	public double getLiftEncoder() {
-		return liftMaster.getSelectedSensorPosition(0);
+		return liftMaster.getSensorCollection().getPulseWidthPosition();
 	}
 
 	public void liftStop() {
