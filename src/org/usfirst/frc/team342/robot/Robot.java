@@ -119,6 +119,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		drivesystem.resetGyro();
 
 		gamedata = DriverStation.getInstance().getGameSpecificMessage();
 

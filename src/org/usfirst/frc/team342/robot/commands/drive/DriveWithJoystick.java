@@ -5,6 +5,7 @@ import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveWithJoystick extends Command {
 
@@ -57,7 +58,6 @@ public class DriveWithJoystick extends Command {
 			
 			drive.drive(ZERO, ZERO, ZERO);
 		}
-
 	}
 
 	@Override

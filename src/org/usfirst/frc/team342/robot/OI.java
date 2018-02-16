@@ -63,8 +63,7 @@ public class OI {
 		private CollectCube collectcube; 
 		private StopCubeController stopcubecontroller;
 		private DispenseCube dispensecube;
-		private LiftToPosition lifttoposition_1;
-		private LiftToPosition lifttoposition_2;
+		
 
 
 	private OI() {
@@ -106,8 +105,7 @@ public class OI {
 				collectcube= new CollectCube ();
 				stopcubecontroller= new StopCubeController ();
 				dispensecube= new DispenseCube ();
-				lifttoposition_1= new LiftToPosition(LiftHeight.onethousand);
-				lifttoposition_2= new LiftToPosition(LiftHeight.fourthousand);
+				
 				
 		// Drive Controller Buttons
 		xbox_drive_button5.whenPressed(manipulatewheeldown);
@@ -120,8 +118,6 @@ public class OI {
 		manipulator_button1.whenReleased(stopcubecontroller);
 		manipulator_button2.whenPressed(stopcubecontroller);
 		manipulator_button4.whenPressed(collectcube);
-		manipulator_button9.whenPressed(lifttoposition_1);
-		manipulator_button10.whenPressed(lifttoposition_2);
 		manipulator_button6.whenPressed(slowdrive);
 	
 		
@@ -138,5 +134,8 @@ public class OI {
 		return manipulator ;
 	}
 	
+	public int getManipulatorPOV () {
+		return manipulator.getPOV();
+	}
 
 }
