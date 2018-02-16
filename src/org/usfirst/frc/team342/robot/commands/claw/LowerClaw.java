@@ -1,48 +1,47 @@
-package org.usfirst.frc.team342.robot.commands.lift;
+package org.usfirst.frc.team342.robot.commands.claw;
 
-import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
+import org.usfirst.frc.team342.robot.subsystems.CubeController;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *	Lowers the claw from the solenoid that holds it up.
  */
-public class liftUp extends Command {
+public class LowerClaw extends Command {
 	
-	private LiftSystem liftUp;
-
-    public liftUp() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	   
-    	liftUp=LiftSystem.getInstance();
-    	requires (liftUp);
+	private CubeController cube_controller;
+	
+    public LowerClaw() {
+        
+    	cube_controller = CubeController.getInstance();
+    	requires(cube_controller);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double speed;
-    	speed= 0.25;
-    	  liftUp.liftUp(speed);
+    	
+    	cube_controller.lowerClaw();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        
+    	return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	liftUp.liftStop();
+    	
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
+    	
     }
 }

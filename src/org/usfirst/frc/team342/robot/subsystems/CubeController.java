@@ -13,6 +13,7 @@ public class CubeController extends Subsystem {
 	private static final CubeController INSTANCE = new CubeController();
 
 	private DoubleSolenoid pneumaticClaw;
+	private DoubleSolenoid pneumaticClawHolder;
 	
 	private Talon intakeMaster;
 	private Talon intakeFollow;
@@ -38,12 +39,29 @@ public class CubeController extends Subsystem {
 	private void initializeCubeController() {
 
 		pneumaticClaw = new DoubleSolenoid(RobotMap.PNEUMATICCLAW_OPEN, RobotMap.PNEUMATICCLAW_CLOSED);
+		
+		pneumaticClawHolder = new DoubleSolenoid(RobotMap.PNEUMATICCLAW_RELEASE_OPEN, RobotMap.PNEUMATICCLAW_RELEASE_CLOSED);
+		
 		intakeMaster = new Talon(RobotMap.INTAKEMASTER);
 		intakeFollow = new Talon(RobotMap.INTAKEFOLLOW);
 		infraredSensor = new AnalogInput(RobotMap.INFRAREDSENSOR);
 				
 		intakeFollow.setInverted(true);
 		
+	}
+	
+	public void lowerClaw() {
+		
+		pneumaticClawHolder.set(Value.kForward);
+	}
+	
+	public boolean getClawHolder() {
+		
+		if (pneumaticClawHolder.get().equals(Value.kForward)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void collectCube(double speed) {
@@ -70,22 +88,6 @@ public class CubeController extends Subsystem {
 		intakeFollow.set(speed);
 	}
 
-	// UNUSED \/
-	public void collectorOutForce(double speed) {
-
-		pneumaticClaw.set(Value.kForward);
-		intakeMaster.set(speed);
-		intakeFollow.set(speed);
-	}
-
-	// UNUSED \/
-	public void collectorInForce(double speed) {
-
-		pneumaticClaw.set(Value.kForward);
-		intakeMaster.set(speed);
-		intakeFollow.set(speed);
-	}
-
 	public boolean getPneumaticClawState() {
 
 		if (pneumaticClaw.get().equals(Value.kForward)) {
@@ -97,7 +99,6 @@ public class CubeController extends Subsystem {
 
 	public double getInfrared() {
 
-		// \/ Is this the right method to use to get an analog output? \/
 		return infraredSensor.getAverageVoltage();
 	}
 

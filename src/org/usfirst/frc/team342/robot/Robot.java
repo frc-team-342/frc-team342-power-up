@@ -119,11 +119,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		drivesystem.resetGyro();
 
 		gamedata = DriverStation.getInstance().getGameSpecificMessage();
-
-		SmartDashboard.putString("Game Message: ", gamedata);
 
 		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected());
 

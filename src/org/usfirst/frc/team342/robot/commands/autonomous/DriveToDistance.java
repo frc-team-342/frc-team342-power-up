@@ -3,7 +3,6 @@ package org.usfirst.frc.team342.robot.commands.autonomous;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This will allow the robot to go forward a certain distance in autonomous
@@ -70,11 +69,6 @@ public class DriveToDistance extends Command {
 		
 		drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
 		
-		SmartDashboard.putNumber("GOAL", goal);
-		SmartDashboard.putNumber("CUR_LEFT", current_Left);
-		SmartDashboard.putNumber("CUR_RIGHT", current_Right);
-		SmartDashboard.putNumber("ROT_COUNT_LEFT", left_rotation_count);
-		SmartDashboard.putNumber("ROT_COUNT_RIGHT", right_rotation_count);
 	}
 
 	protected boolean isFinished() {

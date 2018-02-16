@@ -14,7 +14,13 @@ package org.usfirst.frc.team342.robot;
  * floating around.
  */
 public class RobotMap {
-
+	
+	// Joystick Axis
+	public static final int X_LEFT_AXIS = 0;
+	public static final int Y_LEFT_AXIS = 1;
+	public static final int X_RIGHT_AXIS = 4;
+	public static final int Y_RIGHT_AXIS = 5;
+	
 	// Analog Sensors
 	public static final int INFRAREDSENSOR = 0;
 	public static final int ULTRASONIC_ONE = 1;
@@ -48,5 +54,7 @@ public class RobotMap {
 	public static final int PNEUMATICWHEEL_UP = 1;
 	public static final int PNEUMATICCLAW_OPEN = 2;
 	public static final int PNEUMATICCLAW_CLOSED = 3;
+	public static final int PNEUMATICCLAW_RELEASE_OPEN = 4;
+	public static final int PNEUMATICCLAW_RELEASE_CLOSED = 5;
 
 }

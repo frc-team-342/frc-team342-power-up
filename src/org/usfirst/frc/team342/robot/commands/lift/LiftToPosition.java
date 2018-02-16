@@ -3,7 +3,6 @@ package org.usfirst.frc.team342.robot.commands.lift;
 import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LiftToPosition extends Command {
 	private LiftSystem liftto;
@@ -49,9 +48,6 @@ public class LiftToPosition extends Command {
 			liftto.liftDown(0.15);
 		}
 
-		SmartDashboard.putBoolean("UP:", isUp);
-		SmartDashboard.putNumber("enc:", CurrentHeight);
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -72,6 +68,6 @@ public class LiftToPosition extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		liftto.stopAll();
+		end();
 	}
 }

@@ -5,7 +5,6 @@ import org.usfirst.frc.team342.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -46,9 +45,6 @@ public class DriveSystem extends Subsystem {
 	private static final int PEAK_DURATION = 200;
 	private static final int AMPSCENTER = 35;
 	private static final double RAMP_TIME = 0.1;
-
-	// Deadzone for the drive method
-	private static final double DEADZONE = 0.2;
 
 	// Scale factor for calculating autonomous
 	private static final double SCALE_FACTOR = (1 / 4096);

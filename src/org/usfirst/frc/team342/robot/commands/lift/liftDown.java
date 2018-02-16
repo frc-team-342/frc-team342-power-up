@@ -47,6 +47,6 @@ private LiftSystem liftDown;
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	liftDown.stopAll();
+    	end();
     }
 }

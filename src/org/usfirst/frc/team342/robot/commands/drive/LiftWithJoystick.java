@@ -5,7 +5,6 @@ import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
 import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -14,12 +13,12 @@ public class LiftWithJoystick extends Command {
 	private LiftSystem lift;
 	private OI oi;
 
-	private Joystick manipulator;
-
 	private static final double DEADZONE = 0.2;
-	private static final int AXIS = 1;
 	private static final double SPEED = 1.0;
-	
+	private static final double ZERO = 0.0;
+
+	private double joystickValue;
+
 	private int POV;
 
 	private LiftToPosition floorPosition;
@@ -33,12 +32,11 @@ public class LiftWithJoystick extends Command {
 
 		oi = OI.getInstance();
 		lift = LiftSystem.getInstance();
-		//requires(lift);
-		manipulator = oi.getJoystickManipulator();
-		
+		// requires(lift);
+
 		floorPosition = new LiftToPosition(LiftHeight.floorposition);
 		exchangePosition = new LiftToPosition(LiftHeight.exchangeposition);
-		switchPosition= new LiftToPosition(LiftHeight.switchposition);
+		switchPosition = new LiftToPosition(LiftHeight.switchposition);
 		scaleLow = new LiftToPosition(LiftHeight.scalelow);
 		scaleMiddle = new LiftToPosition(LiftHeight.scalemiddle);
 		scaleHigh = new LiftToPosition(LiftHeight.scalehigh);
@@ -49,19 +47,24 @@ public class LiftWithJoystick extends Command {
 	}
 
 	protected void execute() {
-		
-		POV=oi.getManipulatorPOV();
+
+		joystickValue = oi.getJoystickManipulatorLeftYAxis();
+
+		POV = oi.getManipulatorPOV();
 		SmartDashboard.putNumber("POV:", POV);
-		
-		if (manipulator.getRawAxis(AXIS) > DEADZONE) {
-			
+
+		if (joystickValue > DEADZONE) {
+
 			lift.liftUp(SPEED);
-		} else if (manipulator.getRawAxis(AXIS) < DEADZONE * -1.0) {
-			
+
+		} else if (joystickValue < DEADZONE * -1.0) {
+
 			lift.liftDown(SPEED);
-		} else{
-			
-			switch(POV) {
+
+		} else if (!scaleHigh.isRunning() || !scaleMiddle.isRunning() || !scaleLow.isRunning()
+				   || !floorPosition.isRunning() || !exchangePosition.isRunning() || !switchPosition.isRunning()) {
+
+			switch (POV) {
 			case 0:
 				scaleHigh.start();
 				break;
@@ -87,9 +90,13 @@ public class LiftWithJoystick extends Command {
 			default:
 				break;
 			}
+			
+		}else {
+			
+			lift.liftUp(ZERO);
 		}
-		
-		if(scaleHigh.isCompleted()) {
+
+		if (scaleHigh.isCompleted()) {
 			scaleHigh.cancel();
 		}
 
@@ -107,6 +114,6 @@ public class LiftWithJoystick extends Command {
 
 	protected void interrupted() {
 
-		lift.stopAll();
+		end();
 	}
 }

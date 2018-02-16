@@ -3,7 +3,6 @@ package org.usfirst.frc.team342.robot.commands.autonomous;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class RotateToAngle extends Command {
 	private DriveSystem RotateToAngle;
@@ -15,9 +14,6 @@ public class RotateToAngle extends Command {
 	static final double slowmargin=100;
 	double gyro_angle;
 	
-
-	private double angleinitial;
-
 	/**
 	 * @param angle
 	 *            converted to int in degrees if the angle is greater than or equal
@@ -33,9 +29,10 @@ public class RotateToAngle extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		
+		RotateToAngle.resetGyro();
+		
 		 gyro_angle = RotateToAngle.getGyro();
-
-		angleinitial = RotateToAngle.getGyro();
 
 		if (Math.abs(angle) > 180) {
 
@@ -70,15 +67,10 @@ public class RotateToAngle extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 	
-		
-		SmartDashboard.putNumber(" TARGET ANGLE: ", angle);
-		SmartDashboard.putNumber("ANGLE: ", gyro_angle);
-		
 
 		
 			boolean isFinished = (gyro_angle) <= (angle)+margin && (gyro_angle) >= (angle)-margin;
 			if (isFinished) {
-				SmartDashboard.putBoolean("isfinished: ", isFinished);
 				return true;
 			} else {
 				return false;

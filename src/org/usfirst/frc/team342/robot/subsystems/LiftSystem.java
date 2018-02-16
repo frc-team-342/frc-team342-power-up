@@ -95,8 +95,4 @@ public class LiftSystem extends Subsystem {
 	public void liftStop() {
 		liftMaster.set(ControlMode.PercentOutput, 0.0);
 	}
-
-	public void stopAll() {
-		liftMaster.set(ControlMode.PercentOutput, 0.0);
-	}
 }
