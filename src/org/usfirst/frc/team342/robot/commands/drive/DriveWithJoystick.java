@@ -13,6 +13,8 @@ public class DriveWithJoystick extends Command {
 	private static final int X_RIGHT_AXIS = 4;
 	private static final int Y_RIGHT_AXIS = 5;
 	
+	private static final double ZERO = 0.0;
+	
 	private static final double DEADZONE = 0.2;
 
 	private double speed_y_left;
@@ -49,11 +51,12 @@ public class DriveWithJoystick extends Command {
 		x_average = ((speed_x_left + speed_x_right) / 2.0);
 		
 		if(Math.abs(speed_y_left) > DEADZONE || Math.abs(speed_y_right) > DEADZONE || Math.abs(x_average) > DEADZONE) {
+			
 			drive.drive(speed_y_left, speed_y_right, x_average);
+		}else {
+			
+			drive.drive(ZERO, ZERO, ZERO);
 		}
-
-	//actually drives with the robot 
-		drive.drive(speed_y_left, speed_y_right, x_average);
 
 	}
 

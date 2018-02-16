@@ -49,13 +49,13 @@ public class DriveToDistance extends Command {
 	protected void initialize() {
 		
 		init_Left = Math.abs(drive.getLeftMasterEncoder());
-		init_Right = drive.getRightMasterEncoder(); 
+		init_Right = Math.abs(drive.getRightMasterEncoder()); 
 	}
 
 	protected void execute() {
 		
 		current_Left = (Math.abs(drive.getLeftMasterEncoder())) - init_Left;
-		current_Right = (drive.getRightMasterEncoder()) - init_Right;	
+		current_Right = (Math.abs(drive.getRightMasterEncoder())) - init_Right;	
 		
 		left_rotation_count = current_Left / 4096;
 		right_rotation_count = current_Right / 4096;

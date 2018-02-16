@@ -40,8 +40,8 @@ public class RobotMap {
 	public static final int CENTERWHEEL = 15;
 	public static final int INTAKEMASTER = 0;
 	public static final int INTAKEFOLLOW = 1;
-	public static final int LIFTMASTER = 8;
-	public static final int LIFTFOLLOW = 9;
+	public static final int LIFTMASTER = 9;
+	public static final int LIFTFOLLOW = 10;
 	
 	// Pneumatics
 	public static final int PNEUMATICWHEEL_DOWN = 0;

@@ -161,24 +161,11 @@ public class DriveSystem extends Subsystem {
 			Right_joy_Y = Right_joy_Y * -1.0;
 			center = center * -1.0;
 		}
+		
+		rightMaster.set(ControlMode.PercentOutput, Right_joy_Y);
+		leftMaster.set(ControlMode.PercentOutput, Left_joy_Y);
 
-		if (Math.abs(Right_joy_Y) > DEADZONE || Math.abs(Left_joy_Y) > DEADZONE) {
-
-			rightMaster.set(ControlMode.PercentOutput, Right_joy_Y);
-			leftMaster.set(ControlMode.PercentOutput, Left_joy_Y);
-		} else {
-
-			rightMaster.set(ControlMode.PercentOutput, 0.0);
-			leftMaster.set(ControlMode.PercentOutput, 0.0);
-		}
-
-		if (Math.abs(center) > DEADZONE && getWheelState()) {
-
-			centerWheel.set(ControlMode.PercentOutput, center);
-		} else {
-
-			centerWheel.set(ControlMode.PercentOutput, 0.0);
-		}
+		centerWheel.set(ControlMode.PercentOutput, center);
 	}
 
 	public void driveKeepHeading(double X, double Y, double rot) {
@@ -262,9 +249,7 @@ public class DriveSystem extends Subsystem {
 	public void stopDrive() {
 
 		rightMaster.set(ControlMode.PercentOutput, 0.0);
-		rightFollow.set(ControlMode.PercentOutput, 0.0);
 		leftMaster.set(ControlMode.PercentOutput, 0.0);
-		leftFollow.set(ControlMode.PercentOutput, 0.0);
 		centerWheel.set(ControlMode.PercentOutput, 0.0);
 	}
 
