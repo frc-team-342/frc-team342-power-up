@@ -13,13 +13,15 @@ public class Switch extends CommandGroup {
 	
 	private static final int CENTER_RIGHT_ANGLE = 45;
 	private static final int CENTER_LEFT_ANGLE = 315;
+	private static final double FORWARD_DISTANCE = 10;
+	private static final double OFF_WALL = 1; 
 	
 	private RotateToAngle rotatetoangle;
 	private DriveToDistance drivetodistance;
 	private DriveToDistance driveout;
 	private DriveTimed drivetimed;
 	private LiftToPosition lifttoposition;
-	
+		
     public Switch(char location, char switch_position) {
         
     	if(location == 'L' && switch_position == 'L') {
@@ -31,10 +33,9 @@ public class Switch extends CommandGroup {
     		
     		//Switch auto center left
     		SmartDashboard.putString("Switch Value: ", "CL");
-    		
-    		driveout = new DriveToDistance(Distance.distance3);
+    		driveout = new DriveToDistance(OFF_WALL);
     		rotatetoangle = new RotateToAngle(CENTER_LEFT_ANGLE);
-    		drivetodistance = new DriveToDistance(Distance.distance1);
+    		drivetodistance = new DriveToDistance(FORWARD_DISTANCE);
     		
     		addSequential(driveout);
     		addSequential(rotatetoangle);
@@ -44,10 +45,10 @@ public class Switch extends CommandGroup {
     		
     		//Switch auto center right
     		SmartDashboard.putString("Switch Value: ", "CR");
-    		
-    		driveout = new DriveToDistance(Distance.distance3);
+
+    		driveout = new DriveToDistance(OFF_WALL);
     		rotatetoangle = new RotateToAngle(CENTER_RIGHT_ANGLE);
-    		drivetodistance = new DriveToDistance(Distance.distance1);
+    		drivetodistance = new DriveToDistance(FORWARD_DISTANCE);
     		
     		addSequential(driveout);
     		addSequential(rotatetoangle);

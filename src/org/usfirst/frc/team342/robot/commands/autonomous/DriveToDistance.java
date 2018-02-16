@@ -37,6 +37,14 @@ public class DriveToDistance extends Command {
 			this.value = initValue;
 		}
 	}
+	
+	public DriveToDistance(double distance) {
+		
+		drive = DriveSystem.getInstance(); 
+		requires(drive);
+		
+		goal = distance; 
+	}
 
 	public DriveToDistance(Distance distance) {
 
