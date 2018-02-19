@@ -26,6 +26,7 @@ public class LiftWithJoystick extends Command {
 	private LiftToPosition scaleLow;
 	private LiftToPosition scaleMiddle;
 	private LiftToPosition scaleHigh;
+	private LiftToPosition climbPosition;
 
 	public LiftWithJoystick() {
 
@@ -39,6 +40,7 @@ public class LiftWithJoystick extends Command {
 		scaleLow = new LiftToPosition(LiftHeight.scalelow);
 		scaleMiddle = new LiftToPosition(LiftHeight.scalemiddle);
 		scaleHigh = new LiftToPosition(LiftHeight.scalehigh);
+		climbPosition= new LiftToPosition(LiftHeight.climbposition);
 	}
 
 	protected void initialize() {
@@ -64,21 +66,22 @@ public class LiftWithJoystick extends Command {
 			
 			lift.liftUp(ZERO);
 			
-		}else if (!scaleHigh.isRunning() || !scaleMiddle.isRunning() || !scaleLow.isRunning()
-				   || !floorPosition.isRunning() || !exchangePosition.isRunning() || !switchPosition.isRunning()) {
+		} else if (!scaleHigh.isRunning() || !scaleMiddle.isRunning() || !scaleLow.isRunning()
+				   || !floorPosition.isRunning() || !exchangePosition.isRunning() || !switchPosition.isRunning()|| !climbPosition.isRunning()) {
 			
 			/*
 			switch (POV) {
 			case 0:
-				scaleHigh.start();
+				climbPosition.start();
 				break;
 			case 45:
-				scaleMiddle.start();
+				scaleHigh.start();
 				break;
 			case 90:
-				scaleLow.start();
+				scaleMiddle.start();
 				break;
 			case 135:
+				scaleLow.start();
 				break;
 			case 180:
 				floorPosition.start();
