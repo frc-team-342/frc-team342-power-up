@@ -9,8 +9,8 @@ public class CollectCube extends Command {
 
 	private CubeController cube_controller;
 
-	private static final double COLLECTED_DISTANCE = 0.0;
-	private static final double SPEED = 1.0;
+	private static final double COLLECTED_DISTANCE = 1.0;
+	private static final double SPEED = 0.8;
 
 	public CollectCube() {
 
@@ -31,7 +31,7 @@ public class CollectCube extends Command {
 	@Override
 	protected boolean isFinished() {
 
-		if (cube_controller.getInfrared() <= COLLECTED_DISTANCE) {
+		if (cube_controller.getInfrared() >= COLLECTED_DISTANCE) {
 			return true;
 		} else {
 			return false;

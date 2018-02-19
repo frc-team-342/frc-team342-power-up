@@ -175,6 +175,11 @@ public class DriveSystem extends Subsystem {
 
 		return ((((navx.getAngle()) % 360) + 360) % 360);
 	}
+	
+	public AHRS getNavX() {
+		
+		return navx;
+	}
 
 	public void resetGyro() {
 

@@ -14,7 +14,6 @@ public class LiftWithJoystick extends Command {
 	private OI oi;
 
 	private static final double DEADZONE = 0.2;
-	private static final double SPEED = 1.0;
 	private static final double ZERO = 0.0;
 
 	private double joystickValue;
@@ -52,18 +51,23 @@ public class LiftWithJoystick extends Command {
 
 		POV = oi.getManipulatorPOV();
 		SmartDashboard.putNumber("POV:", POV);
+		
+		if (joystickValue < (DEADZONE * -1.0)) {
 
-		if (joystickValue > DEADZONE) {
+			lift.liftUp(Math.abs(joystickValue));
 
-			lift.liftUp(SPEED);
+		} else if (joystickValue > DEADZONE) {
 
-		} else if (joystickValue < DEADZONE * -1.0) {
+			lift.liftDown(Math.abs(joystickValue));
 
-			lift.liftDown(SPEED);
-
-		} else if (!scaleHigh.isRunning() || !scaleMiddle.isRunning() || !scaleLow.isRunning()
+		} else if(joystickValue < DEADZONE && joystickValue > (DEADZONE * -1.0)) {
+			
+			lift.liftUp(ZERO);
+			
+		}else if (!scaleHigh.isRunning() || !scaleMiddle.isRunning() || !scaleLow.isRunning()
 				   || !floorPosition.isRunning() || !exchangePosition.isRunning() || !switchPosition.isRunning()) {
-
+			
+			/*
 			switch (POV) {
 			case 0:
 				scaleHigh.start();
@@ -90,15 +94,14 @@ public class LiftWithJoystick extends Command {
 			default:
 				break;
 			}
+			*/
 			
 		}else {
 			
 			lift.liftUp(ZERO);
 		}
 
-		if (scaleHigh.isCompleted()) {
-			scaleHigh.cancel();
-		}
+		
 
 	}
 

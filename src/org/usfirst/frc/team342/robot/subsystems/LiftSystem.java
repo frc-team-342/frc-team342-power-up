@@ -60,24 +60,22 @@ public class LiftSystem extends Subsystem {
 		liftFollow.configContinuousCurrentLimit(amps, timeout);
 		liftFollow.enableCurrentLimit(true);
 		
-		liftMaster.setInverted(true);
-		
 	}
 
 	public void liftUpForce(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed);
+		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
 
 	public void liftUp(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed);
+		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
 
 	public void liftDownForce(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
 
 	public void liftDown(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
 
 	public boolean getUpperLimit() {
@@ -89,7 +87,7 @@ public class LiftSystem extends Subsystem {
 	}
 
 	public double getLiftEncoder() {
-		return liftMaster.getSensorCollection().getPulseWidthPosition();
+		return liftMaster.getSensorCollection().getQuadraturePosition();
 	}
 
 	public void liftStop() {

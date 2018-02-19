@@ -87,6 +87,8 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putData("Location: ", location);
 		SmartDashboard.putData("Auto Action: ", action);
+		
+		SmartDashboard.putData("Gyro: ", drivesystem.getNavX());
 	}
 
 	/**
@@ -158,6 +160,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		
+		SmartDashboard.putNumber("LIFT ENCODER: ", liftsystem.getLiftEncoder());
 		Scheduler.getInstance().run();
 	
 	}
