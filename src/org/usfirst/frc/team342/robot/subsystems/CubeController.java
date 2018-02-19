@@ -65,7 +65,9 @@ public class CubeController extends Subsystem {
 	}
 
 	public void collectCube(double speed) {
-
+		
+		speed = speed * -1.0;
+		
 		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(speed);
 		intakeFollow.set(speed);
@@ -80,8 +82,6 @@ public class CubeController extends Subsystem {
 	}
 
 	public void dispenseCube(double speed) {
-		
-		speed = speed * -1.0;
 		
 		pneumaticClaw.set(Value.kForward);
 		intakeMaster.set(speed);

@@ -12,7 +12,7 @@ public class LiftToPosition extends Command {
 
 	// we use enum to simplify getting values for positions
 	public enum LiftHeight {
-		floorposition(50), exchangeposition(500),switchposition(1000),scalelow(2500),scalemiddle(3500),scalehigh(4096);
+		floorposition(50), exchangeposition(500),switchposition(1000),scalelow(2500),scalemiddle(3500),scalehigh(4096),climbposition(4096);
 		public final int value;
 
 		LiftHeight(int initValue) {

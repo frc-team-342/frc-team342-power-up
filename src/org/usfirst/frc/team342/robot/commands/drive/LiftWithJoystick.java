@@ -14,7 +14,6 @@ public class LiftWithJoystick extends Command {
 	private OI oi;
 
 	private static final double DEADZONE = 0.2;
-	private static final double SPEED = 1.0;
 	private static final double ZERO = 0.0;
 
 	private double joystickValue;
@@ -27,6 +26,7 @@ public class LiftWithJoystick extends Command {
 	private LiftToPosition scaleLow;
 	private LiftToPosition scaleMiddle;
 	private LiftToPosition scaleHigh;
+	private LiftToPosition climbPosition;
 
 	public LiftWithJoystick() {
 
@@ -40,6 +40,7 @@ public class LiftWithJoystick extends Command {
 		scaleLow = new LiftToPosition(LiftHeight.scalelow);
 		scaleMiddle = new LiftToPosition(LiftHeight.scalemiddle);
 		scaleHigh = new LiftToPosition(LiftHeight.scalehigh);
+		climbPosition= new LiftToPosition(LiftHeight.climbposition);
 	}
 
 	protected void initialize() {
@@ -52,29 +53,35 @@ public class LiftWithJoystick extends Command {
 
 		POV = oi.getManipulatorPOV();
 		SmartDashboard.putNumber("POV:", POV);
+		
+		if (joystickValue < (DEADZONE * -1.0)) {
 
-		if (joystickValue > DEADZONE) {
+			lift.liftUp(Math.abs(joystickValue));
 
-			lift.liftUp(SPEED);
+		} else if (joystickValue > DEADZONE) {
 
-		} else if (joystickValue < DEADZONE * -1.0) {
+			lift.liftDown(Math.abs(joystickValue));
 
-			lift.liftDown(SPEED);
-
+		} else if(joystickValue < DEADZONE && joystickValue > (DEADZONE * -1.0)) {
+			
+			lift.liftUp(ZERO);
+			
 		} else if (!scaleHigh.isRunning() || !scaleMiddle.isRunning() || !scaleLow.isRunning()
-				   || !floorPosition.isRunning() || !exchangePosition.isRunning() || !switchPosition.isRunning()) {
-
+				   || !floorPosition.isRunning() || !exchangePosition.isRunning() || !switchPosition.isRunning()|| !climbPosition.isRunning()) {
+			
+			/*
 			switch (POV) {
 			case 0:
-				scaleHigh.start();
+				climbPosition.start();
 				break;
 			case 45:
-				scaleMiddle.start();
+				scaleHigh.start();
 				break;
 			case 90:
-				scaleLow.start();
+				scaleMiddle.start();
 				break;
 			case 135:
+				scaleLow.start();
 				break;
 			case 180:
 				floorPosition.start();
@@ -90,15 +97,14 @@ public class LiftWithJoystick extends Command {
 			default:
 				break;
 			}
+			*/
 			
 		}else {
 			
 			lift.liftUp(ZERO);
 		}
 
-		if (scaleHigh.isCompleted()) {
-			scaleHigh.cancel();
-		}
+		
 
 	}
 

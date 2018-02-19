@@ -39,15 +39,33 @@ public class RobotMap {
 	public static final int LIFTUPPERLIMIT = 1;
 
 	// MotorControllers
-	public static final int RIGHTMASTER = 8;
-	public static final int RIGHTFOLLOW = 13;
-	public static final int LEFTMASTER = 19;
-	public static final int LEFTFOLLOW = 21;
-	public static final int CENTERWHEEL = 15;
-	public static final int INTAKEMASTER = 0;
-	public static final int INTAKEFOLLOW = 1;
-	public static final int LIFTMASTER = 9;
-	public static final int LIFTFOLLOW = 10;
+	
+		// Pratice Bot IDs
+		/*
+		public static final int RIGHTMASTER = 8;
+		public static final int RIGHTFOLLOW = 13;
+		public static final int LEFTMASTER = 19;
+		public static final int LEFTFOLLOW = 21;
+		public static final int CENTERWHEEL = 15;
+		public static final int INTAKEMASTER = 0;
+		public static final int INTAKEFOLLOW = 1;
+		public static final int LIFTMASTER = 9;
+		public static final int LIFTFOLLOW = 10;
+		*/
+		
+		// Competition Bot IDs
+		public static final int RIGHTMASTER = 1;
+		public static final int RIGHTFOLLOW = 2;
+		public static final int LEFTMASTER = 3;
+		public static final int LEFTFOLLOW = 4;
+		public static final int CENTERWHEEL = 5;
+		public static final int CLIMBMASTER = 6;
+		public static final int CLIMBFOLLOW = 7;
+		public static final int LIFTMASTER = 8;
+		public static final int LIFTFOLLOW = 9;
+		public static final int INTAKEMASTER = 0;
+		public static final int INTAKEFOLLOW = 1;
+		
 	
 	// Pneumatics
 	public static final int PNEUMATICWHEEL_DOWN = 0;
@@ -56,5 +74,8 @@ public class RobotMap {
 	public static final int PNEUMATICCLAW_CLOSED = 3;
 	public static final int PNEUMATICCLAW_RELEASE_OPEN = 4;
 	public static final int PNEUMATICCLAW_RELEASE_CLOSED = 5;
+	
+	// CANifier
+	public static final int CANIFIER = 14;
 
 }

@@ -29,29 +29,29 @@ public class OI {
 		
 		private Joystick manipulator;
 		private Button  
-						manipulator_button1 ,
-						manipulator_button2 ,
-		//				manipulator_button3 ,
-						manipulator_button4 ,
-		//				manipulator_button5 ,
-						manipulator_button6 ;
-		//				manipulator_button7 ,
-		//				manipulator_button8 ,
-		//				manipulator_button9 ,
-		//				manipulator_button10 ;
+						manipulator_buttonA ,
+						manipulator_buttonB ,
+		//				manipulator_buttonX ,
+						manipulator_buttonY ,
+		//				manipulator_leftBumper ,
+						manipulator_rightBumper;
+		//				manipulator_backButton ,
+		//				manipulator_startButton ,
+		//				manipulator_leftstickButton ,
+		//				manipulator_rightStickButton;
 		
 		private Joystick xbox_drive;
 		private Button 	
-		//				xbox_drive_button1 ,
-		//				xbox_drive_button2 ,
-		//				xbox_drive_button3 ,
-		//				xbox_drive_button4 ,
-						xbox_drive_button5 ,
-						xbox_drive_button6 ;
-		//				xbox_drive_button7 ,
-		//				xbox_drive_button8 ,
-		//				xbox_drive_button9 ,
-		//				xbox_drive_button10 ;
+		//				xbox_drive_buttonA ,
+		//				xbox_drive_buttonB ,
+		//				xbox_drive_buttonX ,
+		//				xbox_drive_buttonY ,
+						xbox_drive_leftBumper ,
+						xbox_drive_rightBumper;
+		//				xbox_drive_backButton ,
+		//				xbox_drive_startButton,
+		//				xbox_drive_leftstickButton,
+		//				xbox_drive_rightstickButton;
 		
 		//Various Commands to be assigned to buttons for the driver
 		private ManipulateWheelUP manipulatewheelup;
@@ -68,28 +68,28 @@ public class OI {
 	private OI() {
 		
 		xbox_drive = new Joystick(0);
-	 	//	xbox_drive_button1 = new JoystickButton(xbox_drive, 1);
-		//	xbox_drive_button2 = new JoystickButton(xbox_drive, 2);
-		//	xbox_drive_button3 = new JoystickButton(xbox_drive, 3);
-		//	xbox_drive_button4 = new JoystickButton(xbox_drive, 4);
-			xbox_drive_button5 = new JoystickButton(xbox_drive, 5);
-			xbox_drive_button6 = new JoystickButton(xbox_drive, 6);
-		//	xbox_drive_button7 = new JoystickButton(xbox_drive, 7);
-		//	xbox_drive_button8 = new JoystickButton(xbox_drive, 8);
-		//	xbox_drive_button9 = new JoystickButton(xbox_drive, 9);
-		//	xbox_drive_button10 = new JoystickButton(xbox_drive, 10);
+	 	//	xbox_drive_buttonA = new JoystickButton(xbox_drive, 1);
+		//	xbox_drive_buttonB = new JoystickButton(xbox_drive, 2);
+		//	xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
+		//	xbox_drive_buttonY = new JoystickButton(xbox_drive, 4);
+			xbox_drive_leftBumper = new JoystickButton(xbox_drive, 5);
+			xbox_drive_rightBumper = new JoystickButton(xbox_drive, 6);
+		//	xbox_drive_backButton = new JoystickButton(xbox_drive, 7);
+		//	xbox_drive_startButton new JoystickButton(xbox_drive, 8);
+		//	xbox_drive_leftstickButton = new JoystickButton(xbox_drive, 9);
+		//	xbox_drive_rightstickButton = new JoystickButton(xbox_drive, 10);
 			
 		manipulator = new Joystick(1);
-	 		manipulator_button1 = new JoystickButton(manipulator, 1);
-	 		manipulator_button2 = new JoystickButton(manipulator, 2);
-	 	//	manipulator_button3 = new JoystickButton(manipulator, 3);
-		 	manipulator_button4 = new JoystickButton(manipulator, 4);
-		// 	manipulator_button5 = new JoystickButton(manipulator, 5);
-		 	manipulator_button6 = new JoystickButton(manipulator, 6);
-		//	manipulator_button7 = new JoystickButton(manipulator, 7);
-		// 	manipulator_button8 = new JoystickButton(manipulator, 8);
-		// 	manipulator_button9 = new JoystickButton(manipulator, 9);
-		// 	manipulator_button10 = new JoystickButton(manipulator, 10);
+	 		manipulator_buttonA = new JoystickButton(manipulator, 1);
+	 		manipulator_buttonB = new JoystickButton(manipulator, 2);
+	 	//	manipulator_buttonX = new JoystickButton(manipulator, 3);
+		 	manipulator_buttonY = new JoystickButton(manipulator, 4);
+		// 	manipulator_leftBumper = new JoystickButton(manipulator, 5);
+		 	manipulator_rightBumper = new JoystickButton(manipulator, 6);
+		//	manipulator_backButton = new JoystickButton(manipulator, 7);
+		// 	manipulator_startButton = new JoystickButton(manipulator, 8);
+		// 	manipulator_leftstickButton = new JoystickButton(manipulator, 9);
+		// 	manipulator_rightstickButton = new JoystickButton(manipulator, 10);
 		 	
 				
 		//Instantiating Commands
@@ -106,17 +106,16 @@ public class OI {
 				
 				
 		// Drive Controller Buttons
-		xbox_drive_button5.whenPressed(manipulatewheeldown);
-		xbox_drive_button5.whenReleased(manipulatewheelup);
-		xbox_drive_button6.whenPressed(slowdrive);
-		xbox_drive_button6.whenReleased(fastdrive);
+		xbox_drive_leftBumper.whenPressed(manipulatewheeldown);
+		xbox_drive_leftBumper.whenReleased(manipulatewheelup);
+		xbox_drive_rightBumper.whenPressed(slowdrive);
+		xbox_drive_rightBumper.whenReleased(fastdrive);
 				
 		// Manipulator Buttons
-		manipulator_button1.whileHeld(dispensecube);
-		manipulator_button1.whenReleased(stopcubecontroller);
-		manipulator_button2.whenPressed(stopcubecontroller);
-		manipulator_button4.whenPressed(collectcube);
-		manipulator_button6.whenPressed(slowdrive);
+		manipulator_buttonA.whileHeld(dispensecube);
+		manipulator_buttonB.whenReleased(stopcubecontroller);
+		manipulator_buttonY.whenPressed(collectcube);
+		manipulator_rightBumper.whenPressed(slowdrive);
 	
 		
 	}
