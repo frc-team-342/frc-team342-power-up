@@ -14,6 +14,7 @@ package org.usfirst.frc.team342.robot;
  * floating around.
  */
 public class RobotMap {
+	//NAVAX(GPIO): has the gyro 
 	
 	// Joystick Axis
 	public static final int X_LEFT_AXIS = 0;
@@ -21,7 +22,13 @@ public class RobotMap {
 	public static final int X_RIGHT_AXIS = 4;
 	public static final int Y_RIGHT_AXIS = 5;
 	
+	//Logitech Axis
+	public static final int X_AXIS = 0;
+	public static final int Y_AXIS = 1;
+	
 	// Analog Sensors
+	// ULTRASONIC_ONE: sensors that detect distance
+	//INFRAREDSENSOR: to detect if we have a power cube in the claw at the moment
 	public static final int INFRAREDSENSOR = 0;
 	public static final int ULTRASONIC_ONE = 1;
 	public static final int ULTRASONIC_TWO = 2;
@@ -39,6 +46,13 @@ public class RobotMap {
 	public static final int LIFTUPPERLIMIT = 1;
 
 	// MotorControllers
+	/*RIGHTMASTER & RIGHTFOLLOW: drives the right side of the robot
+	 *LEFTMASTER & LEFTFOLLOW: drives the left side of the robot
+	 *CENTERWHEEL: allows us to go side to side with the wheel in the center
+	 *INTAKEMASTER & INTAKEFOLLOW: brings in the power cubes with extra power 
+	 *LIFTMASTER & LIFTFOLLOW: brings the power cubes up and down 
+	 *LIFTMASTER & LIFTFOLLOW: prevent elevator from going to far up or down
+	 */	
 	
 		// Pratice Bot IDs
 		/*
@@ -68,6 +82,11 @@ public class RobotMap {
 		
 	
 	// Pneumatics
+	/*PNEUMATICWHEEL_DOWN: brings center wheel down 
+	PNEUMATICWHEEL_UP: brings center wheel up
+	PNEUMATICCLAW_OPEN: opens the claw to allow the power cube in 
+	PNEUMATICCLAW_CLOSED:closes the claw the prevent the power cube from leaving 
+	*/
 	public static final int PNEUMATICWHEEL_DOWN = 0;
 	public static final int PNEUMATICWHEEL_UP = 1;
 	public static final int PNEUMATICCLAW_OPEN = 2;
