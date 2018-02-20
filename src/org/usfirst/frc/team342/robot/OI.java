@@ -33,14 +33,14 @@ public class OI {
 		//				xbox_drive_buttonB ,
 		//				xbox_drive_buttonX ,
 		//				xbox_drive_buttonY ,
-					xbox_drive_leftBumper ,
-					xbox_drive_rightBumper;
+						xbox_drive_leftBumper ,
+						xbox_drive_rightBumper;
 		//				xbox_drive_backButton ,
 		//				xbox_drive_startButton,
 		//				xbox_drive_leftstickButton,
 		//				xbox_drive_rightstickButton;
 	
-		private Joystick manipulator_main;
+		private Joystick manipulator;
 		private Button  
 						manipulator_buttonA ,
 						manipulator_buttonB ,
@@ -55,46 +55,33 @@ public class OI {
 		
 		private Joystick logitech_drive_left;
 		private Button
-						logitech_left_button1,
-						logitech_left_button2,
-						logitech_left_button3,
-						logitech_left_button4,
-						logitech_left_button5,
-						logitech_left_button6,
-						logitech_left_button7,
-						logitech_left_button8,
-						logitech_left_button9,
-						logitech_left_button10,
-						logitech_left_button11,
-						logitech_left_button12;
+						logitech_left_button1;
+		//				logitech_left_button2,
+		//				logitech_left_button3,
+		//				logitech_left_button4,
+		//				logitech_left_button5,
+		//				logitech_left_button6,
+		//				logitech_left_button7,
+		//				logitech_left_button8,
+		//				logitech_left_button9,
+		//				logitech_left_button10,
+		//				logitech_left_button11,
+		//				logitech_left_button12;
 		
 		private Joystick logitech_drive_right;
 		private Button
-						logitech_right_button1,
-						logitech_right_button2,
-						logitech_right_button3,
-						logitech_right_button4,
-						logitech_right_button5,
-						logitech_right_button6,
-						logitech_right_button7,
-						logitech_right_button8,
-						logitech_right_button9,
-						logitech_right_button10,
-						logitech_right_button11,
-						logitech_right_button12;
-		
-		private Joystick manipulator_logitech;
-		private Button  
-						manipulator_logitech_buttonA ,
-						manipulator_logitech_buttonB ,
-		//				manipulator_logitech_buttonX ,
-						manipulator_logitech_buttonY ,
-		//				manipulator_logitech_leftBumper ,
-						manipulator_logitech_rightBumper;
-		//				manipulator_logitech_backButton ,
-		//				manipulator_logitech_startButton ,
-		//				manipulator_logitech_leftstickButton ,
-		//				manipulator_logitech_rightStickButton;
+						logitech_right_button1;
+		//				logitech_right_button2,
+		//				logitech_right_button3,
+		//				logitech_right_button4,
+		//				logitech_right_button5,
+		//				logitech_right_button6,
+		//				logitech_right_button7,
+		//				logitech_right_button8,
+		//				logitech_right_button9,
+		//				logitech_right_button10,
+		//				logitech_right_button11,
+		//				logitech_right_button12;
 		
 		//Various Commands to be assigned to buttons for the driver
 		private ManipulateWheelUP manipulatewheelup;
@@ -122,20 +109,45 @@ public class OI {
 		//	xbox_drive_leftstickButton = new JoystickButton(xbox_drive, 9);
 		//	xbox_drive_rightstickButton = new JoystickButton(xbox_drive, 10);
 			
-		manipulator_main = new Joystick(1);
-	 		manipulator_buttonA = new JoystickButton(manipulator_main, 1);
-	 		manipulator_buttonB = new JoystickButton(manipulator_main, 2);
+		manipulator = new Joystick(1);
+	 		manipulator_buttonA = new JoystickButton(manipulator, 1);
+	 		manipulator_buttonB = new JoystickButton(manipulator, 2);
 	 	//	manipulator_buttonX = new JoystickButton(manipulator, 3);
-		 	manipulator_buttonY = new JoystickButton(manipulator_main, 4);
+		 	manipulator_buttonY = new JoystickButton(manipulator, 4);
 		// 	manipulator_leftBumper = new JoystickButton(manipulator, 5);
-		 	manipulator_rightBumper = new JoystickButton(manipulator_main, 6);
+		 	manipulator_rightBumper = new JoystickButton(manipulator, 6);
 		//	manipulator_backButton = new JoystickButton(manipulator, 7);
 		// 	manipulator_startButton = new JoystickButton(manipulator, 8);
 		// 	manipulator_leftstickButton = new JoystickButton(manipulator, 9);
 		// 	manipulator_rightstickButton = new JoystickButton(manipulator, 10);
 		 	
-		manipulator_logitech = new Joystick(2);
+		logitech_drive_left = new Joystick(2);
+		 	logitech_left_button1 = new JoystickButton(logitech_drive_left, 1);
+		 //	logitech_left_button2 = new JoystickButton(logitech_drive_left, 2);
+		 //	logitech_left_button3 = new JoystickButton(logitech_drive_left, 3);
+		 //	logitech_left_button4 = new JoystickButton(logitech_drive_left, 4);
+		 //	logitech_left_button5 = new JoystickButton(logitech_drive_left, 5);
+		 //	logitech_left_button6 = new JoystickButton(logitech_drive_left, 6);
+		 //	logitech_left_button7 = new JoystickButton(logitech_drive_left, 7);
+		 //	logitech_left_button8 = new JoystickButton(logitech_drive_left, 8);
+		 //	logitech_left_button9 = new JoystickButton(logitech_drive_left, 9);
+		 //	logitech_left_button10 = new JoystickButton(logitech_drive_left, 10);
+		 //	logitech_left_button11 = new JoystickButton(logitech_drive_left, 11);
+		 //	logitech_left_button12 = new JoystickButton(logitech_drive_left, 12);
 		 	
+		logitech_drive_right = new Joystick(3);
+		 	logitech_right_button1 = new JoystickButton(logitech_drive_right, 1);
+		 //	logitech_right_button2 = new JoystickButton(logitech_drive_right, 2);
+		 //	logitech_right_button3 = new JoystickButton(logitech_drive_right, 3);
+		 //	logitech_right_button4 = new JoystickButton(logitech_drive_right, 4);
+		 //	logitech_right_button5 = new JoystickButton(logitech_drive_right, 5);
+		 //	logitech_right_button6 = new JoystickButton(logitech_drive_right, 6);
+		 //	logitech_right_button7 = new JoystickButton(logitech_drive_right, 7);
+		 //	logitech_right_button8 = new JoystickButton(logitech_drive_right, 8);
+		 //	logitech_right_button9 = new JoystickButton(logitech_drive_right, 9);
+		 //	logitech_right_button10 = new JoystickButton(logitech_drive_right, 10);
+		 //	logitech_right_button11 = new JoystickButton(logitech_drive_right, 11);
+		 //	logitech_right_button12 = new JoystickButton(logitech_drive_right, 12);
 				
 		//Instantiating Commands
 			//Drive
@@ -151,21 +163,29 @@ public class OI {
 				
 				
 		// Drive Controller Buttons
-		xbox_drive_leftBumper.whenPressed(manipulatewheeldown);
-		xbox_drive_leftBumper.whenReleased(manipulatewheelup);
-		xbox_drive_rightBumper.whenPressed(slowdrive);
-		xbox_drive_rightBumper.whenReleased(fastdrive);
+			xbox_drive_leftBumper.whenPressed(manipulatewheeldown);
+			xbox_drive_leftBumper.whenReleased(manipulatewheelup);
+			xbox_drive_rightBumper.whenPressed(slowdrive);
+			xbox_drive_rightBumper.whenReleased(fastdrive);
 				
 		// Manipulator Buttons
-		manipulator_buttonA.whileHeld(dispensecube);
-		manipulator_buttonB.whenReleased(stopcubecontroller);
-		manipulator_buttonY.whenPressed(collectcube);
-		manipulator_rightBumper.whenPressed(slowdrive);
-	
+			manipulator_buttonA.whileHeld(dispensecube);
+			manipulator_buttonB.whenReleased(stopcubecontroller);
+			manipulator_buttonY.whenPressed(collectcube);
+			manipulator_rightBumper.whenPressed(slowdrive);
 		
+		// Logitech Left Buttons
+			logitech_left_button1.whenPressed(manipulatewheeldown);
+			logitech_left_button1.whenReleased(manipulatewheelup);
+		
+		// Logitech Right Buttons
+			logitech_right_button1.whenPressed(slowdrive);
+			logitech_right_button1.whenReleased(fastdrive);
+			
 	}
 	
 	public static OI getInstance () {
+		
 		return instance;
 	}
 	
@@ -180,7 +200,8 @@ public class OI {
 	*/
 	
 	public int getManipulatorPOV () {
-		return manipulator_main.getPOV();
+		
+		return manipulator.getPOV();
 	}
 	
 	
@@ -206,25 +227,67 @@ public class OI {
 	}
 	
 	
-	// Methods to get the multiple axis on the manipulator_main Joystick
+	// Methods to get the multiple axis on the manipulator Joystick
 	public double getJoystickManipulatorLeftYAxis() {
 		
-		return manipulator_main.getRawAxis(RobotMap.Y_LEFT_AXIS);
+		return manipulator.getRawAxis(RobotMap.Y_LEFT_AXIS);
 	}
 	
 	public double getJoystickManipulatorLeftXAxis() {
 		
-		return manipulator_main.getRawAxis(RobotMap.X_LEFT_AXIS);
+		return manipulator.getRawAxis(RobotMap.X_LEFT_AXIS);
 	}
 	
 	public double getJoystickManipulatorRightYAxis() {
 	
-		return manipulator_main.getRawAxis(RobotMap.Y_RIGHT_AXIS);
+		return manipulator.getRawAxis(RobotMap.Y_RIGHT_AXIS);
 	}
 	
 	public double getJoystickManipulatorRightXAxis() {
 		
-		return manipulator_main.getRawAxis(RobotMap.X_RIGHT_AXIS);
+		return manipulator.getRawAxis(RobotMap.X_RIGHT_AXIS);
 	}
+	
+	// Methods to get the multiple axis on the Logitech Left Joystick
+	public double getJoystickLogitechLeft_LeftYAxis() {
+			
+		return manipulator.getRawAxis(RobotMap.Y_LEFT_AXIS);
+	}
+		
+	public double getJoystickLogitechLeft_LeftXAxis() {
+			
+		return manipulator.getRawAxis(RobotMap.X_LEFT_AXIS);
+	}
+		
+	public double getJoystickLogitechLeft_RightYAxis() {
+		
+		return manipulator.getRawAxis(RobotMap.Y_RIGHT_AXIS);
+	}
+		
+	public double getJoystickLogitechLeft_RightXAxis() {
+			
+		return manipulator.getRawAxis(RobotMap.X_RIGHT_AXIS);
+	}
+		
+	// Methods to get the multiple axis on the Logitech Right Joystick
+	public double getJoystickLogitechRight_LeftYAxis() {
+			
+		return manipulator.getRawAxis(RobotMap.Y_LEFT_AXIS);
+	}
+		
+	public double getJoystickLogitechRight_LeftXAxis() {
+			
+		return manipulator.getRawAxis(RobotMap.X_LEFT_AXIS);
+	}
+		
+	public double getJoystickLogitechRight_RightYAxis() {
+		
+		return manipulator.getRawAxis(RobotMap.Y_RIGHT_AXIS);
+	}
+		
+	public double getJoystickLogitechRight_RightXAxis() {
+			
+		return manipulator.getRawAxis(RobotMap.X_RIGHT_AXIS);
+	}	
 
 }
