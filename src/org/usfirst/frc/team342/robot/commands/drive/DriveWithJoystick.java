@@ -43,7 +43,13 @@ public class DriveWithJoystick extends Command {
 		
 		if(Math.abs(speed_y_left) > DEADZONE || Math.abs(speed_y_right) > DEADZONE || Math.abs(x_average) > DEADZONE) {
 			
-			drive.drive(speed_y_left, speed_y_right, x_average);
+			if(drive.getWheelState()) {
+				
+				drive.drive(speed_y_left, speed_y_right, ZERO);
+			}else {
+				
+				drive.drive(speed_y_left, speed_y_right, x_average);
+			}
 		}else {
 			
 			drive.drive(ZERO, ZERO, ZERO);

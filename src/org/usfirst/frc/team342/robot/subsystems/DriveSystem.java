@@ -198,7 +198,7 @@ public class DriveSystem extends Subsystem {
 
 	public boolean getWheelState() {
 
-		if (pneumaticSuspension.get().equals(Value.kForward)) {
+		if (pneumaticSuspension.get().equals(Value.kReverse)) {
 			return true;
 		} else {
 			return false;
