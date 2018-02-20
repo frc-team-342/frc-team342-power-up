@@ -21,6 +21,10 @@ public class RobotMap {
 	public static final int Y_LEFT_AXIS = 1;
 	public static final int X_RIGHT_AXIS = 4;
 	public static final int Y_RIGHT_AXIS = 5;
+	public static final int X_AXIS_LOGITECH = 0;
+	public static final int Y_AXIS_LOGITECH = 1;
+	public static final int Z_AXIS_LOGITECH = 2;
+	public static final int SLIDER_AXIS_LOGITECH = 3;
 	
 	//Logitech Axis
 	public static final int X_AXIS = 0;

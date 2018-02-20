@@ -206,88 +206,88 @@ public class OI {
 	
 	
 	// Methods to get the multiple axis on the xbox_drive Joystick
-	public double getJoystickDriveLeftYAxis() {
+		public double getJoystickDriveLeftYAxis() {
+			
+			return xbox_drive.getRawAxis(RobotMap.Y_LEFT_AXIS);
+		}
 		
-		return xbox_drive.getRawAxis(RobotMap.Y_LEFT_AXIS);
-	}
-	
-	public double getJoystickDriveLeftXAxis() {
+		public double getJoystickDriveLeftXAxis() {
+			
+			return xbox_drive.getRawAxis(RobotMap.X_LEFT_AXIS);
+		}
 		
-		return xbox_drive.getRawAxis(RobotMap.X_LEFT_AXIS);
-	}
-	
-	public double getJoystickDriveRightYAxis() {
-	
-		return xbox_drive.getRawAxis(RobotMap.Y_RIGHT_AXIS);
-	}
-	
-	public double getJoystickDriveRightXAxis() {
+		public double getJoystickDriveRightYAxis() {
 		
-		return xbox_drive.getRawAxis(RobotMap.X_RIGHT_AXIS);
-	}
+			return xbox_drive.getRawAxis(RobotMap.Y_RIGHT_AXIS);
+		}
+		
+		public double getJoystickDriveRightXAxis() {
+			
+			return xbox_drive.getRawAxis(RobotMap.X_RIGHT_AXIS);
+		}
 	
 	
 	// Methods to get the multiple axis on the manipulator Joystick
-	public double getJoystickManipulatorLeftYAxis() {
+		public double getJoystickManipulatorLeftYAxis() {
+			
+			return manipulator.getRawAxis(RobotMap.Y_LEFT_AXIS);
+		}
 		
-		return manipulator.getRawAxis(RobotMap.Y_LEFT_AXIS);
-	}
-	
-	public double getJoystickManipulatorLeftXAxis() {
+		public double getJoystickManipulatorLeftXAxis() {
+			
+			return manipulator.getRawAxis(RobotMap.X_LEFT_AXIS);
+		}
 		
-		return manipulator.getRawAxis(RobotMap.X_LEFT_AXIS);
-	}
-	
-	public double getJoystickManipulatorRightYAxis() {
-	
-		return manipulator.getRawAxis(RobotMap.Y_RIGHT_AXIS);
-	}
-	
-	public double getJoystickManipulatorRightXAxis() {
+		public double getJoystickManipulatorRightYAxis() {
 		
-		return manipulator.getRawAxis(RobotMap.X_RIGHT_AXIS);
-	}
+			return manipulator.getRawAxis(RobotMap.Y_RIGHT_AXIS);
+		}
+		
+		public double getJoystickManipulatorRightXAxis() {
+			
+			return manipulator.getRawAxis(RobotMap.X_RIGHT_AXIS);
+		}
 	
 	// Methods to get the multiple axis on the Logitech Left Joystick
-	public double getJoystickLogitechLeft_LeftYAxis() {
+		public double getJoystickLogitechLeftYAxis() {
+				
+			return manipulator.getRawAxis(RobotMap.Y_AXIS_LOGITECH);
+		}
 			
-		return manipulator.getRawAxis(RobotMap.Y_LEFT_AXIS);
-	}
-		
-	public double getJoystickLogitechLeft_LeftXAxis() {
+		public double getJoystickLogitechLeftXAxis() {
+				
+			return manipulator.getRawAxis(RobotMap.X_AXIS_LOGITECH);
+		}
 			
-		return manipulator.getRawAxis(RobotMap.X_LEFT_AXIS);
-	}
-		
-	public double getJoystickLogitechLeft_RightYAxis() {
-		
-		return manipulator.getRawAxis(RobotMap.Y_RIGHT_AXIS);
-	}
-		
-	public double getJoystickLogitechLeft_RightXAxis() {
+		public double getJoystickLogitechLeftZAxis() {
 			
-		return manipulator.getRawAxis(RobotMap.X_RIGHT_AXIS);
-	}
-		
-	// Methods to get the multiple axis on the Logitech Right Joystick
-	public double getJoystickLogitechRight_LeftYAxis() {
+			return manipulator.getRawAxis(RobotMap.Z_AXIS_LOGITECH);
+		}
 			
-		return manipulator.getRawAxis(RobotMap.Y_LEFT_AXIS);
-	}
+		public double getJoystickLogitechLeftSliderAxis() {
+				
+			return manipulator.getRawAxis(RobotMap.SLIDER_AXIS_LOGITECH);
+		}
 		
-	public double getJoystickLogitechRight_LeftXAxis() {
+	// Methods to get the multiple axis on the Logitech Left Joystick
+		public double getJoystickLogitechRightYAxis() {
+				
+			return manipulator.getRawAxis(RobotMap.Y_AXIS_LOGITECH);
+		}
 			
-		return manipulator.getRawAxis(RobotMap.X_LEFT_AXIS);
-	}
-		
-	public double getJoystickLogitechRight_RightYAxis() {
-		
-		return manipulator.getRawAxis(RobotMap.Y_RIGHT_AXIS);
-	}
-		
-	public double getJoystickLogitechRight_RightXAxis() {
+		public double getJoystickLogitechRightXAxis() {
+				
+			return manipulator.getRawAxis(RobotMap.X_AXIS_LOGITECH);
+		}
 			
-		return manipulator.getRawAxis(RobotMap.X_RIGHT_AXIS);
-	}	
+		public double getJoystickLogitechRightZAxis() {
+			
+			return manipulator.getRawAxis(RobotMap.Z_AXIS_LOGITECH);
+		}
+			
+		public double getJoystickLogitechRightSliderAxis() {
+				
+			return manipulator.getRawAxis(RobotMap.SLIDER_AXIS_LOGITECH);
+		}	
 
 }
