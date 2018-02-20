@@ -38,10 +38,10 @@ public class DriveWithLogitech extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	speed_y_left = oi.getJoystickDriveLeftYAxis(); 
-    	speed_x_left = oi.getJoystickDriveLeftXAxis();
-    	speed_y_right = oi.getJoystickDriveRightYAxis();
-    	speed_x_right = oi.getJoystickDriveRightXAxis();
+    	speed_y_left = oi.getJoystickLogitechLeft_LeftYAxis();
+    	speed_x_left = oi.getJoystickLogitechLeft_LeftXAxis();
+    	speed_y_right = oi.getJoystickLogitechRight_RightYAxis();
+    	speed_x_right = oi.getJoystickLogitechRight_RightXAxis();
     	
     	x_average = ((speed_x_left + speed_x_right) / 2.0);  
     
