@@ -24,7 +24,9 @@ public class LiftSystem extends Subsystem {
 	private int amps= 1;
 	private int timeout= 10;
 	private int milliseconds= 200;
-
+	// ramp
+	private static final double RAMP_TIME = 0.2;
+	
 	public LiftSystem() {
 
 		initializeLiftSystem();
@@ -59,6 +61,10 @@ public class LiftSystem extends Subsystem {
 		liftFollow.configPeakCurrentDuration(milliseconds, timeout);
 		liftFollow.configContinuousCurrentLimit(amps, timeout);
 		liftFollow.enableCurrentLimit(true);
+		
+		liftMaster.configOpenloopRamp(RAMP_TIME, 0);
+		liftFollow.configOpenloopRamp(RAMP_TIME, 0);
+	
 		
 	}
 
