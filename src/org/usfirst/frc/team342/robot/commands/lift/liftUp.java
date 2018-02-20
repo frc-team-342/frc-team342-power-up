@@ -1,20 +1,22 @@
-package org.usfirst.frc.team342.robot.commands;
+package org.usfirst.frc.team342.robot.commands.lift;
 
-import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
+import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *basically going to put the 5th solenoid up if it was false 
+ *
  */
-public class ManipulateWheelUP extends Command {
+public class liftUp extends Command {
 	
-	private DriveSystem drive;	
+	private LiftSystem liftUp;
 
-    public ManipulateWheelUP() {
+    public liftUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	drive = DriveSystem.getInstance(); 
+    	   
+    	liftUp=LiftSystem.getInstance();
+    	requires (liftUp);
     }
 
     // Called just before this Command runs the first time
@@ -23,21 +25,24 @@ public class ManipulateWheelUP extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drive.wheelUp();
+    	double speed;
+    	speed= 0.25;
+    	  liftUp.liftUp(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-  
+    	liftUp.liftStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

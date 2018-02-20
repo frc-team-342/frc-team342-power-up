@@ -1,4 +1,4 @@
-package org.usfirst.frc.team342.robot.commands;
+package org.usfirst.frc.team342.robot.commands.drive;
 
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
@@ -47,6 +47,6 @@ public class ManipulateWheelTOGGLE extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	drive.stopAll();
+    	
     }
 }

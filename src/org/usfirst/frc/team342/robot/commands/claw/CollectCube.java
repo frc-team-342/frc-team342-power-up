@@ -1,17 +1,18 @@
-package org.usfirst.frc.team342.robot.commands;
+package org.usfirst.frc.team342.robot.commands.claw;
 
 import org.usfirst.frc.team342.robot.subsystems.CubeController;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class DispenseCube extends Command {
+public class CollectCube extends Command {
 
 	private CubeController cube_controller;
 
-	private static final double SPEED = 1.0;
+	private static final double COLLECTED_DISTANCE = 1.0;
+	private static final double SPEED = 0.8;
 
-	public DispenseCube() {
+	public CollectCube() {
 
 		cube_controller = CubeController.getInstance();
 		requires(cube_controller);
@@ -19,18 +20,22 @@ public class DispenseCube extends Command {
 
 	protected void initialize() {
 
-		SmartDashboard.putString("Cube State:", "Dispensing Cube");
+		SmartDashboard.putString("Cube State:", "Collecting Cube");
 	}
 
 	protected void execute() {
 
-		cube_controller.dispenseCube(SPEED);
+		cube_controller.collectCube(SPEED);
 	}
 
 	@Override
 	protected boolean isFinished() {
 
-		return false;
+		if (cube_controller.getInfrared() >= COLLECTED_DISTANCE) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	protected void end() {
@@ -42,7 +47,7 @@ public class DispenseCube extends Command {
 	@Override
 	protected void interrupted() {
 
-		cube_controller.stopAll();
+		end();
 	}
 
 }

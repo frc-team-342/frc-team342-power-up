@@ -5,7 +5,6 @@ import org.usfirst.frc.team342.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -13,34 +12,43 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class DriveSystem extends Subsystem {
 
+	// Instance of the class.
 	private static final DriveSystem INSTANCE = new DriveSystem();
 
-	private WPI_TalonSRX leftMaster;
-	private WPI_TalonSRX leftFollow;
-	private WPI_TalonSRX rightMaster;
-	private WPI_TalonSRX rightFollow;
+	// Motor Controllers.
+	private TalonSRX leftMaster;
+	private TalonSRX leftFollow;
+	private TalonSRX rightMaster;
+	private TalonSRX rightFollow;
 	private TalonSRX centerWheel;
-	
+
+	// Pneumatic Solenoid.
 	private DoubleSolenoid pneumaticSuspension;
-	
+
+	// Ultrasonic Sensors.
 	private AnalogInput ultrasonicOne;
 	private AnalogInput ultrasonicTwo;
-	
+
+	// NavX.
 	private AHRS navx;
-	
+
+	// Booleans for controlling the robot.
 	private boolean front;
-	
-	private DifferentialDrive drive;
-	
-	// Here are the current variables. Change them at will. 
-	private static final int AMPS = 10; 
+	private boolean slow;
+
+	// Current variables.
+	private static final int AMPS = 200;
 	private static final int TIMEOUT_MS = 10;
-	private static final int PEAK_DURATION = 200; 
+	private static final int PEAK_DURATION = 200;
 	private static final int AMPSCENTER = 35;
+	private static final double RAMP_TIME = 0.1;
+	private static final double SLOW_DOWN = 2.0;
+	
+	// Scale factor for calculating autonomous
+	private static final double SCALE_FACTOR = (1 / 4096);
 
 	public DriveSystem() {
 
@@ -59,83 +67,112 @@ public class DriveSystem extends Subsystem {
 
 	private void initializeDriveSystem() {
 
-		leftMaster = new WPI_TalonSRX(RobotMap.LEFTMASTER);
-		leftFollow = new WPI_TalonSRX(RobotMap.LEFTFOLLOW);
-		rightMaster = new WPI_TalonSRX(RobotMap.RIGHTMASTER);
-		rightFollow = new WPI_TalonSRX(RobotMap.RIGHTFOLLOW);
+		// Configures various booleans for drive.
+		// EX: If slow is true, the robot goes slow.
+		front = false;
+		slow = false;
+
+		// Instantiate Motor Controllers, Sensors, Pneumatics, and the NavX.
+		leftMaster = new TalonSRX(RobotMap.LEFTMASTER);
+		leftFollow = new TalonSRX(RobotMap.LEFTFOLLOW);
+		rightMaster = new TalonSRX(RobotMap.RIGHTMASTER);
+		rightFollow = new TalonSRX(RobotMap.RIGHTFOLLOW);
 		centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
 		pneumaticSuspension = new DoubleSolenoid(RobotMap.PNEUMATICWHEEL_UP, RobotMap.PNEUMATICWHEEL_DOWN);
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
 		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
 		navx = new AHRS(SPI.Port.kMXP);
-		front = true;
 
-		leftFollow.follow(leftMaster);
-		rightFollow.follow(rightMaster);
+		// Inverts the right set of motors to make sure the robot drives in the right
+		// direction.
+		leftMaster.setInverted(true);
+		leftFollow.setInverted(true);
 
-		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		leftFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		rightFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		// Configures the encoder onto the master motor controllers.
+		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 
-		drive = new DifferentialDrive(leftMaster, rightMaster);
-		
-		//This is to control the current. If you want to change any of the bellow variables go to where it is declared
-		leftMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+		// Controls the current. To change any of these change the constants at the top
+		// of the class.
+		leftMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
 		leftMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		leftMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		leftMaster.enableCurrentLimit(true);
-		
-		leftFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+
+		leftFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
 		leftFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		leftFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		leftFollow.enableCurrentLimit(true);
 		
-		rightMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+		rightMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
 		rightMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		rightMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightMaster.enableCurrentLimit(true);
-		
-		rightFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS); 
+
+		rightFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
 		rightFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		rightFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightFollow.enableCurrentLimit(true);
+	
+		// Configures the open loop ramp to set the motor to ramp up to speed after a
+		// specified time other than jerking to full speed.
+		rightMaster.configOpenloopRamp(RAMP_TIME, 0);
+		rightFollow.configOpenloopRamp(RAMP_TIME, 0);
+		leftFollow.configOpenloopRamp(RAMP_TIME, 0);
+		leftMaster.configOpenloopRamp(RAMP_TIME, 0);
 
-		centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS); 
+		// Controls the current of the center wheel. To change any of these change the
+		// constants at the top of the class.
+		centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS);
 		centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
 		centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
 		centerWheel.enableCurrentLimit(true);
 		
+		rightMaster.set(ControlMode.PercentOutput, 0.0);
+		rightFollow.set(ControlMode.PercentOutput, 0.0);
+		rightFollow.follow(rightMaster);
+		
+		leftMaster.set(ControlMode.PercentOutput, 0.0);
+		leftFollow.set(ControlMode.PercentOutput, 0.0);
+		leftFollow.follow(leftMaster);
 	}
 
-	public void drive(double Left_joy_Y, double Right_joy_Y, double X_average, double deadzone) {
+	public void setslow(boolean slow) {
 
-		if(!front) {
-			Left_joy_Y = Left_joy_Y * -1.0;
-			Right_joy_Y = Right_joy_Y * -1.0;
-			X_average = X_average * -1.0;
-		}
-		
-		if(Math.abs(Right_joy_Y) > deadzone || Math.abs(Left_joy_Y) > deadzone) {
-			drive.tankDrive(Left_joy_Y, Right_joy_Y);
-		}else {
-			drive.tankDrive(0.0, 0.0);
-		}
-		
-		if(Math.abs(X_average) > deadzone) {
-			centerWheel.set(ControlMode.PercentOutput, X_average);
-		}
+		this.slow = slow;
 	}
 
-	public void driveKeepHeading(double X, double Y, double rot) {
-	
-		//need to make a main method for driving in autonomous to keep the current heading using the gyro
+	public void drive(double Left_Speed, double Right_Speed, double Center_Speed) {
+
+		// Check if the slow boolean is set to true to cut the robot's speed in half.
+		if (slow) {
+
+			Left_Speed /= SLOW_DOWN;
+			Right_Speed /= SLOW_DOWN; 
+		}
+
+		// Check if the front boolean is false to change the direction of the Inputs.
+		if (!front) {
+
+			Left_Speed = Left_Speed * -1.0;
+			Right_Speed = Right_Speed * -1.0;
+			Center_Speed = Center_Speed * -1.0;
+		}
 		
+		rightMaster.set(ControlMode.PercentOutput, Right_Speed);
+		leftMaster.set(ControlMode.PercentOutput, Left_Speed);
+
+		centerWheel.set(ControlMode.PercentOutput, Center_Speed);
 	}
 
 	public double getGyro() {
 
-		return navx.getAngle();
+		return ((((navx.getAngle()) % 360) + 360) % 360);
+	}
+	
+	public AHRS getNavX() {
+		
+		return navx;
 	}
 
 	public void resetGyro() {
@@ -155,31 +192,21 @@ public class DriveSystem extends Subsystem {
 
 	public boolean getWheelState() {
 
-		if(pneumaticSuspension.get().equals(Value.kForward)) {
+		if (pneumaticSuspension.get().equals(Value.kReverse)) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
 
-	public double getLeftMasterEncoder() {
+	public int getLeftMasterEncoder() {
 
-		return leftMaster.getSelectedSensorPosition(0);
+		return leftMaster.getSensorCollection().getPulseWidthPosition();
 	}
 
-	public double getLeftFollowerEncoder() {
+	public int getRightMasterEncoder() {
 
-		return leftFollow.getSelectedSensorPosition(0);
-	}
-
-	public double getRightMasterEncoder() {
-
-		return rightMaster.getSelectedSensorPosition(0);
-	}
-
-	public double getRightFollowerEncoder() {
-
-		return rightFollow.getSelectedSensorPosition(0);
+		return rightMaster.getSensorCollection().getPulseWidthPosition();
 	}
 
 	public double getUltrasonicOne() {
@@ -199,20 +226,28 @@ public class DriveSystem extends Subsystem {
 		front = !front;
 	}
 
+	public boolean getFront() {
+
+		return front;
+	}
+
+	public boolean getSlow() {
+		
+		return slow;
+	}
+	
+	public double getDistance(double encoder) {
+
+		return encoder * SCALE_FACTOR;
+	}
+	
 	public void stopDrive() {
 
-		leftMaster.set(0.0);
-		rightMaster.set(0.0);
+		rightMaster.set(ControlMode.PercentOutput, 0.0);
+		leftMaster.set(ControlMode.PercentOutput, 0.0);
 		centerWheel.set(ControlMode.PercentOutput, 0.0);
 	}
 
-	public void stopAll() {
-
-		leftMaster.set(0.0);
-		leftFollow.set(0.0);
-		rightMaster.set(0.0);
-		rightFollow.set(0.0);
-		centerWheel.set(ControlMode.PercentOutput, 0.0);
-	}
+	
 
 }

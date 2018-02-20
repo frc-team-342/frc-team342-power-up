@@ -24,7 +24,9 @@ public class LiftSystem extends Subsystem {
 	private int amps= 1;
 	private int timeout= 10;
 	private int milliseconds= 200;
-
+	// ramp
+	private static final double RAMP_TIME = 0.2;
+	
 	public LiftSystem() {
 
 		initializeLiftSystem();
@@ -44,7 +46,7 @@ public class LiftSystem extends Subsystem {
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
 		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
 		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
-		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		liftFollow.follow(liftMaster);
 		
 		
@@ -60,23 +62,26 @@ public class LiftSystem extends Subsystem {
 		liftFollow.configContinuousCurrentLimit(amps, timeout);
 		liftFollow.enableCurrentLimit(true);
 		
+		liftMaster.configOpenloopRamp(RAMP_TIME, 0);
+		liftFollow.configOpenloopRamp(RAMP_TIME, 0);
+	
 		
 	}
 
 	public void liftUpForce(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed);
+		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
 
 	public void liftUp(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed);
+		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
 	}
 
 	public void liftDownForce(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
 
 	public void liftDown(double speed) {
-		liftMaster.set(ControlMode.PercentOutput, speed * -1.0);
+		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
 
 	public boolean getUpperLimit() {
@@ -88,14 +93,10 @@ public class LiftSystem extends Subsystem {
 	}
 
 	public double getLiftEncoder() {
-		return liftMaster.getSelectedSensorPosition(0);
+		return liftMaster.getSensorCollection().getQuadraturePosition();
 	}
 
 	public void liftStop() {
-		liftMaster.set(ControlMode.PercentOutput, 0.0);
-	}
-
-	public void stopAll() {
 		liftMaster.set(ControlMode.PercentOutput, 0.0);
 	}
 }
