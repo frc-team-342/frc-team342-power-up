@@ -45,7 +45,8 @@ public class DriveSystem extends Subsystem {
 	private static final int PEAK_DURATION = 200;
 	private static final int AMPSCENTER = 35;
 	private static final double RAMP_TIME = 0.1;
-
+	private static final double SLOW_DOWN = 2.0;
+	
 	// Scale factor for calculating autonomous
 	private static final double SCALE_FACTOR = (1 / 4096);
 
@@ -141,34 +142,27 @@ public class DriveSystem extends Subsystem {
 		this.slow = slow;
 	}
 
-	public void drive(double Left_joy_Y, double Right_joy_Y, double center) {
+	public void drive(double Left_Speed, double Right_Speed, double Center_Speed) {
 
 		// Check if the slow boolean is set to true to cut the robot's speed in half.
 		if (slow) {
 
-			Left_joy_Y /= 2.0;
-			Right_joy_Y /= 2.0;
+			Left_Speed /= SLOW_DOWN;
+			Right_Speed /= SLOW_DOWN; 
 		}
 
 		// Check if the front boolean is false to change the direction of the Inputs.
 		if (!front) {
 
-			Left_joy_Y = Left_joy_Y * -1.0;
-			Right_joy_Y = Right_joy_Y * -1.0;
-			center = center * -1.0;
+			Left_Speed = Left_Speed * -1.0;
+			Right_Speed = Right_Speed * -1.0;
+			Center_Speed = Center_Speed * -1.0;
 		}
 		
-		rightMaster.set(ControlMode.PercentOutput, Right_joy_Y);
-		leftMaster.set(ControlMode.PercentOutput, Left_joy_Y);
+		rightMaster.set(ControlMode.PercentOutput, Right_Speed);
+		leftMaster.set(ControlMode.PercentOutput, Left_Speed);
 
-		centerWheel.set(ControlMode.PercentOutput, center);
-	}
-
-	public void driveKeepHeading(double X, double Y, double rot) {
-
-		// need to make a main method for driving in autonomous to keep the current
-		// heading using the gyro
-
+		centerWheel.set(ControlMode.PercentOutput, Center_Speed);
 	}
 
 	public double getGyro() {
