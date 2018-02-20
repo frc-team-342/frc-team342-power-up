@@ -9,7 +9,7 @@ package org.usfirst.frc.team342.robot;
 
 import org.usfirst.frc.team342.robot.commands.autonomous.AutoChooser;
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
-import org.usfirst.frc.team342.robot.commands.drive.LiftWithJoystick;
+import org.usfirst.frc.team342.robot.commands.lift.LiftWithJoystick;
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team342.robot.subsystems.CubeController;
