@@ -39,8 +39,10 @@ public class DriveWithJoystick extends Command {
 		speed_y_right = oi.getJoystickDriveRightYAxis() * -1.0;
 		speed_x_right = oi.getJoystickDriveRightXAxis();
 
+		//sets a x average for the x axis
 		x_average = ((speed_x_left + speed_x_right) / 2.0);
 		
+		//sets a deadzone
 		if(Math.abs(speed_y_left) > DEADZONE || Math.abs(speed_y_right) > DEADZONE || Math.abs(x_average) > DEADZONE) {
 			
 			if(drive.getWheelState()) {
