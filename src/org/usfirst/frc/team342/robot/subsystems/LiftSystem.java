@@ -17,8 +17,7 @@ public class LiftSystem extends Subsystem {
 	
 	private TalonSRX liftFollow;
 	
-	private DigitalInput lowerLimit;
-	private DigitalInput upperLimit;
+	
 	
 	// variables for current limits
 	private int amps= 1;
@@ -44,8 +43,6 @@ public class LiftSystem extends Subsystem {
 	private void initializeLiftSystem() {
 		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
-		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
-		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
 		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		liftFollow.follow(liftMaster);
 		
@@ -84,13 +81,6 @@ public class LiftSystem extends Subsystem {
 		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
 
-	public boolean getUpperLimit() {
-		return upperLimit.get();
-	}
-
-	public boolean getLowerLimit() {
-		return lowerLimit.get();
-	}
 
 	public double getLiftEncoder() {
 		return liftMaster.getSensorCollection().getQuadraturePosition();
