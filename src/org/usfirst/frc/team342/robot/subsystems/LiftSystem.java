@@ -21,7 +21,7 @@ public class LiftSystem extends Subsystem {
 	private DigitalInput upperLimit;
 	
 	// variables for current limits
-	private int amps= 1;
+	private int amps= 10;
 	private int timeout= 10;
 	private int milliseconds= 200;
 	// ramp
@@ -42,11 +42,11 @@ public class LiftSystem extends Subsystem {
 	}
 
 	private void initializeLiftSystem() {
-		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
-		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
+		liftMaster = new TalonSRX(RobotMap.LIFTMASTER); //sets liftmaster to a talon from robot map
+		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW); //sets liftfollow to a talon from robot map
 		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
 		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
-		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		liftFollow.follow(liftMaster);
 		
 		
@@ -92,8 +92,17 @@ public class LiftSystem extends Subsystem {
 		return lowerLimit.get();
 	}
 
-	public double getLiftEncoder() {
-		return liftMaster.getSensorCollection().getQuadraturePosition();
+	public double[] getLiftEncoder() {
+		
+		double[] testvalues = new double[5];
+		
+		testvalues[0] = liftMaster.getSelectedSensorPosition(0);
+		testvalues[1] = liftMaster.getSensorCollection().getAnalogIn();
+		testvalues[2] = liftMaster.getSensorCollection().getAnalogInRaw();
+		testvalues[3] = liftMaster.getSensorCollection().getPulseWidthPosition();
+		testvalues[4] = liftMaster.getSensorCollection().getQuadraturePosition();
+		
+		return testvalues;
 	}
 
 	public void liftStop() {

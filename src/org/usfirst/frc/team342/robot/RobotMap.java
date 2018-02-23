@@ -50,28 +50,29 @@ public class RobotMap {
 	public static final int LIFTUPPERLIMIT = 1;
 
 	// MotorControllers
-	/*RIGHTMASTER & RIGHTFOLLOW: drives the right side of the robot
-	 *LEFTMASTER & LEFTFOLLOW: drives the left side of the robot
-	 *CENTERWHEEL: allows us to go side to side with the wheel in the center
-	 *INTAKEMASTER & INTAKEFOLLOW: brings in the power cubes with extra power 
-	 *LIFTMASTER & LIFTFOLLOW: brings the power cubes up and down 
-	 *LIFTMASTER & LIFTFOLLOW: prevent elevator from going to far up or down
-	 */	
+		/*RIGHTMASTER & RIGHTFOLLOW: drives the right side of the robot
+		 *LEFTMASTER & LEFTFOLLOW: drives the left side of the robot
+		 *CENTERWHEEL: allows us to go side to side with the wheel in the center
+		 *INTAKEMASTER & INTAKEFOLLOW: brings in the power cubes with extra power 
+		 *LIFTMASTER & LIFTFOLLOW: brings the power cubes up and down 
+		 *LIFTMASTER & LIFTFOLLOW: prevent elevator from going to far up or down
+		 */	
 	
 		// Pratice Bot IDs
-		/*
-		public static final int RIGHTMASTER = 8;
-		public static final int RIGHTFOLLOW = 13;
+		public static final int RIGHTMASTER = 13;
+		public static final int RIGHTFOLLOW = 8;
 		public static final int LEFTMASTER = 19;
 		public static final int LEFTFOLLOW = 21;
 		public static final int CENTERWHEEL = 15;
+		public static final int CLIMBMASTER = 18;
+		public static final int CLIMBFOLLOW = 20;
+		public static final int LIFTMASTER = 22;
+		public static final int LIFTFOLLOW = 14;
 		public static final int INTAKEMASTER = 0;
 		public static final int INTAKEFOLLOW = 1;
-		public static final int LIFTMASTER = 9;
-		public static final int LIFTFOLLOW = 10;
-		*/
 		
 		// Competition Bot IDs
+		/*
 		public static final int RIGHTMASTER = 1;
 		public static final int RIGHTFOLLOW = 2;
 		public static final int LEFTMASTER = 3;
@@ -83,6 +84,7 @@ public class RobotMap {
 		public static final int LIFTFOLLOW = 9;
 		public static final int INTAKEMASTER = 0;
 		public static final int INTAKEFOLLOW = 1;
+		*/
 		
 	
 	// Pneumatics

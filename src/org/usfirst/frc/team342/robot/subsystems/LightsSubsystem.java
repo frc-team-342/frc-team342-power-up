@@ -4,8 +4,6 @@ import org.usfirst.frc.team342.robot.RobotMap;
 
 import com.ctre.phoenix.CANifier;
 import com.ctre.phoenix.CANifier.LEDChannel;
-import com.ctre.phoenix.CANifierFaults;
-import com.ctre.phoenix.CANifierJNI;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;

@@ -31,7 +31,7 @@ public class LiftToPosition extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		CurrentHeight = liftto.getLiftEncoder();
+		//CurrentHeight = liftto.getLiftEncoder();
 
 		isUp = CurrentHeight <= goal; // is up if current position is less than or equal to where it needs to be
 
@@ -40,7 +40,7 @@ public class LiftToPosition extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// sets the speed that the encoder goes if not in deadzone
-		CurrentHeight = liftto.getLiftEncoder();
+		//CurrentHeight = liftto.getLiftEncoder();
 		if (isUp) {
 			liftto.liftUp(0.15);
 
@@ -52,7 +52,7 @@ public class LiftToPosition extends Command {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		CurrentHeight = liftto.getLiftEncoder();
+		//CurrentHeight = liftto.getLiftEncoder();
 		// deadzone so that robot doesn't have to keep adjusting
 		// if robot is in deadzone it will stop
 		boolean isInDeadzone = CurrentHeight > (goal - 1000.0) && CurrentHeight < (goal + 1000.0);
