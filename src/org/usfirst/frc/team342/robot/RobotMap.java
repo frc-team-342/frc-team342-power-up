@@ -88,17 +88,18 @@ public class RobotMap {
 		
 	
 	// Pneumatics
-	/*PNEUMATICWHEEL_DOWN: brings center wheel down 
-	PNEUMATICWHEEL_UP: brings center wheel up
-	PNEUMATICCLAW_OPEN: opens the claw to allow the power cube in 
-	PNEUMATICCLAW_CLOSED:closes the claw the prevent the power cube from leaving 
-	*/
+		/*PNEUMATICWHEEL_DOWN: brings center wheel down 
+		PNEUMATICWHEEL_UP: brings center wheel up
+		PNEUMATICCLAW_OPEN: opens the claw to allow the power cube in 
+		PNEUMATICCLAW_CLOSED:closes the claw the prevent the power cube from leaving 
+		*/
 	public static final int PNEUMATICWHEEL_DOWN = 0;
 	public static final int PNEUMATICWHEEL_UP = 1;
 	public static final int PNEUMATICCLAW_OPEN = 2;
 	public static final int PNEUMATICCLAW_CLOSED = 3;
 	public static final int PNEUMATICCLAW_RELEASE_OPEN = 4;
-	public static final int PNEUMATICCLAW_RELEASE_CLOSED = 5;
+	public static final int PNEUMATICCLIMB_EXTEND = 5;
+	public static final int PNEUMATICCLIMB_RETRACT = 6;
 	
 	// CANifier
 	public static final int CANIFIER = 14;

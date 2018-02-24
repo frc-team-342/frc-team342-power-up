@@ -5,6 +5,7 @@ import org.usfirst.frc.team342.robot.RobotMap;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -13,7 +14,7 @@ public class CubeController extends Subsystem {
 	private static final CubeController INSTANCE = new CubeController();
 
 	private DoubleSolenoid pneumaticClaw;
-	private DoubleSolenoid pneumaticClawHolder;
+	private Solenoid pneumaticClawHolder;
 	
 	private Talon intakeMaster;
 	private Talon intakeFollow;
@@ -40,7 +41,7 @@ public class CubeController extends Subsystem {
 
 		pneumaticClaw = new DoubleSolenoid(RobotMap.PNEUMATICCLAW_OPEN, RobotMap.PNEUMATICCLAW_CLOSED);
 		
-		pneumaticClawHolder = new DoubleSolenoid(RobotMap.PNEUMATICCLAW_RELEASE_OPEN, RobotMap.PNEUMATICCLAW_RELEASE_CLOSED);
+		pneumaticClawHolder = new Solenoid(RobotMap.PNEUMATICCLAW_RELEASE_OPEN);
 		
 		intakeMaster = new Talon(RobotMap.INTAKEMASTER);
 		intakeFollow = new Talon(RobotMap.INTAKEFOLLOW);
@@ -52,16 +53,12 @@ public class CubeController extends Subsystem {
 	
 	public void lowerClaw() {
 		
-		pneumaticClawHolder.set(Value.kForward);
+		pneumaticClawHolder.set(true);
 	}
 	
 	public boolean getClawHolder() {
 		
-		if (pneumaticClawHolder.get().equals(Value.kForward)) {
-			return true;
-		} else {
-			return false;
-		}
+		return pneumaticClawHolder.get();
 	}
 
 	public void collectCube(double speed) {
