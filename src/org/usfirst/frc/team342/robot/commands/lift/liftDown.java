@@ -9,15 +9,15 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class liftDown extends Command {
 	
-private LiftSystem liftDown;
+	private LiftSystem lift;
 
 
     public liftDown() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
    
-    	liftDown=LiftSystem.getInstance();
-    	requires (liftDown);
+    	lift=LiftSystem.getInstance();
+    	requires (lift);
     	
     }
 
@@ -30,7 +30,7 @@ private LiftSystem liftDown;
     protected void execute() {
     	double speed;
     	speed= 0.25;
-    	liftDown.liftDown(speed);
+    	lift.liftDown(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +41,7 @@ private LiftSystem liftDown;
 
     // Called once after isFinished returns true
     protected void end() {
-    	liftDown.liftStop();
+    	lift.liftStop();
     }
 
     // Called when another command which requires one or more of the same

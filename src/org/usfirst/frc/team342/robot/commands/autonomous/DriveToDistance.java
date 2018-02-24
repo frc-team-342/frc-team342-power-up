@@ -29,7 +29,7 @@ public class DriveToDistance extends Command {
 	public enum Distance {
 
 		// put in numbers once we get them
-		distance1(10), distance2(5), distance3(1);
+		CENTER_SWITCH(10), SIDE_SWITCH(5), SCALE_DISTANCE(1), DRIVE_IN_DISTANCE(1), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(1);
 
 		public final int value;
 
@@ -38,13 +38,13 @@ public class DriveToDistance extends Command {
 		}
 	}
 	
-	public DriveToDistance(double distance) {
-		
-		drive = DriveSystem.getInstance(); 
-		requires(drive);
-		
-		goal = distance; 
-	}
+//	public DriveToDistance(double distance) {
+//		
+//		drive = DriveSystem.getInstance(); 
+//		requires(drive);
+//		
+//		goal = distance; 
+//	}
 
 	public DriveToDistance(Distance distance) {
 

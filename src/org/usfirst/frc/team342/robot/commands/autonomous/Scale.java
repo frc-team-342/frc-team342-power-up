@@ -1,5 +1,6 @@
 package org.usfirst.frc.team342.robot.commands.autonomous;
 
+import org.usfirst.frc.team342.robot.commands.autonomous.DriveToDistance.Distance;
 import org.usfirst.frc.team342.robot.commands.claw.LowerClaw;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
@@ -15,10 +16,6 @@ public class Scale extends CommandGroup {
 	// Angles for various positions in autonomous
 	private static final int LEFT_ANGLE = 90;
 	private static final int RIGHT_ANGLE = 270;
-	
-	// Distances for autonomous
-	private static final double FORWARD_DISTANCE_SIDE = 0.0;
-	private static final double DRIVE_IN = 1.0;
 	
 	// Time for dispensing the cube
 	private static final int DISPENSE_TIME = 2;
@@ -44,9 +41,9 @@ public class Scale extends CommandGroup {
     		
     		lower_claw = new LowerClaw();
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
-    		drive_to_goal = new DriveToDistance(FORWARD_DISTANCE_SIDE);
+    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
-    		drive_in = new DriveToDistance(DRIVE_IN);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
@@ -63,9 +60,9 @@ public class Scale extends CommandGroup {
 
     		lower_claw = new LowerClaw();
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
-    		drive_to_goal = new DriveToDistance(FORWARD_DISTANCE_SIDE);
+    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
-    		drive_in = new DriveToDistance(DRIVE_IN);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
