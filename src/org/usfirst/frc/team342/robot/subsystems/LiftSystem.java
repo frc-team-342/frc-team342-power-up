@@ -43,7 +43,7 @@ public class LiftSystem extends Subsystem {
 
 		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
-		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		liftFollow.follow(liftMaster);
 		
 		

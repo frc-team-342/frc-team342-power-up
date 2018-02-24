@@ -14,7 +14,6 @@ package org.usfirst.frc.team342.robot;
  * floating around.
  */
 public class RobotMap {
-	//NAVAX(GPIO): has the gyro 
 	
 	// Joystick Axis
 	public static final int X_LEFT_AXIS = 0;

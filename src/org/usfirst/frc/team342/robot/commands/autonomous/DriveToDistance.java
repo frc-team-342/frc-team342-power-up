@@ -29,11 +29,11 @@ public class DriveToDistance extends Command {
 	public enum Distance {
 
 		// put in numbers once we get them
-		CENTER_SWITCH(10), SIDE_SWITCH(5), SCALE_DISTANCE(1), DRIVE_IN_DISTANCE(1), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(1);
+		CENTER_SWITCH(8), SIDE_SWITCH(13.5), SCALE_DISTANCE(24), DRIVE_IN_DISTANCE(1), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
 
-		public final int value;
+		public final double value;
 
-		Distance(int initValue) {
+		Distance(double initValue) {
 			this.value = initValue;
 		}
 	}
