@@ -45,10 +45,6 @@ public class RobotMap {
 	public static final int TWELVEVOLTSTWO = 4;
 	public static final int FIVEVOLTS = 5;
 
-	// DigitalInputs
-	public static final int LIFTLOWERLIMIT = 0;
-	public static final int LIFTUPPERLIMIT = 1;
-
 	// MotorControllers
 		/*RIGHTMASTER & RIGHTFOLLOW: drives the right side of the robot
 		 *LEFTMASTER & LEFTFOLLOW: drives the left side of the robot
