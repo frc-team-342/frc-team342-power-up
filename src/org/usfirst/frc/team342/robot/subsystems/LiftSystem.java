@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class LiftSystem extends Subsystem {
@@ -17,11 +16,10 @@ public class LiftSystem extends Subsystem {
 	
 	private TalonSRX liftFollow;
 	
-	private DigitalInput lowerLimit;
-	private DigitalInput upperLimit;
+	
 	
 	// variables for current limits
-	private int amps= 1;
+	private int amps= 10;
 	private int timeout= 10;
 	private int milliseconds= 200;
 	// ramp
@@ -42,10 +40,9 @@ public class LiftSystem extends Subsystem {
 	}
 
 	private void initializeLiftSystem() {
+
 		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
-		lowerLimit = new DigitalInput(RobotMap.LIFTLOWERLIMIT);
-		upperLimit = new DigitalInput(RobotMap.LIFTUPPERLIMIT);
 		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		liftFollow.follow(liftMaster);
 		
@@ -84,16 +81,18 @@ public class LiftSystem extends Subsystem {
 		liftMaster.set(ControlMode.PercentOutput, speed);
 	}
 
-	public boolean getUpperLimit() {
-		return upperLimit.get();
-	}
 
-	public boolean getLowerLimit() {
-		return lowerLimit.get();
-	}
-
-	public double getLiftEncoder() {
-		return liftMaster.getSensorCollection().getQuadraturePosition();
+	public double[] getLiftEncoder() {
+		
+		double[] testvalues = new double[5];
+		
+		testvalues[0] = liftMaster.getSelectedSensorPosition(0);
+		testvalues[1] = liftMaster.getSensorCollection().getAnalogIn();
+		testvalues[2] = liftMaster.getSensorCollection().getAnalogInRaw();
+		testvalues[3] = liftMaster.getSensorCollection().getPulseWidthPosition();
+		testvalues[4] = liftMaster.getSensorCollection().getQuadraturePosition();
+		
+		return testvalues;
 	}
 
 	public void liftStop() {

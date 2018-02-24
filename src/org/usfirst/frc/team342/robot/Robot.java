@@ -9,7 +9,8 @@ package org.usfirst.frc.team342.robot;
 
 import org.usfirst.frc.team342.robot.commands.autonomous.AutoChooser;
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
-import org.usfirst.frc.team342.robot.commands.drive.LiftWithJoystick;
+import org.usfirst.frc.team342.robot.commands.drive.DriveWithLogitech;
+import org.usfirst.frc.team342.robot.commands.lift.LiftWithJoystick;
 import org.usfirst.frc.team342.robot.subsystems.CameraVisionSystem;
 import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
 import org.usfirst.frc.team342.robot.subsystems.CubeController;
@@ -17,6 +18,8 @@ import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 import org.usfirst.frc.team342.robot.subsystems.LightsSubsystem;
 
+import edu.wpi.cscore.VideoMode.PixelFormat;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -41,6 +44,7 @@ public class Robot extends TimedRobot {
 	private static LightsSubsystem lightssubsystem;
 	private static DriveWithJoystick drivewithjoystick;
 	private static LiftWithJoystick liftwithjoystick;
+	private static DriveWithLogitech drivewithlogitech;
 
 	private AutoChooser chooser;
 
@@ -74,6 +78,7 @@ public class Robot extends TimedRobot {
 		lightssubsystem = LightsSubsystem.getInstance();
 		drivewithjoystick = new DriveWithJoystick();
 		liftwithjoystick = new LiftWithJoystick();
+		drivewithlogitech = new DriveWithLogitech();
 
 		chooser = new AutoChooser();
 
@@ -89,6 +94,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Auto Action: ", action);
 		
 		SmartDashboard.putData("Gyro: ", drivesystem.getNavX());
+		
+		CameraServer.getInstance().startAutomaticCapture().setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
 	}
 
 	/**
@@ -152,6 +159,7 @@ public class Robot extends TimedRobot {
 
 		drivewithjoystick.start();
 		liftwithjoystick.start();
+		//drivewithlogitech.start();
 	}
 
 	/**
@@ -160,7 +168,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		
-		SmartDashboard.putNumber("LIFT ENCODER: ", liftsystem.getLiftEncoder());
+		double[] values = liftsystem.getLiftEncoder();
+		
+		SmartDashboard.putNumber("getSelectedSensorPosition", values[0]);
+		SmartDashboard.putNumber("AnalogIn", values[1]);
+		SmartDashboard.putNumber("AnalogInRaw", values[2]);
+		SmartDashboard.putNumber("PulseWidthPosition", values[3]);
+		SmartDashboard.putNumber("QuadraturePosition", values[4]);
 		Scheduler.getInstance().run();
 	
 	}

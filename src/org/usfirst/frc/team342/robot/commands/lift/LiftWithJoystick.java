@@ -1,7 +1,6 @@
-package org.usfirst.frc.team342.robot.commands.drive;
+package org.usfirst.frc.team342.robot.commands.lift;
 
 import org.usfirst.frc.team342.robot.OI;
-import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
 import org.usfirst.frc.team342.robot.subsystems.LiftSystem;
 

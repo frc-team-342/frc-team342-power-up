@@ -10,6 +10,8 @@ package org.usfirst.frc.team342.robot;
 import org.usfirst.frc.team342.robot.commands.claw.CollectCube;
 import org.usfirst.frc.team342.robot.commands.claw.DispenseCube;
 import org.usfirst.frc.team342.robot.commands.claw.StopCubeController;
+import org.usfirst.frc.team342.robot.commands.climb.ClimbDown;
+import org.usfirst.frc.team342.robot.commands.climb.ClimbUp;
 import org.usfirst.frc.team342.robot.commands.drive.FastDrive;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelDOWN;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelUP;
@@ -46,7 +48,7 @@ public class OI {
 						manipulator_buttonB ,
 		//				manipulator_buttonX ,
 						manipulator_buttonY ,
-		//				manipulator_leftBumper ,
+						manipulator_leftBumper ,
 						manipulator_rightBumper;
 		//				manipulator_backButton ,
 		//				manipulator_startButton ,
@@ -93,6 +95,8 @@ public class OI {
 		private CollectCube collectcube; 
 		private StopCubeController stopcubecontroller;
 		private DispenseCube dispensecube;
+		private ClimbUp climbup;
+		private ClimbDown climbdown;
 		
 		
 	private OI() {
@@ -114,7 +118,7 @@ public class OI {
 	 		manipulator_buttonB = new JoystickButton(manipulator, 2);
 	 	//	manipulator_buttonX = new JoystickButton(manipulator, 3);
 		 	manipulator_buttonY = new JoystickButton(manipulator, 4);
-		// 	manipulator_leftBumper = new JoystickButton(manipulator, 5);
+		 	manipulator_leftBumper = new JoystickButton(manipulator, 5);
 		 	manipulator_rightBumper = new JoystickButton(manipulator, 6);
 		//	manipulator_backButton = new JoystickButton(manipulator, 7);
 		// 	manipulator_startButton = new JoystickButton(manipulator, 8);
@@ -160,6 +164,8 @@ public class OI {
 				collectcube= new CollectCube ();
 				stopcubecontroller= new StopCubeController ();
 				dispensecube= new DispenseCube ();
+				climbup = new ClimbUp ();
+				climbdown = new ClimbDown ();
 				
 				
 		// Drive Controller Buttons
@@ -172,7 +178,8 @@ public class OI {
 			manipulator_buttonA.whileHeld(dispensecube);
 			manipulator_buttonB.whenReleased(stopcubecontroller);
 			manipulator_buttonY.whenPressed(collectcube);
-			manipulator_rightBumper.whenPressed(slowdrive);
+			manipulator_rightBumper.whenPressed(climbup);
+			manipulator_leftBumper.whenPressed(climbdown);
 		
 		// Logitech Left Buttons
 			logitech_left_button1.whenPressed(manipulatewheeldown);
