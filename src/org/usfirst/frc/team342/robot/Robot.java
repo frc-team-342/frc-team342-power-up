@@ -175,6 +175,14 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("AnalogInRaw", values[2]);
 		SmartDashboard.putNumber("PulseWidthPosition", values[3]);
 		SmartDashboard.putNumber("QuadraturePosition", values[4]);
+		
+		double[] values1 = liftsystem.getLiftEncoderS();
+		
+		SmartDashboard.putNumber("getSelectedSensorPosition - s", values1[0]);
+		SmartDashboard.putNumber("AnalogIn - s", values1[1]);
+		SmartDashboard.putNumber("AnalogInRaw - s", values1[2]);
+		SmartDashboard.putNumber("PulseWidthPosition - s", values1[3]);
+		SmartDashboard.putNumber("QuadraturePosition - s", values1[4]);
 		Scheduler.getInstance().run();
 	
 	}

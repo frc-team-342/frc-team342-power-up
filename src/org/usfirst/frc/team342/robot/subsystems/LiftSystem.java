@@ -15,9 +15,7 @@ public class LiftSystem extends Subsystem {
 	private TalonSRX liftMaster;
 	
 	private TalonSRX liftFollow;
-	
-	
-	
+
 	// variables for current limits
 	private int amps= 10;
 	private int timeout= 10;
@@ -43,9 +41,9 @@ public class LiftSystem extends Subsystem {
 
 		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
-		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
+		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		liftFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
 		liftFollow.follow(liftMaster);
-		
 		
 		// current limits for liftMaster
 		liftMaster.configPeakCurrentLimit(amps, timeout);
@@ -91,6 +89,19 @@ public class LiftSystem extends Subsystem {
 		testvalues[2] = liftMaster.getSensorCollection().getAnalogInRaw();
 		testvalues[3] = liftMaster.getSensorCollection().getPulseWidthPosition();
 		testvalues[4] = liftMaster.getSensorCollection().getQuadraturePosition();
+		
+		return testvalues;
+	}
+	
+	public double[] getLiftEncoderS() {
+		
+		double[] testvalues = new double[5];
+		
+		testvalues[0] = liftFollow.getSelectedSensorPosition(0);
+		testvalues[1] = liftFollow.getSensorCollection().getAnalogIn();
+		testvalues[2] = liftFollow.getSensorCollection().getAnalogInRaw();
+		testvalues[3] = liftFollow.getSensorCollection().getPulseWidthPosition();
+		testvalues[4] = liftFollow.getSensorCollection().getQuadraturePosition();
 		
 		return testvalues;
 	}

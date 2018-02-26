@@ -1,5 +1,6 @@
 package org.usfirst.frc.team342.robot.commands.autonomous;
 
+import org.usfirst.frc.team342.robot.commands.autonomous.DriveToDistance.Distance;
 import org.usfirst.frc.team342.robot.commands.claw.LowerClaw;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
@@ -16,9 +17,8 @@ public class Scale extends CommandGroup {
 	private static final int LEFT_ANGLE = 90;
 	private static final int RIGHT_ANGLE = 270;
 	
-	// Distances for autonomous
-	private static final double FORWARD_DISTANCE_SIDE = 0.0;
-	private static final double DRIVE_IN = 1.0;
+	// Time for raising the lift
+	private static final int LIFT_TIME = 3800;
 	
 	// Time for dispensing the cube
 	private static final int DISPENSE_TIME = 2;
@@ -29,6 +29,7 @@ public class Scale extends CommandGroup {
 	
 	// Lift positions
 	private LiftToPosition lift_to_position;
+	private LiftUpTimed lift_up_timed;
 	
 	// Drive commands
 	private RotateToAngle rotate_to_angle;
@@ -43,15 +44,17 @@ public class Scale extends CommandGroup {
     		SmartDashboard.putString("Scale Value: ", "L");
     		
     		lower_claw = new LowerClaw();
+    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE);
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
-    		drive_to_goal = new DriveToDistance(FORWARD_DISTANCE_SIDE);
+    		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
-    		drive_in = new DriveToDistance(DRIVE_IN);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
-    		addParallel(lift_to_position);
     		addSequential(drive_to_goal);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_timed);
     		addSequential(rotate_to_angle);
     		addSequential(drive_in);
     		addSequential(dispense_cube_timed);
@@ -62,15 +65,17 @@ public class Scale extends CommandGroup {
     		SmartDashboard.putString("Scale Value: ", "R");
 
     		lower_claw = new LowerClaw();
+    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE);
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
-    		drive_to_goal = new DriveToDistance(FORWARD_DISTANCE_SIDE);
+    		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
-    		drive_in = new DriveToDistance(DRIVE_IN);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
-    		addParallel(lift_to_position);
     		addSequential(drive_to_goal);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_timed);
     		addSequential(rotate_to_angle);
     		addSequential(drive_in);
     		addSequential(dispense_cube_timed);

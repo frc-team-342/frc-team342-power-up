@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class liftUp extends Command {
 	
-	private LiftSystem liftUp;
+	private LiftSystem lift;
 
     public liftUp() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	   
-    	liftUp=LiftSystem.getInstance();
-    	requires (liftUp);
+    	lift=LiftSystem.getInstance();
+    	requires (lift);
     }
 
     // Called just before this Command runs the first time
@@ -27,7 +27,7 @@ public class liftUp extends Command {
     protected void execute() {
     	double speed;
     	speed= 0.25;
-    	  liftUp.liftUp(speed);
+    	  lift.liftUp(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -37,7 +37,7 @@ public class liftUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	liftUp.liftStop();
+    	lift.liftStop();
     }
 
     // Called when another command which requires one or more of the same

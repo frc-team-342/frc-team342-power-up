@@ -1,5 +1,6 @@
 package org.usfirst.frc.team342.robot.commands.autonomous;
 
+import org.usfirst.frc.team342.robot.commands.autonomous.DriveToDistance.Distance;
 import org.usfirst.frc.team342.robot.commands.claw.LowerClaw;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -9,10 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */
 public class DriveForward extends CommandGroup {
-	
-	// Distances for autonomous
-	private static final double DRIVE_DISTANCE_CENTER = 0.0;
-	private static final double DRIVE_DISTANCE_SIDE = 0.0;
 	
 	// Drive commands
 	private DriveToDistance drive_to_distance;
@@ -28,7 +25,7 @@ public class DriveForward extends CommandGroup {
         	SmartDashboard.putString("Drive Forward Value: ", "L");
         	
         	lower_claw = new LowerClaw();
-        	drive_to_distance = new DriveToDistance(DRIVE_DISTANCE_SIDE);
+        	drive_to_distance = new DriveToDistance(Distance.DRIVE_FORWARD_DISTANCE);
         	
         	addSequential(lower_claw);
         	addSequential(drive_to_distance);
@@ -39,7 +36,7 @@ public class DriveForward extends CommandGroup {
         	SmartDashboard.putString("Drive Forward Value: ", "C");
 
         	lower_claw = new LowerClaw();
-        	drive_to_distance = new DriveToDistance(DRIVE_DISTANCE_CENTER);
+        	drive_to_distance = new DriveToDistance(Distance.DRIVE_FORWARD_DISTANCE);
         	
         	addSequential(lower_claw);
         	addSequential(drive_to_distance);
@@ -50,7 +47,7 @@ public class DriveForward extends CommandGroup {
         	SmartDashboard.putString("Drive Forward Value: ", "R");
 
         	lower_claw = new LowerClaw();
-        	drive_to_distance = new DriveToDistance(DRIVE_DISTANCE_SIDE);
+        	drive_to_distance = new DriveToDistance(Distance.DRIVE_FORWARD_DISTANCE);
         	
         	addSequential(lower_claw);
         	addSequential(drive_to_distance);

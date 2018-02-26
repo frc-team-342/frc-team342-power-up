@@ -55,7 +55,7 @@ public class DispenseCubeTimed extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	
+    
     	cube_controller.closeClawAndStop();
     }
 

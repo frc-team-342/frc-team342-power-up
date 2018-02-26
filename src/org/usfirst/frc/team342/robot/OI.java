@@ -16,6 +16,8 @@ import org.usfirst.frc.team342.robot.commands.drive.FastDrive;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelDOWN;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelUP;
 import org.usfirst.frc.team342.robot.commands.drive.SlowDrive;
+import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
+import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -49,11 +51,11 @@ public class OI {
 		//				manipulator_buttonX ,
 						manipulator_buttonY ,
 						manipulator_leftBumper ,
-						manipulator_rightBumper;
+						manipulator_rightBumper,
 		//				manipulator_backButton ,
 		//				manipulator_startButton ,
 		//				manipulator_leftstickButton ,
-		//				manipulator_rightStickButton;
+						manipulator_rightStickButton;
 		
 		private Joystick logitech_drive_left;
 		private Button
@@ -98,6 +100,9 @@ public class OI {
 		private ClimbUp climbup;
 		private ClimbDown climbdown;
 		
+		//Test commands
+		private LiftToPosition liftto;
+		
 		
 	private OI() {
 		
@@ -123,7 +128,7 @@ public class OI {
 		//	manipulator_backButton = new JoystickButton(manipulator, 7);
 		// 	manipulator_startButton = new JoystickButton(manipulator, 8);
 		// 	manipulator_leftstickButton = new JoystickButton(manipulator, 9);
-		// 	manipulator_rightstickButton = new JoystickButton(manipulator, 10);
+		 	manipulator_rightStickButton = new JoystickButton(manipulator, 10);
 		 	
 		logitech_drive_left = new Joystick(2);
 		 	logitech_left_button1 = new JoystickButton(logitech_drive_left, 1);
@@ -167,6 +172,8 @@ public class OI {
 				climbup = new ClimbUp ();
 				climbdown = new ClimbDown ();
 				
+			//Test
+				liftto = new LiftToPosition(LiftHeight.switchposition);
 				
 		// Drive Controller Buttons
 			xbox_drive_leftBumper.whenPressed(manipulatewheeldown);
@@ -178,8 +185,10 @@ public class OI {
 			manipulator_buttonA.whileHeld(dispensecube);
 			manipulator_buttonB.whenReleased(stopcubecontroller);
 			manipulator_buttonY.whenPressed(collectcube);
-			manipulator_rightBumper.whenPressed(climbup);
-			manipulator_leftBumper.whenPressed(climbdown);
+			manipulator_rightBumper.whileHeld(climbup);
+			manipulator_leftBumper.whileHeld(climbdown);
+			
+			manipulator_rightStickButton.whenPressed(liftto);
 		
 		// Logitech Left Buttons
 			logitech_left_button1.whenPressed(manipulatewheeldown);
