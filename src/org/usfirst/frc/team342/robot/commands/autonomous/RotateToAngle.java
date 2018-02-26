@@ -14,9 +14,9 @@ public class RotateToAngle extends Command {
 	private boolean TurnRight;
 	
 	private static final double RotateSpeed = 1.0;
-	private static final double RotateSlowSpeed=0.21;
+	private static final double RotateSlowSpeed=0.25;
 	private static final double margin = 10;
-	private static final double slowmargin=100;
+	private static final double slowmargin=120;
 	
 	/**
 	 * @param angle

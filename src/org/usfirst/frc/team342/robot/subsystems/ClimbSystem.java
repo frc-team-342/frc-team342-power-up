@@ -59,7 +59,7 @@ public class ClimbSystem extends Subsystem {
 			climbfollow.configPeakCurrentDuration(MILLISECONDS, TIMEOUT);
 			climbfollow.configContinuousCurrentLimit(AMPS, TIMEOUT);
 			climbfollow.enableCurrentLimit(true);
-	
+		
 		climbfollow.follow(climbmaster);
 	}
 

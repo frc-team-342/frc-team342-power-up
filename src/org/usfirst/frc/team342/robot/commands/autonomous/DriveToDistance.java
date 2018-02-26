@@ -29,7 +29,7 @@ public class DriveToDistance extends Command {
 	public enum Distance {
 
 		// put in numbers once we get them
-		CENTER_SWITCH(8), SIDE_SWITCH(13.5), SCALE_DISTANCE(24), DRIVE_IN_DISTANCE(1), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
+		CENTER_SWITCH(10), SIDE_SWITCH(15), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE(0.5), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
 
 		public final double value;
 

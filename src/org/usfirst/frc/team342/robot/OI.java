@@ -185,8 +185,8 @@ public class OI {
 			manipulator_buttonA.whileHeld(dispensecube);
 			manipulator_buttonB.whenReleased(stopcubecontroller);
 			manipulator_buttonY.whenPressed(collectcube);
-//			manipulator_rightBumper.whileHeld(climbup);
-//			manipulator_leftBumper.whileHeld(climbdown);
+			manipulator_rightBumper.whileHeld(climbup);
+			manipulator_leftBumper.whileHeld(climbdown);
 			
 			manipulator_rightStickButton.whenPressed(liftto);
 		
