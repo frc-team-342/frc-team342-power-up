@@ -22,9 +22,17 @@ public class DriveToDistance extends Command {
 	private double left_rotation_count;
 	private double right_rotation_count;
 	
-	private static final double LEFT_SPEED = 0.5;
-	private static final double RIGHT_SPEED = 0.5;
-	private static final double CENTER_SPEED = 0.0;
+	private double gyro_angle;
+	private double angle;
+	private double total_correction;
+	private double left_speed;
+	private double right_speed;
+	
+	private static final double SPEED = 0.25;
+	private static final double ZERO = 0.0;
+	
+	private static final double KP = 0.6;
+	
 	
 	public enum Distance {
 
@@ -68,7 +76,25 @@ public class DriveToDistance extends Command {
 		left_rotation_count = current_Left / 4096;
 		right_rotation_count = current_Right / 4096;
 		
-		drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
+		gyro_angle = drive.getGyro();
+    	
+    	if(gyro_angle > 180.0) {
+    		
+    		angle = 360.0 - gyro_angle;
+        	total_correction = angle * KP;
+        	
+        	left_speed = SPEED;
+        	right_speed = SPEED - total_correction;
+    	}else {
+    		
+    		angle = gyro_angle;
+        	total_correction = angle * KP;
+        	
+        	left_speed = SPEED - total_correction;
+        	right_speed = SPEED;
+    	}
+    	
+    	drive.drive(left_speed, right_speed, ZERO);
 		
 	}
 
