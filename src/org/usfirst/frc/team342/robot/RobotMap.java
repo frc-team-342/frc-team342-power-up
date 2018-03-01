@@ -54,6 +54,7 @@ public class RobotMap {
 		 */	
 	
 		// Pratice Bot IDs
+		/*	
 		public static final int RIGHTMASTER = 13;
 		public static final int RIGHTFOLLOW = 8;
 		public static final int LEFTMASTER = 19;
@@ -65,9 +66,9 @@ public class RobotMap {
 		public static final int LIFTFOLLOW = 14;
 		public static final int INTAKEMASTER = 0;
 		public static final int INTAKEFOLLOW = 1;
+		*/
 		
 		// Competition Bot IDs
-		/*
 		public static final int RIGHTMASTER = 1;
 		public static final int RIGHTFOLLOW = 2;
 		public static final int LEFTMASTER = 3;
@@ -79,7 +80,6 @@ public class RobotMap {
 		public static final int LIFTFOLLOW = 9;
 		public static final int INTAKEMASTER = 0;
 		public static final int INTAKEFOLLOW = 1;
-		*/
 		
 	
 	// Pneumatics
