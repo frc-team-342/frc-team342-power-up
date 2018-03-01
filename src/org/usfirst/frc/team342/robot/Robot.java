@@ -132,7 +132,7 @@ public class Robot extends TimedRobot {
 		gamedata = DriverStation.getInstance().getGameSpecificMessage();
 
 		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected());
-
+		// He's not the messiah, he's a very naughty boy!
 		if (whattodo == 1) {
 			chooser.switchauto.start();
 		} else if (whattodo == 2) {
