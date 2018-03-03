@@ -49,7 +49,7 @@ public class DriveSystem extends Subsystem {
 	private static final double SLOW_DOWN = 2.0;
 	
 	// Constants for the PID loop
-	private static final double P = 0.0;
+	private static final double P = 0.01;
 	private static final double I = 0.0;
 	private static final double D = 0.0;
 	private static final double F = 0.25;
@@ -183,21 +183,23 @@ public class DriveSystem extends Subsystem {
 		centerWheel.set(ControlMode.PercentOutput, Center_Speed);
 	}
 	
-	public void driveSetSpeed(double speed) {
+	public void driveSetSpeed(double Left_Speed, double Right_Speed) {
 		
 		if (slow) {
 			
-			speed /= SLOW_DOWN;
+			Right_Speed /= SLOW_DOWN;
+			Left_Speed /= SLOW_DOWN;
 		}
 		
 		if (!front) {
 
-			speed *= -1.0;
+			Right_Speed *= -1.0;
+			Left_Speed *= -1.0;
 		}
 		
 		// argument is in position change per 100ms
-		rightMaster.set(ControlMode.Velocity, speed);
-		leftMaster.set(ControlMode.Velocity, speed);
+		rightMaster.set(ControlMode.Velocity, Right_Speed);
+		leftMaster.set(ControlMode.Velocity, Left_Speed);
 	}
 
 	public double getGyro() {

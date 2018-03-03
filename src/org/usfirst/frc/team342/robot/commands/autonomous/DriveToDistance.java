@@ -23,16 +23,17 @@ public class DriveToDistance extends Command {
 	private double left_rotation_count;
 	private double right_rotation_count;
 	
-	private static final double LEFT_SPEED = 0.5;
-	private static final double RIGHT_SPEED = 0.5;
-	private static final double CENTER_SPEED = 0.0;
+	private double degrees_off_zero;
+	private double left_speed;
+	private double right_speed;
 	
+	private static final double kP = -50;
 	private static final double SPEED_CONST = 1500;
 	
 	public enum Distance {
 
 		// put in numbers once we get them
-		CENTER_SWITCH(10), SIDE_SWITCH(13), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE_SCALE(0.5), DRIVE_IN_DISTANCE_SWITCH(1.5), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
+		CENTER_SWITCH(10), SIDE_SWITCH(15), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE_SCALE(0.5), DRIVE_IN_DISTANCE_SWITCH(3), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
 		//SIDE_SWITCH(13.5)
 		public final double value;
 
@@ -59,21 +60,50 @@ public class DriveToDistance extends Command {
 
 	protected void initialize() {
 		
-		init_Left = Math.abs(drive.getLeftMasterEncoder());
-		init_Right = Math.abs(drive.getRightMasterEncoder()); 
+		init_Left = drive.getLeftMasterEncoder();
+		init_Right = drive.getRightMasterEncoder(); 
+		
+		drive.resetGyro();
 	}
 
 	protected void execute() {
+
+		left_speed = SPEED_CONST;
+		right_speed = SPEED_CONST;
 		
-		current_Left = (Math.abs(drive.getLeftMasterEncoder())) - init_Left;
-		current_Right = (Math.abs(drive.getRightMasterEncoder())) - init_Right;	
+		current_Left = drive.getLeftMasterEncoder() - init_Left;
+		current_Right = drive.getRightMasterEncoder() - init_Right;	
 		
 		left_rotation_count = current_Left / 4096;
 		right_rotation_count = current_Right / 4096;
 		
 		//drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
 		
-		drive.driveSetSpeed(SPEED_CONST);
+		if(drive.getGyro() > 180 && drive.getGyro() < 359) {
+			
+			degrees_off_zero = (360 - drive.getGyro());
+			
+			if(degrees_off_zero > 15) {
+				degrees_off_zero = 15.0;
+			}
+			
+			left_speed = left_speed - (degrees_off_zero * kP);
+			right_speed = right_speed + (degrees_off_zero * kP);
+			
+		}else if(drive.getGyro() < 180 && drive.getGyro() > 1) {
+			
+			degrees_off_zero = drive.getGyro();
+			
+			if(degrees_off_zero > 15) {
+				degrees_off_zero = 15.0;
+			}
+			
+			left_speed = left_speed + (degrees_off_zero * kP);
+			right_speed = right_speed - (degrees_off_zero * kP);
+			
+		}
+		
+		drive.driveSetSpeed(left_speed, right_speed);
 		
 		SmartDashboard.putNumber("left", left_rotation_count);
 		SmartDashboard.putNumber("right", right_rotation_count);
