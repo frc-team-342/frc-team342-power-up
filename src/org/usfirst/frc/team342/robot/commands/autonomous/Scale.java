@@ -18,7 +18,7 @@ public class Scale extends CommandGroup {
 	private static final int RIGHT_ANGLE = 270;
 	
 	// Time for raising the lift
-	private static final int LIFT_TIME = 3800;
+	private static final int LIFT_TIME = 3850;
 	
 	// Time for dispensing the cube
 	private static final int DISPENSE_TIME = 2;
@@ -48,7 +48,7 @@ public class Scale extends CommandGroup {
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SCALE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
@@ -69,7 +69,7 @@ public class Scale extends CommandGroup {
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SCALE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);

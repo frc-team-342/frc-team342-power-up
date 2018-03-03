@@ -3,6 +3,7 @@ package org.usfirst.frc.team342.robot.commands.autonomous;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This will allow the robot to go forward a certain distance in autonomous
@@ -26,11 +27,13 @@ public class DriveToDistance extends Command {
 	private static final double RIGHT_SPEED = 0.5;
 	private static final double CENTER_SPEED = 0.0;
 	
+	private static final double SPEED_CONST = 34000;
+	
 	public enum Distance {
 
 		// put in numbers once we get them
-		CENTER_SWITCH(10), SIDE_SWITCH(15), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE(0.5), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
-
+		CENTER_SWITCH(10), SIDE_SWITCH(13), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE_SCALE(0.5), DRIVE_IN_DISTANCE_SWITCH(1.5), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
+		//SIDE_SWITCH(13.5)
 		public final double value;
 
 		Distance(double initValue) {
@@ -68,7 +71,12 @@ public class DriveToDistance extends Command {
 		left_rotation_count = current_Left / 4096;
 		right_rotation_count = current_Right / 4096;
 		
-		drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
+		//drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
+		
+		drive.driveSetSpeed(SPEED_CONST * 0.1);
+		
+		SmartDashboard.putNumber("left", left_rotation_count);
+		SmartDashboard.putNumber("right", right_rotation_count);
 		
 	}
 

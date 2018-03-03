@@ -168,23 +168,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void teleopPeriodic() {
 		
-		double[] values = liftsystem.getLiftEncoder();
-		
-		SmartDashboard.putNumber("getSelectedSensorPosition", values[0]);
-		SmartDashboard.putNumber("AnalogIn", values[1]);
-		SmartDashboard.putNumber("AnalogInRaw", values[2]);
-		SmartDashboard.putNumber("PulseWidthPosition", values[3]);
-		SmartDashboard.putNumber("QuadraturePosition", values[4]);
-		
-		double[] values1 = liftsystem.getLiftEncoderS();
-		
-		SmartDashboard.putNumber("getSelectedSensorPosition - s", values1[0]);
-		SmartDashboard.putNumber("AnalogIn - s", values1[1]);
-		SmartDashboard.putNumber("AnalogInRaw - s", values1[2]);
-		SmartDashboard.putNumber("PulseWidthPosition - s", values1[3]);
-		SmartDashboard.putNumber("QuadraturePosition - s", values1[4]);
 		Scheduler.getInstance().run();
-	
 	}
 
 	/**

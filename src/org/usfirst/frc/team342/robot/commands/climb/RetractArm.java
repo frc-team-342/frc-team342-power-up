@@ -5,18 +5,14 @@ import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *	Makes the robot climb down.
+ *
  */
-public class ClimbDown extends Command {
-
-	private ClimbSystem climb;
-	
-	private static final double SPEED = 0.25;
-	
-    public ClimbDown() {
-    	
+public class RetractArm extends Command {
+	private ClimbSystem climb; 
+    public RetractArm() {
     	climb = ClimbSystem.getInstance();
-    	requires(climb);
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -25,25 +21,20 @@ public class ClimbDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	climb.climbDown(SPEED);
+    	climb.RetractArm();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	
-    	climb.climbStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
-    	end();
     }
 }
