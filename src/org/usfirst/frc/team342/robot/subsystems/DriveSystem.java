@@ -49,9 +49,10 @@ public class DriveSystem extends Subsystem {
 	private static final double SLOW_DOWN = 2.0;
 	
 	// Constants for the PID loop
-	private static final double P = 1.0;
+	private static final double P = 0.0;
 	private static final double I = 0.0;
 	private static final double D = 0.0;
+	private static final double F = 0.25;
 	
 	// Scale factor for calculating autonomous
 	private static final double SCALE_FACTOR = (1 / 4096);
@@ -138,10 +139,12 @@ public class DriveSystem extends Subsystem {
 		rightMaster.config_kP(0, P, TIMEOUT_MS);
 		rightMaster.config_kI(0, I, TIMEOUT_MS);
 		rightMaster.config_kD(0, D, TIMEOUT_MS);
+		rightMaster.config_kF(0, F, TIMEOUT_MS);
 		
 		leftMaster.config_kP(0, P, TIMEOUT_MS);
 		leftMaster.config_kI(0, I, TIMEOUT_MS);
 		leftMaster.config_kD(0, D, TIMEOUT_MS);
+		leftMaster.config_kF(0, F, TIMEOUT_MS);
 		
 		rightMaster.set(ControlMode.PercentOutput, 0.0);
 		rightFollow.set(ControlMode.PercentOutput, 0.0);

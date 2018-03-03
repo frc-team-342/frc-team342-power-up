@@ -27,7 +27,7 @@ public class DriveToDistance extends Command {
 	private static final double RIGHT_SPEED = 0.5;
 	private static final double CENTER_SPEED = 0.0;
 	
-	private static final double SPEED_CONST = 34000;
+	private static final double SPEED_CONST = 1500;
 	
 	public enum Distance {
 
@@ -73,7 +73,7 @@ public class DriveToDistance extends Command {
 		
 		//drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
 		
-		drive.driveSetSpeed(SPEED_CONST * 0.1);
+		drive.driveSetSpeed(SPEED_CONST);
 		
 		SmartDashboard.putNumber("left", left_rotation_count);
 		SmartDashboard.putNumber("right", right_rotation_count);
