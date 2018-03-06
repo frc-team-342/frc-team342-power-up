@@ -28,7 +28,7 @@ public class DriveToDistance extends Command {
 	
 	public enum Distance {
 
-		// put in numbers once we get them
+		//numbers for how far the robot will go 
 		CENTER_SWITCH(10), SIDE_SWITCH(15), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE(0.5), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
 
 		public final double value;
@@ -56,15 +56,18 @@ public class DriveToDistance extends Command {
 
 	protected void initialize() {
 		
+		//sets the encoders to their absolute value
 		init_Left = Math.abs(drive.getLeftMasterEncoder());
 		init_Right = Math.abs(drive.getRightMasterEncoder()); 
 	}
 
 	protected void execute() {
 		
+		//takes the new encoder value and subtracts it from the original 
 		current_Left = (Math.abs(drive.getLeftMasterEncoder())) - init_Left;
 		current_Right = (Math.abs(drive.getRightMasterEncoder())) - init_Right;	
 		
+		//then divides by 4096, which is the wheel ticks
 		left_rotation_count = current_Left / 4096;
 		right_rotation_count = current_Right / 4096;
 		
@@ -74,6 +77,7 @@ public class DriveToDistance extends Command {
 
 	protected boolean isFinished() {
 		
+		//basically saying that if the goal is met to return true
 		if(left_rotation_count >= goal || right_rotation_count >= goal) {
 			return true;
 			
