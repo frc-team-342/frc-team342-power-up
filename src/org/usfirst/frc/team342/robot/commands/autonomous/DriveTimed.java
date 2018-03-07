@@ -3,7 +3,6 @@ package org.usfirst.frc.team342.robot.commands.autonomous;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Drive until a certain time has passed
@@ -14,13 +13,11 @@ public class DriveTimed extends Command {
 	
 	private static final long TIME_DEADZONE = 500;
 	private static final double SLOW_SPEED = 0.3;
-	private static final double ZERO = 0.0;
 
-	private long starttime;
-	private long endtime;
-	
 	private double speed;
 	private double time;
+	private long starttime;
+	private long endtime;
 
 	public DriveTimed(double time, double speed) {
 
@@ -42,11 +39,9 @@ public class DriveTimed extends Command {
 	protected void execute() {
 		
 		if(System.currentTimeMillis() > (endtime - TIME_DEADZONE)){
-			
-	    	drive.drive(SLOW_SPEED, SLOW_SPEED, ZERO);
+			drive.drive(SLOW_SPEED, SLOW_SPEED, 0.0);
 		}else {
-			
-	    	drive.drive(speed, speed, ZERO);
+			drive.drive(speed, speed, 0.0);
 		}
 	}
 

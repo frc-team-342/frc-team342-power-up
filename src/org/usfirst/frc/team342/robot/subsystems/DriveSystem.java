@@ -56,12 +56,6 @@ public class DriveSystem extends Subsystem {
 	
 	// Scale factor for calculating autonomous
 	private static final double SCALE_FACTOR = (1 / 4096);
-	
-	// Proportional factor for correcting the drive
-	private static final double KP = 0.6;
-	
-	// Sensitivity value for correction of the drive
-	private static final double SENSITIVITY = 0.5;
 
 	public DriveSystem() {
 
