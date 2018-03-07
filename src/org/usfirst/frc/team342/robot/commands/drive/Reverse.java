@@ -1,22 +1,20 @@
-package org.usfirst.frc.team342.robot.commands.climb;
+package org.usfirst.frc.team342.robot.commands.drive;
 
-import org.usfirst.frc.team342.robot.subsystems.ClimbSystem;
+import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *	Makes the robot climb down.
+ *
  */
-public class ClimbDown extends Command {
+public class Reverse extends Command {
 
-	private ClimbSystem climb;
+	private DriveSystem drive;	
 	
-	private static final double SPEED = 0.25;
-	
-    public ClimbDown() {
-    	
-    	climb = ClimbSystem.getInstance();
-    	requires(climb);
+    public Reverse() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	drive = DriveSystem.getInstance(); 
     }
 
     // Called just before this Command runs the first time
@@ -25,8 +23,7 @@ public class ClimbDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	climb.climbDown(SPEED);
+    	drive.changeFront();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,14 +33,10 @@ public class ClimbDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	
-    	climb.climbStop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
-    	end();
     }
 }

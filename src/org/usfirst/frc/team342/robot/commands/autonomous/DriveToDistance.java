@@ -29,7 +29,7 @@ public class DriveToDistance extends Command {
 	public enum Distance {
 
 		//numbers for how far the robot will go 
-		CENTER_SWITCH(10), SIDE_SWITCH(15), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE(0.5), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
+		CENTER_SWITCH(10), CENTER_SWITCH_LEFT(12), SIDE_SWITCH(15), SCALE_DISTANCE(35), DRIVE_IN_DISTANCE(0.5), DRIVE_IN_DISTANCE_SWITCH(3), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
 
 		public final double value;
 

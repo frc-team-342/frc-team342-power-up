@@ -9,12 +9,16 @@ package org.usfirst.frc.team342.robot;
 
 import org.usfirst.frc.team342.robot.commands.claw.CollectCube;
 import org.usfirst.frc.team342.robot.commands.claw.DispenseCube;
+import org.usfirst.frc.team342.robot.commands.claw.LowerClaw;
 import org.usfirst.frc.team342.robot.commands.claw.StopCubeController;
 import org.usfirst.frc.team342.robot.commands.climb.ClimbDown;
 import org.usfirst.frc.team342.robot.commands.climb.ClimbUp;
+import org.usfirst.frc.team342.robot.commands.climb.ExtendArm;
+import org.usfirst.frc.team342.robot.commands.climb.RetractArm;
 import org.usfirst.frc.team342.robot.commands.drive.FastDrive;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelDOWN;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelUP;
+import org.usfirst.frc.team342.robot.commands.drive.Reverse;
 import org.usfirst.frc.team342.robot.commands.drive.SlowDrive;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
@@ -35,7 +39,7 @@ public class OI {
 		private Button 	
 		//				xbox_drive_buttonA ,
 		//				xbox_drive_buttonB ,
-		//				xbox_drive_buttonX ,
+						xbox_drive_buttonX ,
 		//				xbox_drive_buttonY ,
 						xbox_drive_leftBumper ,
 						xbox_drive_rightBumper;
@@ -52,14 +56,14 @@ public class OI {
 						manipulator_buttonY ,
 						manipulator_leftBumper ,
 						manipulator_rightBumper,
-		//				manipulator_backButton ,
-		//				manipulator_startButton ,
+						manipulator_backButton ,
+						manipulator_startButton ,
 		//				manipulator_leftstickButton ,
 						manipulator_rightStickButton;
 		
 		private Joystick logitech_drive_left;
-		private Button
-						logitech_left_button1;
+		//private Button
+		//				logitech_left_button1;
 		//				logitech_left_button2,
 		//				logitech_left_button3,
 		//				logitech_left_button4,
@@ -73,8 +77,8 @@ public class OI {
 		//				logitech_left_button12;
 		
 		private Joystick logitech_drive_right;
-		private Button
-						logitech_right_button1;
+		//private Button
+		//				logitech_right_button1;
 		//				logitech_right_button2,
 		//				logitech_right_button3,
 		//				logitech_right_button4,
@@ -92,6 +96,7 @@ public class OI {
 		private ManipulateWheelDOWN manipulatewheeldown;
 		private SlowDrive slowdrive;
 		private FastDrive fastdrive;
+		private Reverse reverse;
 		
 		//Various Commands to be assigned to buttons for manipulator
 		private CollectCube collectcube; 
@@ -99,9 +104,10 @@ public class OI {
 		private DispenseCube dispensecube;
 		private ClimbUp climbup;
 		private ClimbDown climbdown;
+		private LowerClaw lowerclaw;
+		private ExtendArm extendarm;
+		private RetractArm retractarm;
 		
-		//Test commands
-		private LiftToPosition liftto;
 		
 		
 	private OI() {
@@ -109,7 +115,7 @@ public class OI {
 		xbox_drive = new Joystick(0);
 	 	//	xbox_drive_buttonA = new JoystickButton(xbox_drive, 1);
 		//	xbox_drive_buttonB = new JoystickButton(xbox_drive, 2);
-		//	xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
+			xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
 		//	xbox_drive_buttonY = new JoystickButton(xbox_drive, 4);
 			xbox_drive_leftBumper = new JoystickButton(xbox_drive, 5);
 			xbox_drive_rightBumper = new JoystickButton(xbox_drive, 6);
@@ -125,13 +131,13 @@ public class OI {
 		 	manipulator_buttonY = new JoystickButton(manipulator, 4);
 		 	manipulator_leftBumper = new JoystickButton(manipulator, 5);
 		 	manipulator_rightBumper = new JoystickButton(manipulator, 6);
-		//	manipulator_backButton = new JoystickButton(manipulator, 7);
-		// 	manipulator_startButton = new JoystickButton(manipulator, 8);
+			manipulator_backButton = new JoystickButton(manipulator, 7);
+		 	manipulator_startButton = new JoystickButton(manipulator, 8);
 		// 	manipulator_leftstickButton = new JoystickButton(manipulator, 9);
 		 	manipulator_rightStickButton = new JoystickButton(manipulator, 10);
 		 	
 		logitech_drive_left = new Joystick(2);
-		 	logitech_left_button1 = new JoystickButton(logitech_drive_left, 1);
+		 //	logitech_left_button1 = new JoystickButton(logitech_drive_left, 1);
 		 //	logitech_left_button2 = new JoystickButton(logitech_drive_left, 2);
 		 //	logitech_left_button3 = new JoystickButton(logitech_drive_left, 3);
 		 //	logitech_left_button4 = new JoystickButton(logitech_drive_left, 4);
@@ -145,7 +151,7 @@ public class OI {
 		 //	logitech_left_button12 = new JoystickButton(logitech_drive_left, 12);
 		 	
 		logitech_drive_right = new Joystick(3);
-		 	logitech_right_button1 = new JoystickButton(logitech_drive_right, 1);
+		 //	logitech_right_button1 = new JoystickButton(logitech_drive_right, 1);
 		 //	logitech_right_button2 = new JoystickButton(logitech_drive_right, 2);
 		 //	logitech_right_button3 = new JoystickButton(logitech_drive_right, 3);
 		 //	logitech_right_button4 = new JoystickButton(logitech_drive_right, 4);
@@ -164,6 +170,7 @@ public class OI {
 				manipulatewheeldown = new ManipulateWheelDOWN();
 				slowdrive = new SlowDrive();
 				fastdrive = new FastDrive();
+				reverse= new Reverse();
 				
 			//Manipulator
 				collectcube= new CollectCube ();
@@ -171,15 +178,16 @@ public class OI {
 				dispensecube= new DispenseCube ();
 				climbup = new ClimbUp ();
 				climbdown = new ClimbDown ();
-				
-			//Test
-				liftto = new LiftToPosition(LiftHeight.switchposition);
+				lowerclaw = new LowerClaw();
+				extendarm = new ExtendArm();
+				retractarm = new RetractArm();
 				
 		// Drive Controller Buttons
 			xbox_drive_leftBumper.whenPressed(manipulatewheeldown);
 			xbox_drive_leftBumper.whenReleased(manipulatewheelup);
 			xbox_drive_rightBumper.whenPressed(slowdrive);
 			xbox_drive_rightBumper.whenReleased(fastdrive);
+			xbox_drive_buttonX.whenPressed(reverse);
 				
 		// Manipulator Buttons
 			manipulator_buttonA.whileHeld(dispensecube);
@@ -187,16 +195,18 @@ public class OI {
 			manipulator_buttonY.whenPressed(collectcube);
 			manipulator_rightBumper.whileHeld(climbup);
 			manipulator_leftBumper.whileHeld(climbdown);
-			
-			manipulator_rightStickButton.whenPressed(liftto);
+			manipulator_backButton.whenPressed(lowerclaw);
+			manipulator_rightStickButton.whenPressed(extendarm);
+			manipulator_startButton.whenPressed(retractarm);
+		
 		
 		// Logitech Left Buttons
-			logitech_left_button1.whenPressed(manipulatewheeldown);
-			logitech_left_button1.whenReleased(manipulatewheelup);
+		//	logitech_left_button1.whenPressed(manipulatewheeldown);
+		//	logitech_left_button1.whenReleased(manipulatewheelup);
 		
 		// Logitech Right Buttons
-			logitech_right_button1.whenPressed(slowdrive);
-			logitech_right_button1.whenReleased(fastdrive);
+		//	logitech_right_button1.whenPressed(slowdrive);
+		//	logitech_right_button1.whenReleased(fastdrive);
 			
 	}
 	

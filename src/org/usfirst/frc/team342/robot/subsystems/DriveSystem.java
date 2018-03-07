@@ -4,6 +4,7 @@ import org.usfirst.frc.team342.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.VelocityMeasPeriod;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -46,6 +47,12 @@ public class DriveSystem extends Subsystem {
 	private static final int AMPSCENTER = 35;
 	private static final double RAMP_TIME = 0.1;
 	private static final double SLOW_DOWN = 2.0;
+	
+	// Constants for the PID loop
+	private static final double P = 0.01;
+	private static final double I = 0.0;
+	private static final double D = 0.0;
+	private static final double F = 0.25;
 	
 	// Scale factor for calculating autonomous
 	private static final double SCALE_FACTOR = (1 / 4096);
@@ -128,6 +135,17 @@ public class DriveSystem extends Subsystem {
 		centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
 		centerWheel.enableCurrentLimit(true);
 		
+		// Setting the PID loop for the master controllers
+		rightMaster.config_kP(0, P, TIMEOUT_MS);
+		rightMaster.config_kI(0, I, TIMEOUT_MS);
+		rightMaster.config_kD(0, D, TIMEOUT_MS);
+		rightMaster.config_kF(0, F, TIMEOUT_MS);
+		
+		leftMaster.config_kP(0, P, TIMEOUT_MS);
+		leftMaster.config_kI(0, I, TIMEOUT_MS);
+		leftMaster.config_kD(0, D, TIMEOUT_MS);
+		leftMaster.config_kF(0, F, TIMEOUT_MS);
+		
 		rightMaster.set(ControlMode.PercentOutput, 0.0);
 		rightFollow.set(ControlMode.PercentOutput, 0.0);
 		rightFollow.follow(rightMaster);
@@ -163,6 +181,25 @@ public class DriveSystem extends Subsystem {
 		leftMaster.set(ControlMode.PercentOutput, Left_Speed);
 
 		centerWheel.set(ControlMode.PercentOutput, Center_Speed);
+	}
+	
+	public void driveSetSpeed(double Left_Speed, double Right_Speed) {
+		
+		if (slow) {
+			
+			Right_Speed /= SLOW_DOWN;
+			Left_Speed /= SLOW_DOWN;
+		}
+		
+		if (!front) {
+
+			Right_Speed *= -1.0;
+			Left_Speed *= -1.0;
+		}
+		
+		// argument is in position change per 100ms
+		rightMaster.set(ControlMode.Velocity, Right_Speed);
+		leftMaster.set(ControlMode.Velocity, Left_Speed);
 	}
 
 	public double getGyro() {

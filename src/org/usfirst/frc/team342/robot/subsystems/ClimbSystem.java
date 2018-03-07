@@ -19,7 +19,7 @@ public class ClimbSystem extends Subsystem {
 	private DoubleSolenoid climbextend;
 	
 	// variables for current limits
-		private static final int AMPS= 10;
+		private static final int AMPS= 50;
 		private static final int TIMEOUT= 10;
 		private static final int MILLISECONDS= 200;
 		
@@ -66,14 +66,21 @@ public class ClimbSystem extends Subsystem {
 	public void climbUp(double speed) {
 
 		climbmaster.set(ControlMode.PercentOutput, speed);
-		climbextend.set(Value.kForward);
+		
 	}
-
+	public void ExtendArm() {
+	climbextend.set(Value.kReverse);	
+	}
+	
+	public void RetractArm() {
+		climbextend.set(Value.kForward);	
+		}
+	
 	public void climbDown(double speed) {
 		
 		speed = speed * -1.0;
 		climbmaster.set(ControlMode.PercentOutput, speed);
-		climbextend.set(Value.kReverse);
+		
 	}
 	
 	public boolean getClimbExtender() {

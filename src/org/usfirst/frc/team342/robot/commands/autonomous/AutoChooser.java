@@ -44,14 +44,16 @@ public class AutoChooser {
 					whattorun = 1;
 
 					// If the switch is not on the left but the scale is
-				} else if (gamedata.charAt(0) != 'L' && gamedata.charAt(1) == 'L') {
-
-					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
-					scaleauto = new Scale('L');
-					whattorun = 2;
-
-					// If all else fails
-				} else {
+				} 
+//				else if (gamedata.charAt(0) != 'L' && gamedata.charAt(1) == 'L') {
+//
+//					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
+//					scaleauto = new Scale('L');
+//					whattorun = 2;
+//
+//					// If all else fails
+//				} 
+				else {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_LEFT);
 					driveforwardauto = new DriveForward('L');
@@ -155,14 +157,16 @@ public class AutoChooser {
 					whattorun = 1;
 
 					// If the switch is not on the left but the scale is
-				} else if (gamedata.charAt(0) != 'R' && gamedata.charAt(1) == 'R') {
-
-					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
-					scaleauto = new Scale('R');
-					whattorun = 2;
-
-					// If all else fails
-				} else {
+				} 
+//				else if (gamedata.charAt(0) != 'R' && gamedata.charAt(1) == 'R') {
+//
+//					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
+//					scaleauto = new Scale('R');
+//					whattorun = 2;
+//
+//					// If all else fails
+//				} 
+				else {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_DRIVE_FORWARD_RIGHT);
 					driveforwardauto = new DriveForward('R');

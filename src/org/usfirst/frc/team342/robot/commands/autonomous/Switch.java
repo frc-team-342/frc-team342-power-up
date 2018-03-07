@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Switch extends CommandGroup {
 	
 	// Angles for various positions in autonomous
-	private static final int CENTER_RIGHT_ANGLE = 35;
-	private static final int CENTER_LEFT_ANGLE = 325;
-	private static final int STRAIGHT_LEFT_ANGLE = 35;
-	private static final int STRAIGHT_RIGHT_ANGLE = 325;
+	private static final int CENTER_RIGHT_ANGLE = 25;
+	private static final int CENTER_LEFT_ANGLE = 335;
+	private static final int STRAIGHT_LEFT_ANGLE = 45;
+	private static final int STRAIGHT_RIGHT_ANGLE = 340;
 	private static final int LEFT_ANGLE = 90;
 	private static final int RIGHT_ANGLE = 270;
 	
@@ -50,20 +50,20 @@ public class Switch extends CommandGroup {
     		SmartDashboard.putString("Switch Value: ", "LL");
     		
     		lower_claw = new LowerClaw();
+    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
-    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		
     		addSequential(lower_claw);
+    		addSequential(drive_to_goal);
     		//addParallel(lift_to_position);
     		addSequential(lift_up_timed);
-    		addSequential(drive_to_goal);
     		addSequential(rotate_to_angle);
-    		addSequential(drive_in);
+    		addSequential(drive_in, 0.5);
     		addSequential(dispense_cube_timed);
     		
     	} else if(location == 'C' && switch_position == 'L') {
@@ -76,17 +76,17 @@ public class Switch extends CommandGroup {
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_LEFT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_LEFT);
     		straighten_out = new RotateToAngle(STRAIGHT_LEFT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
-    		//addParallel(lift_to_position);
-    		addSequential(lift_up_timed);
     		addSequential(drive_out);
     		addSequential(rotate_to_angle);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_timed);
     		addSequential(drive_to_goal);
-    		addSequential(straighten_out);
+    		addSequential(straighten_out, 1.0);
     		addSequential(dispense_cube_timed);
     		
     	} else if(location == 'C' && switch_position == 'R') {
@@ -99,17 +99,17 @@ public class Switch extends CommandGroup {
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT);
     		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
-    		//addParallel(lift_to_position);
-    		addSequential(lift_up_timed);
     		addSequential(drive_out);
     		addSequential(rotate_to_angle);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_timed);
     		addSequential(drive_to_goal);
-    		addSequential(straighten_out);
+    		addSequential(straighten_out, 1.0);
     		addSequential(dispense_cube_timed);
     		
     	} else if(location == 'R' && switch_position == 'R') {
@@ -118,19 +118,19 @@ public class Switch extends CommandGroup {
     		SmartDashboard.putString("Switch Value: ", "RR");
     		
     		lower_claw = new LowerClaw();
+    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
-    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
+    		addSequential(drive_to_goal);
     		//addParallel(lift_to_position);
     		addSequential(lift_up_timed);
-    		addSequential(drive_to_goal);
     		addSequential(rotate_to_angle);
-    		addSequential(drive_in);
+    		addSequential(drive_in, 0.5);
     		addSequential(dispense_cube_timed);
     		
     	}
