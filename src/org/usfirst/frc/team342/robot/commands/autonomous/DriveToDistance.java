@@ -29,7 +29,6 @@ public class DriveToDistance extends Command {
 	
 	private static final double kP = -50;
 	private static final double SPEED_CONST = 1500;
-	
 	public enum Distance {
 
 		// put in numbers once we get them
