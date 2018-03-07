@@ -18,6 +18,7 @@ import org.usfirst.frc.team342.robot.commands.climb.RetractArm;
 import org.usfirst.frc.team342.robot.commands.drive.FastDrive;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelDOWN;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelUP;
+import org.usfirst.frc.team342.robot.commands.drive.Reverse;
 import org.usfirst.frc.team342.robot.commands.drive.SlowDrive;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
@@ -38,7 +39,7 @@ public class OI {
 		private Button 	
 		//				xbox_drive_buttonA ,
 		//				xbox_drive_buttonB ,
-		//				xbox_drive_buttonX ,
+						xbox_drive_buttonX ,
 		//				xbox_drive_buttonY ,
 						xbox_drive_leftBumper ,
 						xbox_drive_rightBumper;
@@ -95,6 +96,7 @@ public class OI {
 		private ManipulateWheelDOWN manipulatewheeldown;
 		private SlowDrive slowdrive;
 		private FastDrive fastdrive;
+		private Reverse reverse;
 		
 		//Various Commands to be assigned to buttons for manipulator
 		private CollectCube collectcube; 
@@ -107,12 +109,13 @@ public class OI {
 		private RetractArm retractarm;
 		
 		
+		
 	private OI() {
 		
 		xbox_drive = new Joystick(0);
 	 	//	xbox_drive_buttonA = new JoystickButton(xbox_drive, 1);
 		//	xbox_drive_buttonB = new JoystickButton(xbox_drive, 2);
-		//	xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
+			xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
 		//	xbox_drive_buttonY = new JoystickButton(xbox_drive, 4);
 			xbox_drive_leftBumper = new JoystickButton(xbox_drive, 5);
 			xbox_drive_rightBumper = new JoystickButton(xbox_drive, 6);
@@ -167,6 +170,7 @@ public class OI {
 				manipulatewheeldown = new ManipulateWheelDOWN();
 				slowdrive = new SlowDrive();
 				fastdrive = new FastDrive();
+				reverse= new Reverse();
 				
 			//Manipulator
 				collectcube= new CollectCube ();
@@ -183,6 +187,7 @@ public class OI {
 			xbox_drive_leftBumper.whenReleased(manipulatewheelup);
 			xbox_drive_rightBumper.whenPressed(slowdrive);
 			xbox_drive_rightBumper.whenReleased(fastdrive);
+			xbox_drive_buttonX.whenPressed(reverse);
 				
 		// Manipulator Buttons
 			manipulator_buttonA.whileHeld(dispensecube);
@@ -193,6 +198,7 @@ public class OI {
 			manipulator_backButton.whenPressed(lowerclaw);
 			manipulator_rightStickButton.whenPressed(extendarm);
 			manipulator_startButton.whenPressed(retractarm);
+		
 		
 		// Logitech Left Buttons
 		//	logitech_left_button1.whenPressed(manipulatewheeldown);
