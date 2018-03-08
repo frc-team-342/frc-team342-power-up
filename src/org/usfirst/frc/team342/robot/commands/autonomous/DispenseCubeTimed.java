@@ -19,6 +19,7 @@ public class DispenseCubeTimed extends Command {
 	private CubeController cube_controller;
 	
 	/**
+	 * 
 	 * @param time Time in seconds.
 	 */
     public DispenseCubeTimed(int time) {
@@ -27,12 +28,14 @@ public class DispenseCubeTimed extends Command {
     	duration = time * 1000;
     }
 
+    // Called just before this Command runs the first time
     protected void initialize() {
     	
     	start_time = System.currentTimeMillis();
     	goal = start_time + duration;
     }
 
+    // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
     	current_time = System.currentTimeMillis();
@@ -40,9 +43,9 @@ public class DispenseCubeTimed extends Command {
     	cube_controller.dispenseCube(SPEED);
     }
 
+    // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	
-    	//if the time is less than goal then keep going 
     	if(current_time >= goal) {
     		return true;
     	} else {
@@ -50,11 +53,14 @@ public class DispenseCubeTimed extends Command {
     	}
     }
 
+    // Called once after isFinished returns true
     protected void end() {
     
     	cube_controller.closeClawAndStop();
     }
 
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
     protected void interrupted() {
     	
     	end();

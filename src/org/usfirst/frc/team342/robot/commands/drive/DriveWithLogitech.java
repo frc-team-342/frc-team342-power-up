@@ -25,7 +25,6 @@ public class DriveWithLogitech extends Command {
 	
     public DriveWithLogitech() {
 
-    	//gets feedback from oi and drivesystem
     	oi = OI.getInstance();
     	drive = DriveSystem.getInstance(); 
     	
@@ -39,16 +38,13 @@ public class DriveWithLogitech extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	//sets up the axis's 
     	speed_y_left = oi.getJoystickLogitechLeftYAxis();
     	speed_x_left = oi.getJoystickLogitechLeftXAxis();
     	speed_y_right = oi.getJoystickLogitechRightYAxis();
     	speed_x_right = oi.getJoystickLogitechRightXAxis();
     	
-    	//makes the x axis have a single average
     	x_average = ((speed_x_left + speed_x_right) / 2.0);  
     
-    	//establishes the deadzone
     	if(Math.abs(speed_y_left) > DEADZONE || (speed_y_right) > DEADZONE || Math.abs(x_average) > DEADZONE) {
     		
     		if(drive.getWheelState()) {
