@@ -14,10 +14,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Switch extends CommandGroup {
 	
 	// Angles for various positions in autonomous
-	private static final int CENTER_RIGHT_ANGLE = 25;
-	private static final int CENTER_LEFT_ANGLE = 335;
-	private static final int STRAIGHT_LEFT_ANGLE = 45;
-	private static final int STRAIGHT_RIGHT_ANGLE = 340;
+	private static final int CENTER_RIGHT_ANGLE = 35;
+	private static final int CENTER_LEFT_ANGLE = 325;
+	private static final int STRAIGHT_LEFT_ANGLE = 40;
+	private static final int STRAIGHT_RIGHT_ANGLE = 320;
 	private static final int LEFT_ANGLE = 90;
 	private static final int RIGHT_ANGLE = 270;
 	
@@ -76,7 +76,7 @@ public class Switch extends CommandGroup {
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_LEFT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_LEFT);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH);
     		straighten_out = new RotateToAngle(STRAIGHT_LEFT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
@@ -99,7 +99,7 @@ public class Switch extends CommandGroup {
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH);
     		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
