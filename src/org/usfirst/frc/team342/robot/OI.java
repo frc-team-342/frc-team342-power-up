@@ -37,9 +37,9 @@ public class OI {
 
 		private Joystick xbox_drive;
 		private Button 	
-		//				xbox_drive_buttonA ,
+						xbox_drive_buttonA ,
 		//				xbox_drive_buttonB ,
-						xbox_drive_buttonX ,
+		//				xbox_drive_buttonX ,
 		//				xbox_drive_buttonY ,
 						xbox_drive_leftBumper ,
 						xbox_drive_rightBumper;
@@ -113,9 +113,9 @@ public class OI {
 	private OI() {
 		
 		xbox_drive = new Joystick(0);
-	 	//	xbox_drive_buttonA = new JoystickButton(xbox_drive, 1);
+	 		xbox_drive_buttonA = new JoystickButton(xbox_drive, 1);
 		//	xbox_drive_buttonB = new JoystickButton(xbox_drive, 2);
-			xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
+		//	xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
 		//	xbox_drive_buttonY = new JoystickButton(xbox_drive, 4);
 			xbox_drive_leftBumper = new JoystickButton(xbox_drive, 5);
 			xbox_drive_rightBumper = new JoystickButton(xbox_drive, 6);
@@ -187,7 +187,7 @@ public class OI {
 			xbox_drive_leftBumper.whenReleased(manipulatewheelup);
 			xbox_drive_rightBumper.whenPressed(slowdrive);
 			xbox_drive_rightBumper.whenReleased(fastdrive);
-			xbox_drive_buttonX.whenPressed(reverse);
+			xbox_drive_buttonA.whenPressed(reverse);
 				
 		// Manipulator Buttons
 			manipulator_buttonA.whileHeld(dispensecube);

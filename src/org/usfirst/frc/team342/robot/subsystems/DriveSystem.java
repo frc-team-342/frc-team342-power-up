@@ -76,7 +76,7 @@ public class DriveSystem extends Subsystem {
 
 		// Configures various booleans for drive.
 		// EX: If slow is true, the robot goes slow.
-		front = false;
+		front = true;
 		slow = false;
 
 		// Instantiate Motor Controllers, Sensors, Pneumatics, and the NavX.
@@ -170,11 +170,17 @@ public class DriveSystem extends Subsystem {
 		}
 
 		// Check if the front boolean is false to change the direction of the Inputs.
-		if (!front) {
+		if (front) {
 
 			Left_Speed = Left_Speed * -1.0;
 			Right_Speed = Right_Speed * -1.0;
 			Center_Speed = Center_Speed * -1.0;
+		}else {
+			double temp;
+			
+			temp = Left_Speed;
+			Left_Speed = Right_Speed;
+			Right_Speed = temp;
 		}
 		
 		rightMaster.set(ControlMode.PercentOutput, Right_Speed);
@@ -191,7 +197,7 @@ public class DriveSystem extends Subsystem {
 			Left_Speed /= SLOW_DOWN;
 		}
 		
-		if (!front) {
+		if (front) {
 
 			Right_Speed *= -1.0;
 			Left_Speed *= -1.0;
