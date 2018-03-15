@@ -34,7 +34,6 @@ public class Scale extends CommandGroup {
 	// Drive commands
 	private RotateToAngle rotate_to_angle;
 	private DriveToDistance drive_to_goal;
-	private DriveToDistance drive_in;
 	
     public Scale(char location) {
        
@@ -48,7 +47,6 @@ public class Scale extends CommandGroup {
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SCALE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
@@ -56,7 +54,6 @@ public class Scale extends CommandGroup {
     		//addParallel(lift_to_position);
     		addSequential(lift_up_timed);
     		addSequential(rotate_to_angle);
-    		addSequential(drive_in);
     		addSequential(dispense_cube_timed);
     		
     	}else if(location == 'R') {
@@ -69,7 +66,6 @@ public class Scale extends CommandGroup {
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SCALE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
@@ -77,7 +73,6 @@ public class Scale extends CommandGroup {
     		//addParallel(lift_to_position);
     		addSequential(lift_up_timed);
     		addSequential(rotate_to_angle);
-    		addSequential(drive_in);
     		addSequential(dispense_cube_timed);
     	}
     }
