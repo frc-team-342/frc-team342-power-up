@@ -18,7 +18,7 @@ public class Scale extends CommandGroup {
 	private static final int RIGHT_ANGLE = 270;
 	
 	// Time for raising the lift
-	private static final int LIFT_TIME = 3850;
+	private static final int LIFT_TIME = 3875;
 	
 	// Time for dispensing the cube
 	private static final int DISPENSE_TIME = 2;

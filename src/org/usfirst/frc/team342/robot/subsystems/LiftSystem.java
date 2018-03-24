@@ -4,6 +4,7 @@ import org.usfirst.frc.team342.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.RemoteFeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -41,8 +42,8 @@ public class LiftSystem extends Subsystem {
 
 		liftMaster = new TalonSRX(RobotMap.LIFTMASTER);
 		liftFollow = new TalonSRX(RobotMap.LIFTFOLLOW);
-		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
-		liftFollow.configSelectedFeedbackSensor(FeedbackDevice.QuadEncoder, 0, 0);
+		liftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, 0);
+		liftFollow.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 1, 0);
 		liftFollow.follow(liftMaster);
 		
 		// current limits for liftMaster

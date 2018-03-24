@@ -28,12 +28,12 @@ public class DriveToDistance extends Command {
 	private double right_speed;
 	
 	private static final double kP = -50;
-	private static final double SPEED_CONST = 1500;
+	private static final double SPEED_CONST = 1600;
 	
 	public enum Distance {
 
 		// put in numbers once we get them
-		CENTER_SWITCH(12), SIDE_SWITCH(17.316), SCALE_DISTANCE(37.179), DRIVE_IN_DISTANCE_SCALE(0.5), DRIVE_IN_DISTANCE_SWITCH(3), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
+		CENTER_SWITCH_LEFT(12), CENTER_SWITCH_RIGHT(10.8), SIDE_SWITCH(17.316), SCALE_DISTANCE(37.179), DRIVE_IN_DISTANCE_SCALE(0.5), DRIVE_IN_DISTANCE_SWITCH(3), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
 		//SIDE_SWITCH(13.5)
 		public final double value;
 

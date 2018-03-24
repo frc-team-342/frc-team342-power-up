@@ -76,7 +76,7 @@ public class Switch extends CommandGroup {
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_LEFT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_LEFT);
     		straighten_out = new RotateToAngle(STRAIGHT_LEFT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
@@ -99,7 +99,7 @@ public class Switch extends CommandGroup {
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT);
     		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
