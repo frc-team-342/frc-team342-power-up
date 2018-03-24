@@ -1,4 +1,4 @@
-package org.usfirst.frc.team342.robot.commands.autonomous;
+Package org.usfirst.frc.team342.robot.commands.autonomous;
 
 import org.usfirst.frc.team342.robot.commands.autonomous.DriveToDistance.Distance;
 import org.usfirst.frc.team342.robot.commands.claw.LowerClaw;
