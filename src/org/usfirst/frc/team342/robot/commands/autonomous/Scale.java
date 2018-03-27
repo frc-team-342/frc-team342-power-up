@@ -30,10 +30,12 @@ public class Scale extends CommandGroup {
 	// Lift positions
 	private LiftToPosition lift_to_position;
 	private LiftUpTimed lift_up_timed;
+	private LiftDownTimed lift_down;
 	
 	// Drive commands
 	private RotateToAngle rotate_to_angle;
 	private DriveToDistance drive_to_goal;
+	private RotateToAngle turn_around;
 	
     public Scale(char location) {
        
@@ -48,6 +50,8 @@ public class Scale extends CommandGroup {
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
+    		turn_around = new RotateToAngle(90);
+    		lift_down = new LiftDownTimed(0); 
     		
     		addSequential(lower_claw);
     		addSequential(drive_to_goal);
@@ -55,6 +59,10 @@ public class Scale extends CommandGroup {
     		addSequential(lift_up_timed);
     		addSequential(rotate_to_angle);
     		addSequential(dispense_cube_timed);
+    		addSequential(turn_around); 
+    		addSequential(lift_down);
+    		//TODO find the rotation of current cube
+    		addSequential(); 
     		
     	}else if(location == 'R') {
     		
