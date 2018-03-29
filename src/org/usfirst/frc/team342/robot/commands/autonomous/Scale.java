@@ -62,7 +62,6 @@ public class Scale extends CommandGroup {
     		addSequential(turn_around); 
     		addSequential(lift_down);
     		//TODO find the rotation of current cube
-    		addSequential(); 
     		
     	}else if(location == 'R') {
     		
