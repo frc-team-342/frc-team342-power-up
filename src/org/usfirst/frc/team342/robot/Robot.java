@@ -61,6 +61,7 @@ public class Robot extends TimedRobot {
 
 	SendableChooser<Integer> location = new SendableChooser<>();
 	SendableChooser<Integer> action = new SendableChooser<>();
+	SendableChooser<Boolean> second_cube = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -89,6 +90,9 @@ public class Robot extends TimedRobot {
 		action.addDefault("Switch", SWITCH);
 		action.addDefault("Scale", SCALE);
 		action.addDefault("Drive Forward", DRIVE_FORWARD);
+		
+		second_cube.addDefault("Single Cube", false);
+		second_cube.addDefault("Second Cube", true);
 
 		SmartDashboard.putData("Location: ", location);
 		SmartDashboard.putData("Auto Action: ", action);
@@ -128,10 +132,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-
+		
 		gamedata = DriverStation.getInstance().getGameSpecificMessage();
 
-		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected());
+		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected(), second_cube.getSelected());
 		// He's not the messiah, he's a very naughty boy!
 		if (whattodo == 1) {
 			chooser.switchauto.start();

@@ -35,7 +35,7 @@ public class Scale extends CommandGroup {
 	private RotateToAngle rotate_to_angle;
 	private DriveToDistance drive_to_goal;
 	
-    public Scale(char location) {
+    public Scale(char location, boolean second_cube) {
        
     	if(location == 'L') {
     		

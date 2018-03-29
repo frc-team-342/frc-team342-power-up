@@ -1,6 +1,7 @@
 package org.usfirst.frc.team342.robot.commands.autonomous;
 
 import org.usfirst.frc.team342.robot.commands.autonomous.DriveToDistance.Distance;
+import org.usfirst.frc.team342.robot.commands.claw.CollectCube;
 import org.usfirst.frc.team342.robot.commands.claw.LowerClaw;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
 import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
@@ -20,6 +21,9 @@ public class Switch extends CommandGroup {
 	private static final int STRAIGHT_RIGHT_ANGLE = 320;
 	private static final int LEFT_ANGLE = 90;
 	private static final int RIGHT_ANGLE = 270;
+	private static final int NINETY_DEGREES = 90;
+	private static final int ONE_EIGHTY_DEGREES = 180;
+	private static final int TWO_SEVENTY_DEGREES = 270;
 	
 	// Time for raising the lift
 	private static final int LIFT_TIME = 1500;
@@ -30,6 +34,7 @@ public class Switch extends CommandGroup {
 	// Cube controller commands
 	private LowerClaw lower_claw;
 	private DispenseCubeTimed dispense_cube_timed;
+	private CollectCube collect_cube;
 	
 	// Drive commands
 	private RotateToAngle rotate_to_angle;
@@ -40,9 +45,11 @@ public class Switch extends CommandGroup {
 	
 	// Lift commands
 	private LiftToPosition lift_to_position;
-	private LiftUpTimed lift_up_timed;
+	private LiftUpTimed lift_up_to_switch;
+	private LiftDownTimed lift_down_to_floor;
+	
 		
-    public Switch(char location, char switch_position) {
+    public Switch(char location, char switch_position, boolean second_cube) {
         
     	if(location == 'L' && switch_position == 'L') {
     		
@@ -52,7 +59,7 @@ public class Switch extends CommandGroup {
     		lower_claw = new LowerClaw();
     		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
-    		lift_up_timed = new LiftUpTimed(LIFT_TIME);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
     		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
@@ -61,7 +68,7 @@ public class Switch extends CommandGroup {
     		addSequential(lower_claw);
     		addSequential(drive_to_goal);
     		//addParallel(lift_to_position);
-    		addSequential(lift_up_timed);
+    		addSequential(lift_up_to_switch);
     		addSequential(rotate_to_angle);
     		addSequential(drive_in, 0.5);
     		addSequential(dispense_cube_timed);
@@ -73,7 +80,7 @@ public class Switch extends CommandGroup {
     		
     		lower_claw = new LowerClaw();
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
-    		lift_up_timed = new LiftUpTimed(LIFT_TIME);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_LEFT_ANGLE);
     		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_LEFT);
@@ -84,7 +91,7 @@ public class Switch extends CommandGroup {
     		addSequential(drive_out);
     		addSequential(rotate_to_angle);
     		//addParallel(lift_to_position);
-    		addSequential(lift_up_timed);
+    		addSequential(lift_up_to_switch);
     		addSequential(drive_to_goal);
     		addSequential(straighten_out, 1.0);
     		addSequential(dispense_cube_timed);
@@ -96,7 +103,7 @@ public class Switch extends CommandGroup {
     		
     		lower_claw = new LowerClaw();
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
-    		lift_up_timed = new LiftUpTimed(LIFT_TIME);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
     		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE);
     		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT);
@@ -107,7 +114,7 @@ public class Switch extends CommandGroup {
     		addSequential(drive_out);
     		addSequential(rotate_to_angle);
     		//addParallel(lift_to_position);
-    		addSequential(lift_up_timed);
+    		addSequential(lift_up_to_switch);
     		addSequential(drive_to_goal);
     		addSequential(straighten_out, 1.0);
     		addSequential(dispense_cube_timed);
@@ -120,7 +127,7 @@ public class Switch extends CommandGroup {
     		lower_claw = new LowerClaw();
     		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
-    		lift_up_timed = new LiftUpTimed(LIFT_TIME);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
     		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
@@ -128,7 +135,7 @@ public class Switch extends CommandGroup {
     		addSequential(lower_claw);
     		addSequential(drive_to_goal);
     		//addParallel(lift_to_position);
-    		addSequential(lift_up_timed);
+    		addSequential(lift_up_to_switch);
     		addSequential(rotate_to_angle);
     		addSequential(drive_in, 0.5);
     		addSequential(dispense_cube_timed);

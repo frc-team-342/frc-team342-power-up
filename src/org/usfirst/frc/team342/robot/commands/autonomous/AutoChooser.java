@@ -23,7 +23,7 @@ public class AutoChooser {
 	public AutoChooser() {
 	}
 
-	public int calculateWhatToDo(String gamedata, int location, int action) {
+	public int calculateWhatToDo(String gamedata, int location, int action, boolean second_cube) {
 
 		SmartDashboard.putString("Game Message: ", gamedata);
 
@@ -40,14 +40,14 @@ public class AutoChooser {
 				if (gamedata.charAt(0) == 'L') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_LEFT);
-					switchauto = new Switch('L', gamedata.charAt(0));
+					switchauto = new Switch('L', gamedata.charAt(0), second_cube);
 					whattorun = 1;
 
 					// If the switch is not on the left but the scale is
 				}else if (gamedata.charAt(0) != 'L' && gamedata.charAt(1) == 'L') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
-					scaleauto = new Scale('L');
+					scaleauto = new Scale('L', second_cube);
 					whattorun = 2;
 
 					// If all else fails
@@ -66,14 +66,14 @@ public class AutoChooser {
 				if (gamedata.charAt(1) == 'L') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
-					scaleauto = new Scale('L');
+					scaleauto = new Scale('L', second_cube);
 					whattorun = 2;
 
 					// If the scale is not on the left but the switch is
 				} else if (gamedata.charAt(1) != 'L' && gamedata.charAt(0) == 'L') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_LEFT);
-					switchauto = new Switch('L', gamedata.charAt(0));
+					switchauto = new Switch('L', gamedata.charAt(0), second_cube);
 					whattorun = 1;
 
 					// If all else fails
@@ -104,14 +104,14 @@ public class AutoChooser {
 				if (gamedata.charAt(0) == 'L') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_CENTER_LEFT);
-					switchauto = new Switch('C', gamedata.charAt(0));
+					switchauto = new Switch('C', gamedata.charAt(0), second_cube);
 					whattorun = 1;
 
 					// If the switch is on the right
 				} else if (gamedata.charAt(0) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_CENTER_RIGHT);
-					switchauto = new Switch('C', gamedata.charAt(0));
+					switchauto = new Switch('C', gamedata.charAt(0), second_cube);
 					whattorun = 1;
 
 					// If all else fails
@@ -151,14 +151,14 @@ public class AutoChooser {
 				if (gamedata.charAt(0) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_RIGHT);
-					switchauto = new Switch('R', gamedata.charAt(0));
+					switchauto = new Switch('R', gamedata.charAt(0), second_cube);
 					whattorun = 1;
 
 					// If the switch is not on the left but the scale is
 				} else if (gamedata.charAt(0) != 'R' && gamedata.charAt(1) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
-					scaleauto = new Scale('R');
+					scaleauto = new Scale('R', second_cube);
 					whattorun = 2;
 
 					// If all else fails
@@ -177,14 +177,14 @@ public class AutoChooser {
 				if (gamedata.charAt(1) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
-					scaleauto = new Scale('R');
+					scaleauto = new Scale('R', second_cube);
 					whattorun = 2;
 
 					// If the scale is not on the left but the switch is
 				} else if (gamedata.charAt(1) != 'R' && gamedata.charAt(0) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_RIGHT);
-					switchauto = new Switch('R', gamedata.charAt(0));
+					switchauto = new Switch('R', gamedata.charAt(0), second_cube);
 					whattorun = 1;
 
 					// If all else fails
