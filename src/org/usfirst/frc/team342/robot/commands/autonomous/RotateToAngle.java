@@ -37,7 +37,7 @@ public class RotateToAngle extends Command {
 		 RotateSpeed = 1.0;
 		drive.resetGyro();
 		
-		gyro_angle = drive.getGyro();
+		gyro_angle = drive.getGyro(false);
 
 		if (Math.abs(angle) > 180) {
 
@@ -51,7 +51,7 @@ public class RotateToAngle extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		
-		gyro_angle = drive.getGyro();
+		gyro_angle = drive.getGyro(false);
 		
 		double CurrentDriveSpeed;
 		

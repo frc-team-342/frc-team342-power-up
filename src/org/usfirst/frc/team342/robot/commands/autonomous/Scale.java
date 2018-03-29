@@ -43,7 +43,7 @@ public class Scale extends CommandGroup {
     		SmartDashboard.putString("Scale Value: ", "L");
     		
     		lower_claw = new LowerClaw();
-    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE);
+    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE, false);
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
@@ -62,7 +62,7 @@ public class Scale extends CommandGroup {
     		SmartDashboard.putString("Scale Value: ", "R");
 
     		lower_claw = new LowerClaw();
-    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE);
+    		drive_to_goal = new DriveToDistance(Distance.SCALE_DISTANCE, false);
     		lift_to_position = new LiftToPosition(LiftHeight.scalemiddle);
     		lift_up_timed = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);

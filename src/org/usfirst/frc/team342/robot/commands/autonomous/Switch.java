@@ -57,11 +57,11 @@ public class Switch extends CommandGroup {
     		SmartDashboard.putString("Switch Value: ", "LL");
     		
     		lower_claw = new LowerClaw();
-    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
+    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH, false);
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(LEFT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		
@@ -85,9 +85,9 @@ public class Switch extends CommandGroup {
     		lower_claw = new LowerClaw();
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
-    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, false);
     		rotate_to_angle = new RotateToAngle(CENTER_LEFT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_LEFT);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_LEFT, false);
     		straighten_out = new RotateToAngle(STRAIGHT_LEFT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
@@ -112,9 +112,9 @@ public class Switch extends CommandGroup {
     		lower_claw = new LowerClaw();
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
-    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL);
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, false);
     		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE);
-    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT, false);
     		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
@@ -137,11 +137,11 @@ public class Switch extends CommandGroup {
     		SmartDashboard.putString("Switch Value: ", "RR");
     		
     		lower_claw = new LowerClaw();
-    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH);
+    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH, false);
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
-    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);

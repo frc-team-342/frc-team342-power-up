@@ -208,9 +208,17 @@ public class DriveSystem extends Subsystem {
 		leftMaster.set(ControlMode.Velocity, Left_Speed);
 	}
 
-	public double getGyro() {
-
-		return ((((navx.getAngle()) % 360) + 360) % 360);
+	public double getGyro(boolean backwards) {
+		
+		double angle;
+		
+		if(backwards) {
+			angle = (((((navx.getAngle() + 180)) % 360) + 360) % 360);
+		} else {
+			angle = ((((navx.getAngle()) % 360) + 360) % 360);
+		}
+		
+		return angle;
 	}
 	
 	public AHRS getNavX() {

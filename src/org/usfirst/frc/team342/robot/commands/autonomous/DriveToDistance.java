@@ -82,9 +82,9 @@ public class DriveToDistance extends Command {
 		
 		//drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
 		
-		if(drive.getGyro() > 180 && drive.getGyro() < 359 && !backwards) {
+		if(drive.getGyro(backwards) > 180 && drive.getGyro(backwards) < 359) {
 			
-			degrees_off_zero = (360 - drive.getGyro());
+			degrees_off_zero = (360 - drive.getGyro(backwards));
 			
 			if(degrees_off_zero > 15) {
 				degrees_off_zero = 15.0;
@@ -93,9 +93,9 @@ public class DriveToDistance extends Command {
 			left_speed = left_speed - (degrees_off_zero * kP);
 			right_speed = right_speed + (degrees_off_zero * kP);
 			
-		}else if(drive.getGyro() < 180 && drive.getGyro() > 1 && !backwards) {
+		}else if(drive.getGyro(backwards) < 180 && drive.getGyro(backwards) > 1) {
 			
-			degrees_off_zero = drive.getGyro();
+			degrees_off_zero = drive.getGyro(backwards);
 			
 			if(degrees_off_zero > 15) {
 				degrees_off_zero = 15.0;
