@@ -90,8 +90,16 @@ public class DriveToDistance extends Command {
 				degrees_off_zero = 15.0;
 			}
 			
-			left_speed = left_speed - (degrees_off_zero * kP);
-			right_speed = right_speed + (degrees_off_zero * kP);
+			if(backwards) {
+				
+				left_speed = left_speed + (degrees_off_zero * kP);
+				right_speed = right_speed - (degrees_off_zero * kP);
+			}else {
+				
+				left_speed = left_speed - (degrees_off_zero * kP);
+				right_speed = right_speed + (degrees_off_zero * kP);
+			}
+			
 			
 		}else if(drive.getGyro(backwards) < 180 && drive.getGyro(backwards) > 1) {
 			
@@ -101,8 +109,16 @@ public class DriveToDistance extends Command {
 				degrees_off_zero = 15.0;
 			}
 			
-			left_speed = left_speed + (degrees_off_zero * kP);
-			right_speed = right_speed - (degrees_off_zero * kP);
+			if(backwards) {
+				
+				left_speed = left_speed - (degrees_off_zero * kP);
+				right_speed = right_speed + (degrees_off_zero * kP);
+			}else {
+				
+				left_speed = left_speed + (degrees_off_zero * kP);
+				right_speed = right_speed - (degrees_off_zero * kP);
+			}
+			
 			
 		}
 		
