@@ -35,7 +35,8 @@ public class DriveToDistance extends Command {
 	public enum Distance {
 
 		// put in numbers once we get them
-		CENTER_SWITCH_LEFT(12), CENTER_SWITCH_RIGHT(10.8), SCALE_ACROSS(0), SIDE_SWITCH(17.316), SCALE_DISTANCE(37.179), DRIVE_IN_DISTANCE_SCALE(0.5), DRIVE_IN_DISTANCE_SWITCH(3), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13);
+		CENTER_SWITCH_LEFT(12), CENTER_SWITCH_RIGHT(10.8), SCALE_ACROSS(0), SIDE_SWITCH(17.316), SCALE_DISTANCE(37.179), DRIVE_IN_DISTANCE_SCALE(0.5),
+		DRIVE_IN_DISTANCE_SWITCH(3), DRIVE_OFF_WALL(1), DRIVE_FORWARD_DISTANCE(13), DRIVE_OFF_WALL_SWITCH(1.5);
 		//SIDE_SWITCH(13.5)
 		public final double value;
 
@@ -77,8 +78,8 @@ public class DriveToDistance extends Command {
 		current_Left = drive.getLeftMasterEncoder() - init_Left;
 		current_Right = drive.getRightMasterEncoder() - init_Right;	
 		
-		left_rotation_count = current_Left / 4096;
-		right_rotation_count = current_Right / 4096;
+		left_rotation_count = Math.abs(current_Left / 4096);
+		right_rotation_count = Math.abs(current_Right / 4096);
 		
 		//drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
 		
@@ -119,7 +120,6 @@ public class DriveToDistance extends Command {
 				right_speed = right_speed - (degrees_off_zero * kP);
 			}
 			
-			
 		}
 		
 		if(backwards) {
@@ -127,10 +127,6 @@ public class DriveToDistance extends Command {
 		}else {
 			drive.driveSetSpeed(left_speed, right_speed);
 		}
-		
-		
-		
-		
 		
 		SmartDashboard.putNumber("left", left_rotation_count);
 		SmartDashboard.putNumber("right", right_rotation_count);

@@ -39,9 +39,13 @@ public class Switch extends CommandGroup {
 	// Drive commands
 	private RotateToAngle rotate_to_angle;
 	private RotateToAngle straighten_out;
+	private RotateToAngle rotate_to_ninety;
 	private DriveToDistance drive_to_goal;
 	private DriveToDistance drive_out;
 	private DriveToDistance drive_in;
+	private DriveToDistance drive_to_platform_zone;
+	private DriveToDistance drive_to_cube;
+	private DriveToDistance drive_pick_to_switch_wall;
 	
 	// Lift commands
 	private LiftToPosition lift_to_position;
@@ -155,7 +159,29 @@ public class Switch extends CommandGroup {
     	} else if(location == 'R' && switch_position == 'R' && second_cube) {
     		
     		//NICK IS WRITING THIS CODE
-    	
+    		
+    		//Switch auto right
+    		SmartDashboard.putString("Switch Value: ", "RR");
+    		
+    		lower_claw = new LowerClaw();
+    		drive_to_goal = new DriveToDistance(Distance.SIDE_SWITCH, false);
+    		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
+    		rotate_to_angle = new RotateToAngle(RIGHT_ANGLE);
+    		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
+    		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL_SWITCH, true);
+    		rotate_to_ninety = new RotateToAngle(NINETY_DEGREES);
+    		
+    		addSequential(lower_claw);
+    		addSequential(drive_to_goal);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_to_switch);
+    		addSequential(rotate_to_angle);
+    		addSequential(drive_in, 0.5);
+    		addSequential(dispense_cube_timed);
+    		addSequential(drive_out);
+    		addSequential(rotate_to_ninety);
     	} 
     }
 }
