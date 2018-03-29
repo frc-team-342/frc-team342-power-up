@@ -16,6 +16,8 @@ public class DriveToDistance extends Command {
 
 	private double goal;
 	
+	private boolean backwards;
+	
 	private double init_Left;
 	private double init_Right;
 	private double current_Left;
@@ -50,12 +52,13 @@ public class DriveToDistance extends Command {
 //		goal = distance; 
 //	}
 
-	public DriveToDistance(Distance distance) {
+	public DriveToDistance(Distance distance, boolean backwards) {
 
 		drive = DriveSystem.getInstance();
 		requires(drive);
 
 		goal = distance.value;
+		this.backwards = backwards;
 	}
 
 	protected void initialize() {
@@ -79,7 +82,7 @@ public class DriveToDistance extends Command {
 		
 		//drive.drive(LEFT_SPEED, RIGHT_SPEED, CENTER_SPEED);
 		
-		if(drive.getGyro() > 180 && drive.getGyro() < 359) {
+		if(drive.getGyro() > 180 && drive.getGyro() < 359 && !backwards) {
 			
 			degrees_off_zero = (360 - drive.getGyro());
 			
@@ -90,7 +93,7 @@ public class DriveToDistance extends Command {
 			left_speed = left_speed - (degrees_off_zero * kP);
 			right_speed = right_speed + (degrees_off_zero * kP);
 			
-		}else if(drive.getGyro() < 180 && drive.getGyro() > 1) {
+		}else if(drive.getGyro() < 180 && drive.getGyro() > 1 && !backwards) {
 			
 			degrees_off_zero = drive.getGyro();
 			
@@ -103,7 +106,15 @@ public class DriveToDistance extends Command {
 			
 		}
 		
-		drive.driveSetSpeed(left_speed, right_speed);
+		if(backwards) {
+			drive.driveSetSpeed(left_speed * -1.0, right_speed * -1.0);
+		}else {
+			drive.driveSetSpeed(left_speed, right_speed);
+		}
+		
+		
+		
+		
 		
 		SmartDashboard.putNumber("left", left_rotation_count);
 		SmartDashboard.putNumber("right", right_rotation_count);
