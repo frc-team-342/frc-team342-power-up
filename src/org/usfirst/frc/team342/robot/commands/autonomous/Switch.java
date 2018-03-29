@@ -51,7 +51,7 @@ public class Switch extends CommandGroup {
 		
     public Switch(char location, char switch_position, boolean second_cube) {
         
-    	if(location == 'L' && switch_position == 'L') {
+    	if(location == 'L' && switch_position == 'L' && !second_cube) {
     		
     		//Switch auto left
     		SmartDashboard.putString("Switch Value: ", "LL");
@@ -73,7 +73,11 @@ public class Switch extends CommandGroup {
     		addSequential(drive_in, 0.5);
     		addSequential(dispense_cube_timed);
     		
-    	} else if(location == 'C' && switch_position == 'L') {
+    	} else if(location == 'L' && switch_position == 'L' && second_cube) {
+    		
+    		//NICK IS WRITING THIS CODE
+    		
+    	} else if(location == 'C' && switch_position == 'L' && !second_cube) {
     		
     		//Switch auto center left
     		SmartDashboard.putString("Switch Value: ", "CL");
@@ -96,7 +100,11 @@ public class Switch extends CommandGroup {
     		addSequential(straighten_out, 1.0);
     		addSequential(dispense_cube_timed);
     		
-    	} else if(location == 'C' && switch_position == 'R') {
+    	} else if(location == 'C' && switch_position == 'L' && second_cube) {
+    		
+    		//ELIZABETH IS WRITING THIS CODE
+    	
+    	} else if(location == 'C' && switch_position == 'R' && !second_cube) {
     		
     		//Switch auto center right
     		SmartDashboard.putString("Switch Value: ", "CR");
@@ -119,7 +127,11 @@ public class Switch extends CommandGroup {
     		addSequential(straighten_out, 1.0);
     		addSequential(dispense_cube_timed);
     		
-    	} else if(location == 'R' && switch_position == 'R') {
+    	} else if(location == 'C' && switch_position == 'R' && second_cube) {
+    		
+    		//ELIZABETH IS WRITING THIS CODE
+    	
+    	} else if(location == 'R' && switch_position == 'R' && !second_cube) {
     		
     		//Switch auto right
     		SmartDashboard.putString("Switch Value: ", "RR");
@@ -140,6 +152,10 @@ public class Switch extends CommandGroup {
     		addSequential(drive_in, 0.5);
     		addSequential(dispense_cube_timed);
     		
-    	}
+    	} else if(location == 'R' && switch_position == 'R' && second_cube) {
+    		
+    		//NICK IS WRITING THIS CODE
+    	
+    	} 
     }
 }
