@@ -24,6 +24,7 @@ public class Switch extends CommandGroup {
 	private static final int NINETY_DEGREES = 90;
 	private static final int ONE_EIGHTY_DEGREES = 180;
 	private static final int TWO_SEVENTY_DEGREES = 270;
+	private static final int CENTER_RIGHT_ANGLE2 = 259;
 	
 	// Time for raising the lift
 	private static final int LIFT_TIME = 1500;
@@ -46,11 +47,13 @@ public class Switch extends CommandGroup {
 	private DriveToDistance drive_to_platform_zone;
 	private DriveToDistance drive_to_cube;
 	private DriveToDistance drive_to_pick_cube_up;
+
 	
 	// Lift commands
 	private LiftToPosition lift_to_position;
 	private LiftUpTimed lift_up_to_switch;
 	private LiftDownTimed lift_down_to_floor;
+	private CollectCube pick_up_cube;
 	
 		
     public Switch(char location, char switch_position, boolean second_cube) {
@@ -169,6 +172,82 @@ public class Switch extends CommandGroup {
     	} else if(location == 'C' && switch_position == 'R' && second_cube) {
     		
     		//ELIZABETH IS WRITING THIS CODE
+    		SmartDashboard.putString("Switch Value: ", "CR");
+    		
+    		lower_claw = new LowerClaw();
+    		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, false);
+    		rotate_to_angle_one = new RotateToAngle(CENTER_RIGHT_ANGLE);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT, false);
+    		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
+    		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
+    		
+    		addSequential(lower_claw);
+    		addSequential(drive_out);
+    		addSequential(rotate_to_angle_one);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_to_switch);
+    		addSequential(drive_to_goal);
+    		addSequential(straighten_out, 1.0);
+    		addSequential(dispense_cube_timed);
+    		
+    		// gets back to starting position
+    	
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, true);
+    		rotate_to_angle_one = new RotateToAngle(CENTER_RIGHT_ANGLE);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT, true);
+    		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
+    		
+    		addSequential(drive_out);
+    		addSequential(rotate_to_angle_one);
+    		addSequential(drive_to_goal);
+    		addSequential(straighten_out, 1.0);
+    	
+    		// pick up second cube
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, true);
+    		lift_down_to_floor= new LiftDownTimed(LIFT_TIME);
+    		rotate_to_angle_one = new RotateToAngle(CENTER_RIGHT_ANGLE2);
+    		drive_to_cube= new DriveToDistance(Distance.DRIVE_TO_CUBES,false);
+    		pick_up_cube = new CollectCube ();
+    	
+    		addSequential(drive_out);
+    		addSequential(lift_down_to_floor);
+    		addSequential(rotate_to_angle_one);
+    		addParallel(pick_up_cube);
+    		addSequential(drive_to_cube);
+    		
+    		//drives back to start
+    		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, true);
+    		rotate_to_angle_one = new RotateToAngle(CENTER_RIGHT_ANGLE2);
+    		drive_to_goal = new DriveToDistance(Distance.DRIVE_TO_CUBES, true);
+    		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
+    		
+    		addSequential(drive_out);
+    		addSequential(rotate_to_angle_one);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_to_switch);
+    		addSequential(drive_to_goal);
+    		addSequential(straighten_out, 1.0);
+    		
+    		//drops off second cube
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, false);
+    		rotate_to_angle_one = new RotateToAngle(CENTER_RIGHT_ANGLE);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT, false);
+    		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
+    		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
+    		
+    		
+    		addSequential(drive_out);
+    		addSequential(rotate_to_angle_one);
+    		addSequential(drive_to_goal);
+    		addSequential(straighten_out, 1.0);
+    		addSequential(dispense_cube_timed);
+    		
+    		
+    	
     	
     	} else if(location == 'R' && switch_position == 'R' && !second_cube) {
     		
