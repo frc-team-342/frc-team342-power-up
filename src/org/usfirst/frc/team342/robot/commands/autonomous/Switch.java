@@ -151,6 +151,7 @@ public class Switch extends CommandGroup {
     		addSequential(lift_up_to_switch);
     		addSequential(drive_to_goal);
     		addSequential(straighten_out, 1.0);
+    		addSequential(dispense_cube_timed);
     		
     		// gets back to starting position
     	
@@ -159,20 +160,54 @@ public class Switch extends CommandGroup {
     		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT, true);
     		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
     		
-    		
-    		//addSequential(lower_claw);
     		addSequential(drive_out);
     		addSequential(rotate_to_angle);
-    		//addParallel(lift_to_position);
-    		//addSequential(lift_up_to_switch);
     		addSequential(drive_to_goal);
     		addSequential(straighten_out, 1.0);
     	
     		// pick up second cube
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, true);
     		lift_down_to_floor= new LiftDownTimed(LIFT_TIME);
     		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE2);
     		drive_to_cube= new DriveToDistance(Distance.DRIVE_TO_CUBES,false);
     		pick_up_cube = new CollectCube ();
+    	
+    		addSequential(drive_out);
+    		addSequential(lift_down_to_floor);
+    		addSequential(rotate_to_angle);
+    		addParallel(pick_up_cube);
+    		addSequential(drive_to_cube);
+    		
+    		//drives back to start
+    		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
+    		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, true);
+    		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE2);
+    		drive_to_goal = new DriveToDistance(Distance.DRIVE_TO_CUBES, true);
+    		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
+    		
+    		addSequential(drive_out);
+    		addSequential(rotate_to_angle);
+    		//addParallel(lift_to_position);
+    		addSequential(lift_up_to_switch);
+    		addSequential(drive_to_goal);
+    		addSequential(straighten_out, 1.0);
+    		
+    		//drops off second cube
+    		drive_out = new DriveToDistance(Distance.DRIVE_OFF_WALL, false);
+    		rotate_to_angle = new RotateToAngle(CENTER_RIGHT_ANGLE);
+    		drive_to_goal = new DriveToDistance(Distance.CENTER_SWITCH_RIGHT, false);
+    		straighten_out = new RotateToAngle(STRAIGHT_RIGHT_ANGLE);
+    		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
+    		
+    		
+    		addSequential(drive_out);
+    		addSequential(rotate_to_angle);
+    		addSequential(drive_to_goal);
+    		addSequential(straighten_out, 1.0);
+    		addSequential(dispense_cube_timed);
+    		
+    		
     	
     	
     	} else if(location == 'R' && switch_position == 'R' && !second_cube) {
