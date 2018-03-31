@@ -17,7 +17,7 @@ public class RotateToAngle extends Command {
 
 	private static final double margin = 10;
 	
-	private static final double slowestspeed=.3;
+	private static final double slowestspeed=.4;
 	
 	/**
 	 * @param angle
@@ -59,13 +59,13 @@ public class RotateToAngle extends Command {
 		if (angle!=0) {
 			
 	//Checks to see if rotate speed is greater than lowest allowable speed
-			if (RotateSpeed>slowestspeed) {
-				if(angle>=0 && angle<=180){
-					RotateSpeed=(angle-gyro_angle)/angle;  //Causes rotate speed to get closer to zero as the angle gets closer to the target
-				}
-					
+		if (RotateSpeed > slowestspeed) {
+			if(angle>=0 && angle<=180){
+				RotateSpeed=(angle-gyro_angle)/angle;  //Causes rotate speed to get closer to zero as the angle gets closer to the target
+			}
+				
 			} else {
-				RotateSpeed=gyro_angle/(360-angle);
+				RotateSpeed=(gyro_angle - angle)/(360-angle);
 			}
 				
 		}else {

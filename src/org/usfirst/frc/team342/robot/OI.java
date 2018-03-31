@@ -41,7 +41,7 @@ public class OI {
 		//				xbox_drive_buttonB ,
 		//				xbox_drive_buttonX ,
 		//				xbox_drive_buttonY ,
-						xbox_drive_leftBumper ,
+		//				xbox_drive_leftBumper ,
 						xbox_drive_rightBumper;
 		//				xbox_drive_backButton ,
 		//				xbox_drive_startButton,
@@ -117,7 +117,7 @@ public class OI {
 		//	xbox_drive_buttonB = new JoystickButton(xbox_drive, 2);
 		//	xbox_drive_buttonX = new JoystickButton(xbox_drive, 3);
 		//	xbox_drive_buttonY = new JoystickButton(xbox_drive, 4);
-			xbox_drive_leftBumper = new JoystickButton(xbox_drive, 5);
+		//	xbox_drive_leftBumper = new JoystickButton(xbox_drive, 5);
 			xbox_drive_rightBumper = new JoystickButton(xbox_drive, 6);
 		//	xbox_drive_backButton = new JoystickButton(xbox_drive, 7);
 		//	xbox_drive_startButton new JoystickButton(xbox_drive, 8);
@@ -183,8 +183,8 @@ public class OI {
 				retractarm = new RetractArm();
 				
 		// Drive Controller Buttons
-			xbox_drive_leftBumper.whenPressed(manipulatewheeldown);
-			xbox_drive_leftBumper.whenReleased(manipulatewheelup);
+		//	xbox_drive_leftBumper.whenPressed(manipulatewheeldown);
+		//	xbox_drive_leftBumper.whenReleased(manipulatewheelup);
 			xbox_drive_rightBumper.whenPressed(slowdrive);
 			xbox_drive_rightBumper.whenReleased(fastdrive);
 			xbox_drive_buttonA.whenPressed(reverse);

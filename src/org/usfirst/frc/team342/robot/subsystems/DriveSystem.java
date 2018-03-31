@@ -24,7 +24,7 @@ public class DriveSystem extends Subsystem {
 	private TalonSRX leftFollow;
 	private TalonSRX rightMaster;
 	private TalonSRX rightFollow;
-	private TalonSRX centerWheel;
+	//private TalonSRX centerWheel;
 
 	// Pneumatic Solenoid.
 	private DoubleSolenoid pneumaticSuspension;
@@ -84,7 +84,7 @@ public class DriveSystem extends Subsystem {
 		leftFollow = new TalonSRX(RobotMap.LEFTFOLLOW);
 		rightMaster = new TalonSRX(RobotMap.RIGHTMASTER);
 		rightFollow = new TalonSRX(RobotMap.RIGHTFOLLOW);
-		centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
+	//	centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
 		pneumaticSuspension = new DoubleSolenoid(RobotMap.PNEUMATICWHEEL_UP, RobotMap.PNEUMATICWHEEL_DOWN);
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
 		ultrasonicTwo = new AnalogInput(RobotMap.ULTRASONIC_TWO);
@@ -130,10 +130,10 @@ public class DriveSystem extends Subsystem {
 
 		// Controls the current of the center wheel. To change any of these change the
 		// constants at the top of the class.
-		centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS);
-		centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
-		centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
-		centerWheel.enableCurrentLimit(true);
+	//	centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS);
+	//	centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+	//	centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
+	//	centerWheel.enableCurrentLimit(true);
 		
 		// Setting the PID loop for the master controllers
 		rightMaster.config_kP(0, P, TIMEOUT_MS);
@@ -186,7 +186,7 @@ public class DriveSystem extends Subsystem {
 		rightMaster.set(ControlMode.PercentOutput, Right_Speed);
 		leftMaster.set(ControlMode.PercentOutput, Left_Speed);
 
-		centerWheel.set(ControlMode.PercentOutput, Center_Speed);
+	//	centerWheel.set(ControlMode.PercentOutput, Center_Speed);
 	}
 	
 	public void driveSetSpeed(double Left_Speed, double Right_Speed) {
@@ -296,7 +296,7 @@ public class DriveSystem extends Subsystem {
 
 		rightMaster.set(ControlMode.PercentOutput, 0.0);
 		leftMaster.set(ControlMode.PercentOutput, 0.0);
-		centerWheel.set(ControlMode.PercentOutput, 0.0);
+	//	centerWheel.set(ControlMode.PercentOutput, 0.0);
 	}
 
 	

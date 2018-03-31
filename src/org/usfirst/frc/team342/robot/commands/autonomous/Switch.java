@@ -35,15 +35,19 @@ public class Switch extends CommandGroup {
 	// Cube controller commands
 	private LowerClaw lower_claw;
 	private DispenseCubeTimed dispense_cube_timed;
+	private DispenseCubeTimed dispense_cube_timed_two;
 	private CollectCube collect_cube;
 	
 	// Drive commands
 	private RotateToAngle rotate_to_angle_one;
 	private RotateToAngle rotate_to_angle_two;
+	private RotateToAngle rotate_to_angle_three;
+	private RotateToAngle rotate_to_angle_four;
 	private RotateToAngle straighten_out;
 	private DriveToDistance drive_to_goal;
 	private DriveToDistance drive_out;
 	private DriveToDistance drive_in;
+	private DriveToDistance drive_in_two;
 	private DriveToDistance drive_to_platform_zone;
 	private DriveToDistance drive_to_cube;
 	private DriveToDistance drive_to_pick_cube_up;
@@ -52,6 +56,7 @@ public class Switch extends CommandGroup {
 	// Lift commands
 	private LiftToPosition lift_to_position;
 	private LiftUpTimed lift_up_to_switch;
+	private LiftUpTimed lift_up_to_switch_two;
 	private LiftDownTimed lift_down_to_floor;
 	private CollectCube pick_up_cube;
 	
@@ -92,6 +97,8 @@ public class Switch extends CommandGroup {
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle_one = new RotateToAngle(LEFT_ANGLE);
+    		rotate_to_angle_three = new RotateToAngle(LEFT_ANGLE);
+    		rotate_to_angle_four = new RotateToAngle(LEFT_ANGLE);
     		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_SWITCH_WALL, true);
@@ -99,6 +106,10 @@ public class Switch extends CommandGroup {
     		drive_to_platform_zone = new DriveToDistance(Distance.DRIVE_TO_PLATFORM_ZONE_FROM_SWITCH, false);
     		drive_to_cube = new DriveToDistance(Distance.DRIVE_TO_CUBE_SWITCH, false);
     		drive_to_pick_cube_up = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
+    		collect_cube = new CollectCube();
+    		lift_up_to_switch_two = new LiftUpTimed(LIFT_TIME);
+    		drive_in_two = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
+    		dispense_cube_timed_two = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
     		addSequential(drive_to_goal);
@@ -110,14 +121,14 @@ public class Switch extends CommandGroup {
     		addSequential(drive_out);
     		addSequential(rotate_to_angle_two);
     		addSequential(drive_to_platform_zone);
-    		addSequential(rotate_to_angle_one);
+    		addSequential(rotate_to_angle_three);
     		addSequential(drive_to_cube);
-    		addSequential(rotate_to_angle_one);
+    		addSequential(rotate_to_angle_four);
     		addSequential(drive_to_pick_cube_up);
     		addParallel(collect_cube);
-    		addSequential(lift_up_to_switch);
-    		addSequential(drive_in);
-    		addSequential(dispense_cube_timed);
+    		addSequential(lift_up_to_switch_two);
+    		addSequential(drive_in_two);
+    		addSequential(dispense_cube_timed_two);
     		
     	} else if(location == 'C' && switch_position == 'L' && !second_cube) {
     		
@@ -282,6 +293,8 @@ public class Switch extends CommandGroup {
     		lift_to_position = new LiftToPosition(LiftHeight.switchposition);
     		lift_up_to_switch = new LiftUpTimed(LIFT_TIME);
     		rotate_to_angle_one = new RotateToAngle(RIGHT_ANGLE);
+    		rotate_to_angle_three = new RotateToAngle(RIGHT_ANGLE);
+    		rotate_to_angle_four = new RotateToAngle(RIGHT_ANGLE);
     		drive_in = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
     		dispense_cube_timed = new DispenseCubeTimed(DISPENSE_TIME);
     		drive_out = new DriveToDistance(Distance.DRIVE_OFF_SWITCH_WALL, true);
@@ -289,6 +302,10 @@ public class Switch extends CommandGroup {
     		drive_to_platform_zone = new DriveToDistance(Distance.DRIVE_TO_PLATFORM_ZONE_FROM_SWITCH, false);
     		drive_to_cube = new DriveToDistance(Distance.DRIVE_TO_CUBE_SWITCH, false);
     		drive_to_pick_cube_up = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
+    		collect_cube = new CollectCube();
+    		lift_up_to_switch_two = new LiftUpTimed(LIFT_TIME);
+    		drive_in_two = new DriveToDistance(Distance.DRIVE_IN_DISTANCE_SWITCH, false);
+    		dispense_cube_timed_two = new DispenseCubeTimed(DISPENSE_TIME);
     		
     		addSequential(lower_claw);
     		addSequential(drive_to_goal);
@@ -300,14 +317,14 @@ public class Switch extends CommandGroup {
     		addSequential(drive_out);
     		addSequential(rotate_to_angle_two);
     		addSequential(drive_to_platform_zone);
-    		addSequential(rotate_to_angle_one);
+    		addSequential(rotate_to_angle_three);
     		addSequential(drive_to_cube);
-    		addSequential(rotate_to_angle_one);
+    		addSequential(rotate_to_angle_four);
     		addSequential(drive_to_pick_cube_up);
     		addParallel(collect_cube);
-    		addSequential(lift_up_to_switch);
-    		addSequential(drive_in);
-    		addSequential(dispense_cube_timed);
+    		addSequential(lift_up_to_switch_two);
+    		addSequential(drive_in_two);
+    		addSequential(dispense_cube_timed_two);
     	} 
     }
 }

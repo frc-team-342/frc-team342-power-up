@@ -47,7 +47,7 @@ public class DriveForward extends CommandGroup {
         	SmartDashboard.putString("Drive Forward Value: ", "R");
 
         	lower_claw = new LowerClaw();
-        	drive_to_distance = new DriveToDistance(Distance.DRIVE_FORWARD_DISTANCE, false);
+        	drive_to_distance = new DriveToDistance(Distance.DRIVE_FORWARD_DISTANCE, true);
         	
         	addSequential(lower_claw);
         	addSequential(drive_to_distance);

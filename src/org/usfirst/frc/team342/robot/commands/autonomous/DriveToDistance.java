@@ -95,8 +95,8 @@ public class DriveToDistance extends Command {
 			
 			if(backwards) {
 				
-				left_speed = left_speed + (degrees_off_zero * kP);
-				right_speed = right_speed - (degrees_off_zero * kP);
+				left_speed = left_speed - (degrees_off_zero * kP);
+				right_speed = right_speed + (degrees_off_zero * kP);
 			}else {
 				
 				left_speed = left_speed - (degrees_off_zero * kP);
@@ -114,8 +114,8 @@ public class DriveToDistance extends Command {
 			
 			if(backwards) {
 				
-				left_speed = left_speed - (degrees_off_zero * kP);
-				right_speed = right_speed + (degrees_off_zero * kP);
+				left_speed = left_speed + (degrees_off_zero * kP);
+				right_speed = right_speed - (degrees_off_zero * kP);
 			}else {
 				
 				left_speed = left_speed + (degrees_off_zero * kP);
