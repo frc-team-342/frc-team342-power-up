@@ -53,27 +53,16 @@ public class RobotMap {
 		 *LIFTMASTER & LIFTFOLLOW: prevent elevator from going to far up or down
 		 */	
 	
-		// Pratice Bot IDs
-		/*	
-		public static final int RIGHTMASTER = 13;
-		public static final int RIGHTFOLLOW = 8;
-		public static final int LEFTMASTER = 19;
-		public static final int LEFTFOLLOW = 21;
-		public static final int CENTERWHEEL = 15;
-		public static final int CLIMBMASTER = 18;
-		public static final int CLIMBFOLLOW = 20;
-		public static final int LIFTMASTER = 22;
-		public static final int LIFTFOLLOW = 14;
-		public static final int INTAKEMASTER = 0;
-		public static final int INTAKEFOLLOW = 1;
-		*/
 		
 		// Competition Bot IDs
 		public static final int RIGHTMASTER = 1;
-		public static final int RIGHTFOLLOW = 2;
+		public static final int RIGHTFOLLOW_1 = 2;
+		public static final int RIGHTFOLLOW_2 = 10;
+		public static final int RIGHTFOLLOW_3 = 11;
 		public static final int LEFTMASTER = 3;
-		public static final int LEFTFOLLOW = 4;
-		public static final int CENTERWHEEL = 5;
+		public static final int LEFTFOLLOW_1 = 4;
+		public static final int LEFTFOLLOW_2 = 12;
+		public static final int LEFTFOLLOW_3 = 13;
 		public static final int CLIMBMASTER = 6;
 		public static final int CLIMBFOLLOW = 7;
 		public static final int LIFTMASTER = 8;

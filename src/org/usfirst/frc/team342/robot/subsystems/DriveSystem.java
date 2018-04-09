@@ -21,9 +21,13 @@ public class DriveSystem extends Subsystem {
 
 	// Motor Controllers.
 	private TalonSRX leftMaster;
-	private TalonSRX leftFollow;
+	private TalonSRX leftFollow_1;
+	private TalonSRX leftFollow_2;
+	private TalonSRX leftFollow_3;
 	private TalonSRX rightMaster;
-	private TalonSRX rightFollow;
+	private TalonSRX rightFollow_1;
+	private TalonSRX rightFollow_2;
+	private TalonSRX rightFollow_3;
 	//private TalonSRX centerWheel;
 
 	// Pneumatic Solenoid.
@@ -41,12 +45,13 @@ public class DriveSystem extends Subsystem {
 	private boolean slow;
 
 	// Current variables.
-	private static final int AMPS = 200;
+	private static final int AMPS = 35;
 	private static final int TIMEOUT_MS = 10;
 	private static final int PEAK_DURATION = 200;
 	private static final int AMPSCENTER = 35;
-	private static final double RAMP_TIME = 0.1;
+	private static final double RAMP_TIME = 0.2;
 	private static final double SLOW_DOWN = 2.0;
+	private static final int ZERO = 0;
 	
 	// Constants for the PID loop
 	private static final double P = 0.01;
@@ -81,9 +86,13 @@ public class DriveSystem extends Subsystem {
 
 		// Instantiate Motor Controllers, Sensors, Pneumatics, and the NavX.
 		leftMaster = new TalonSRX(RobotMap.LEFTMASTER);
-		leftFollow = new TalonSRX(RobotMap.LEFTFOLLOW);
+		leftFollow_1 = new TalonSRX(RobotMap.LEFTFOLLOW_1);
+		leftFollow_2 = new TalonSRX(RobotMap.LEFTFOLLOW_2);
+		leftFollow_3 = new TalonSRX(RobotMap.LEFTFOLLOW_3);
 		rightMaster = new TalonSRX(RobotMap.RIGHTMASTER);
-		rightFollow = new TalonSRX(RobotMap.RIGHTFOLLOW);
+		rightFollow_1 = new TalonSRX(RobotMap.RIGHTFOLLOW_1);
+		rightFollow_2 = new TalonSRX(RobotMap.RIGHTFOLLOW_2);
+		rightFollow_3 = new TalonSRX(RobotMap.RIGHTFOLLOW_3);
 	//	centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
 		pneumaticSuspension = new DoubleSolenoid(RobotMap.PNEUMATICWHEEL_UP, RobotMap.PNEUMATICWHEEL_DOWN);
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
@@ -93,7 +102,9 @@ public class DriveSystem extends Subsystem {
 		// Inverts the right set of motors to make sure the robot drives in the right
 		// direction.
 		leftMaster.setInverted(true);
-		leftFollow.setInverted(true);
+		leftFollow_1.setInverted(true);
+		leftFollow_2.setInverted(true);
+		leftFollow_3.setInverted(true);
 
 		// Configures the encoder onto the master motor controllers.
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
@@ -101,39 +112,63 @@ public class DriveSystem extends Subsystem {
 
 		// Controls the current. To change any of these change the constants at the top
 		// of the class.
-		leftMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
-		leftMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		leftMaster.configPeakCurrentLimit(ZERO, ZERO);
+		leftMaster.configPeakCurrentDuration(ZERO, ZERO);
 		leftMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		leftMaster.enableCurrentLimit(true);
 
-		leftFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
-		leftFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
-		leftFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
-		leftFollow.enableCurrentLimit(true);
+		leftFollow_1.configPeakCurrentLimit(ZERO, ZERO);
+		leftFollow_1.configPeakCurrentDuration(ZERO, ZERO);
+		leftFollow_1.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		leftFollow_1.enableCurrentLimit(true);
 		
-		rightMaster.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
-		rightMaster.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		leftFollow_2.configPeakCurrentLimit(ZERO, ZERO);
+		leftFollow_2.configPeakCurrentDuration(ZERO, ZERO);
+		leftFollow_2.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		leftFollow_2.enableCurrentLimit(true);
+		
+		leftFollow_3.configPeakCurrentLimit(ZERO, ZERO);
+		leftFollow_3.configPeakCurrentDuration(ZERO, ZERO);
+		leftFollow_3.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		leftFollow_3.enableCurrentLimit(true);
+		
+		rightMaster.configPeakCurrentLimit(ZERO, ZERO);
+		rightMaster.configPeakCurrentDuration(ZERO, ZERO);
 		rightMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightMaster.enableCurrentLimit(true);
 
-		rightFollow.configPeakCurrentLimit(AMPS, TIMEOUT_MS);
-		rightFollow.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
-		rightFollow.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
-		rightFollow.enableCurrentLimit(true);
+		rightFollow_1.configPeakCurrentLimit(ZERO, ZERO);
+		rightFollow_1.configPeakCurrentDuration(ZERO, ZERO);
+		rightFollow_1.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		rightFollow_1.enableCurrentLimit(true);
+
+		rightFollow_2.configPeakCurrentLimit(ZERO, ZERO);
+		rightFollow_2.configPeakCurrentDuration(ZERO, ZERO);
+		rightFollow_2.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		rightFollow_2.enableCurrentLimit(true);
+
+		rightFollow_3.configPeakCurrentLimit(ZERO, ZERO);
+		rightFollow_3.configPeakCurrentDuration(ZERO, ZERO);
+		rightFollow_3.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
+		rightFollow_3.enableCurrentLimit(true);
 	
 		// Configures the open loop ramp to set the motor to ramp up to speed after a
 		// specified time other than jerking to full speed.
-		rightMaster.configOpenloopRamp(RAMP_TIME, 0);
-		rightFollow.configOpenloopRamp(RAMP_TIME, 0);
-		leftFollow.configOpenloopRamp(RAMP_TIME, 0);
 		leftMaster.configOpenloopRamp(RAMP_TIME, 0);
+		leftFollow_1.configOpenloopRamp(RAMP_TIME, 0);
+		leftFollow_2.configOpenloopRamp(RAMP_TIME, 0);
+		leftFollow_3.configOpenloopRamp(RAMP_TIME, 0);
+		rightMaster.configOpenloopRamp(RAMP_TIME, 0);
+		rightFollow_1.configOpenloopRamp(RAMP_TIME, 0);
+		rightFollow_2.configOpenloopRamp(RAMP_TIME, 0);
+		rightFollow_3.configOpenloopRamp(RAMP_TIME, 0);
 
 		// Controls the current of the center wheel. To change any of these change the
 		// constants at the top of the class.
-	//	centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS);
-	//	centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
-	//	centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
-	//	centerWheel.enableCurrentLimit(true);
+		//	centerWheel.configPeakCurrentLimit(AMPSCENTER, TIMEOUT_MS);
+		//	centerWheel.configPeakCurrentDuration(PEAK_DURATION, TIMEOUT_MS);
+		//	centerWheel.configContinuousCurrentLimit(AMPSCENTER, TIMEOUT_MS);
+		//	centerWheel.enableCurrentLimit(true);
 		
 		// Setting the PID loop for the master controllers
 		rightMaster.config_kP(0, P, TIMEOUT_MS);
@@ -146,13 +181,21 @@ public class DriveSystem extends Subsystem {
 		leftMaster.config_kD(0, D, TIMEOUT_MS);
 		leftMaster.config_kF(0, F, TIMEOUT_MS);
 		
-		rightMaster.set(ControlMode.PercentOutput, 0.0);
-		rightFollow.set(ControlMode.PercentOutput, 0.0);
-		rightFollow.follow(rightMaster);
-		
 		leftMaster.set(ControlMode.PercentOutput, 0.0);
-		leftFollow.set(ControlMode.PercentOutput, 0.0);
-		leftFollow.follow(leftMaster);
+		leftFollow_1.set(ControlMode.PercentOutput, 0.0);
+		leftFollow_2.set(ControlMode.PercentOutput, 0.0);
+		leftFollow_3.set(ControlMode.PercentOutput, 0.0);
+		leftFollow_1.follow(leftMaster);
+		leftFollow_2.follow(leftMaster);
+		leftFollow_3.follow(leftMaster);
+		
+		rightMaster.set(ControlMode.PercentOutput, 0.0);
+		rightFollow_1.set(ControlMode.PercentOutput, 0.0);
+		rightFollow_2.set(ControlMode.PercentOutput, 0.0);
+		rightFollow_3.set(ControlMode.PercentOutput, 0.0);
+		rightFollow_1.follow(rightMaster);
+		rightFollow_2.follow(rightMaster);
+		rightFollow_3.follow(rightMaster);
 	}
 
 	public void setslow(boolean slow) {
