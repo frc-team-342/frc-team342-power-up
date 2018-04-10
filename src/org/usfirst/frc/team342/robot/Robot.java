@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
 
 	SendableChooser<Integer> location = new SendableChooser<>();
 	SendableChooser<Integer> action = new SendableChooser<>();
-	SendableChooser<Boolean> second_cube = new SendableChooser<>();
+	//SendableChooser<Boolean> second_cube = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -91,12 +91,12 @@ public class Robot extends TimedRobot {
 		action.addObject("Scale", SCALE);
 		action.addObject("Drive Forward", DRIVE_FORWARD);
 		
-		second_cube.addDefault("Single Cube", false);
-		second_cube.addObject("Second Cube", true);
+		//second_cube.addDefault("Single Cube", false);
+		//second_cube.addObject("Second Cube", true);
 
 		SmartDashboard.putData("Location: ", location);
 		SmartDashboard.putData("Auto Action: ", action);
-		SmartDashboard.putData("Second Cube Chooser: ", second_cube);
+		//SmartDashboard.putData("Second Cube Chooser: ", second_cube);
 		
 		SmartDashboard.putData("Gyro: ", drivesystem.getNavX());
 		
@@ -136,9 +136,9 @@ public class Robot extends TimedRobot {
 		
 		gamedata = DriverStation.getInstance().getGameSpecificMessage();
 		
-		SmartDashboard.putBoolean("Selecte", second_cube.getSelected());
+		//SmartDashboard.putBoolean("Selecte", second_cube.getSelected());
 		
-		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected(), second_cube.getSelected());
+		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected(), false);
 		// He's not the messiah, he's a very naughty boy!
 		if (whattodo == 1) {
 			chooser.switchauto.start();

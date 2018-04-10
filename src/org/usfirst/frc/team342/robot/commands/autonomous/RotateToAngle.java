@@ -34,7 +34,7 @@ public class RotateToAngle extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		 RotateSpeed = 1.0;
+		 RotateSpeed = 0.6;
 		drive.resetGyro();
 		
 		gyro_angle = drive.getGyro(false);
