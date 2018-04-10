@@ -159,6 +159,8 @@ public class Robot extends TimedRobot {
 	public void autonomousPeriodic() {
 		
 		Scheduler.getInstance().run();
+		
+		SmartDashboard.putNumber("GYRO: ", drivesystem.getGyro(false));
 	}
 
 	@Override
@@ -174,22 +176,10 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		//double[] master = liftsystem.getLiftEncoder();
-		//double[] slave = liftsystem.getLiftEncoderS();
-		Scheduler.getInstance().run();
-		/*
-		SmartDashboard.putNumber("MASTER - 1: ", master[0]);
-		SmartDashboard.putNumber("MASTER - 2: ", master[1]);
-		SmartDashboard.putNumber("MASTER - 3: ", master[2]);
-		SmartDashboard.putNumber("MASTER - 4: ", master[3]);
-		SmartDashboard.putNumber("MASTER - 5: ", master[4]);
 		
-		SmartDashboard.putNumber("SLAVE - 1: ", master[0]);
-		SmartDashboard.putNumber("SLAVE - 2: ", master[1]);
-		SmartDashboard.putNumber("SLAVE - 3: ", master[2]);
-		SmartDashboard.putNumber("SLAVE - 4: ", master[3]);
-		SmartDashboard.putNumber("SLAVE - 5: ", master[4]);
-		*/
+		Scheduler.getInstance().run();
+		
+		SmartDashboard.putNumber("GYRO: ", drivesystem.getGyro(false));
 	}
 
 	/**

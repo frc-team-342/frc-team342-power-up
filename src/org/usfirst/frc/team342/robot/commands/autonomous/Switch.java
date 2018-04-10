@@ -87,6 +87,7 @@ public class Switch extends CommandGroup {
     		
     	} else if(location == 'L' && switch_position == 'L' && second_cube) {
     		
+    		/*
     		//NICK IS WRITING THIS CODE
     		
     		//Switch auto right
@@ -129,7 +130,7 @@ public class Switch extends CommandGroup {
     		addSequential(lift_up_to_switch_two);
     		addSequential(drive_in_two);
     		addSequential(dispense_cube_timed_two);
-    		
+    		*/
     	} else if(location == 'C' && switch_position == 'L' && !second_cube) {
     		
     		//Switch auto center left
@@ -182,6 +183,7 @@ public class Switch extends CommandGroup {
     		
     	} else if(location == 'C' && switch_position == 'R' && second_cube) {
     		
+    		/*
     		//ELIZABETH IS WRITING THIS CODE
     		SmartDashboard.putString("Switch Value: ", "CR");
     		
@@ -258,7 +260,7 @@ public class Switch extends CommandGroup {
     		addSequential(dispense_cube_timed);
     		
     		
-    	
+    		*/
     	
     	} else if(location == 'R' && switch_position == 'R' && !second_cube) {
     		
@@ -283,6 +285,7 @@ public class Switch extends CommandGroup {
     		
     	} else if(location == 'R' && switch_position == 'R' && second_cube) {
     		
+    		/*
     		//NICK IS WRITING THIS CODE
     		
     		//Switch auto right
@@ -325,6 +328,7 @@ public class Switch extends CommandGroup {
     		addSequential(lift_up_to_switch_two);
     		addSequential(drive_in_two);
     		addSequential(dispense_cube_timed_two);
+    		*/
     	} 
     }
 }
