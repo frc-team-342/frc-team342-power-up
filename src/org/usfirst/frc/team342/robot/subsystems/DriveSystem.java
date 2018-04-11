@@ -46,7 +46,7 @@ public class DriveSystem extends Subsystem {
 
 	// Current variables.
 	private static final int AMPS = 35;
-	private static final int TIMEOUT_MS = 0;
+	private static final int TIMEOUT_MS = 1;
 	private static final int PEAK_DURATION = 200;
 	private static final int AMPSCENTER = 35;
 	private static final double RAMP_TIME = 0.2;
@@ -205,12 +205,14 @@ public class DriveSystem extends Subsystem {
 
 	public void drive(double Left_Speed, double Right_Speed, double Center_Speed) {
 		
+		/*
 		if(Left_Speed > 0) {
 			Left_Speed *= 0.8;
 		}
 		if(Right_Speed > 0) {
 			Right_Speed *= 0.8;
 		}
+		*/
 		
 		// Check if the slow boolean is set to true to cut the robot's speed in half.
 		if (slow) {

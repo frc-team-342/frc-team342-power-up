@@ -17,7 +17,7 @@ public class RotateToAngle extends Command {
 
 	private static final double margin = 10;
 	
-	private static final double slowestspeed=.4;
+	private static final double slowestspeed=.3;
 	
 	/**
 	 * @param angle
@@ -34,7 +34,7 @@ public class RotateToAngle extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		 RotateSpeed = 0.6;
+		 RotateSpeed = 0.5;
 		drive.resetGyro();
 		
 		gyro_angle = drive.getGyro(false);

@@ -4,6 +4,7 @@ import org.usfirst.frc.team342.robot.OI;
 import org.usfirst.frc.team342.robot.subsystems.DriveSystem;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveWithJoystick extends Command {
 	
@@ -41,7 +42,20 @@ public class DriveWithJoystick extends Command {
 
 		x_average = ((speed_x_left + speed_x_right) / 2.0);
 		
+		
+		
 		if(Math.abs(speed_y_left) > DEADZONE || Math.abs(speed_y_right) > DEADZONE || Math.abs(x_average) > DEADZONE) {
+			
+			if(speed_y_left > 0.8) {
+				speed_y_left = 0.8;
+			}
+			
+			if(speed_y_right > 0.8) {
+				speed_y_right = 0.8;
+			}
+			
+			SmartDashboard.putNumber("Y_LEFT", speed_y_left);
+			SmartDashboard.putNumber("Y_RIGHT", speed_y_right);
 			
 			if(drive.getWheelState()) {
 				
