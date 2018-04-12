@@ -14,7 +14,7 @@ public class DispenseCubeTimed extends Command {
 	private long duration;
 	private long goal;
 	
-	private static final double SPEED = 1.0;
+	private static final double SPEED = 0.7;
 	
 	private CubeController cube_controller;
 	

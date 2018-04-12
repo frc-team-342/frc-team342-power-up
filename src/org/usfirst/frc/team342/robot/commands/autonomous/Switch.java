@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Switch extends CommandGroup {
 	
 	// Angles for various positions in autonomous
-	private static final int CENTER_RIGHT_ANGLE = 35;
-	private static final int CENTER_LEFT_ANGLE = 325;
-	private static final int STRAIGHT_LEFT_ANGLE = 40;
-	private static final int STRAIGHT_RIGHT_ANGLE = 320;
+	private static final int CENTER_RIGHT_ANGLE = 22;
+	private static final int CENTER_LEFT_ANGLE = 345;
+	private static final int STRAIGHT_LEFT_ANGLE = 20;
+	private static final int STRAIGHT_RIGHT_ANGLE = 340;
 	private static final int LEFT_ANGLE = 90;
 	private static final int RIGHT_ANGLE = 270;
 	private static final int NINETY_DEGREES = 90;

@@ -10,7 +10,9 @@ public class AutoChooser {
 	private static final String AUTO_MESSAGE_SWITCH_RIGHT = "Attempting Switch On The Right From The Right Position.";
 
 	private static final String AUTO_MESSAGE_SCALE_LEFT = "Attempting Scale On The Left From The Left Position";
+	private static final String AUTO_MESSAGE_SCALE_LEFT_CROSSOVER = "Attempting To Cross Over To The Right Side Scale From The Left Side";
 	private static final String AUTO_MESSAGE_SCALE_RIGHT = "Attempting Scale On The Right From The Right Position";
+	private static final String AUTO_MESSAGE_SCALE_RIGHT_CROSSOVER = "Attempting To Cross Over To The Left Side Scale From The Right Side";
 
 	private static final String AUTO_MESSAGE_DRIVE_FORWARD_LEFT = "Attempting To Drive Forward From The Left Position";
 	private static final String AUTO_MESSAGE_DRIVE_FORWARD_CENTER = "Attempting To Drive Forward From The Center Position";
@@ -23,7 +25,7 @@ public class AutoChooser {
 	public AutoChooser() {
 	}
 
-	public int calculateWhatToDo(String gamedata, int location, int action, boolean second_cube) {
+	public int calculateWhatToDo(String gamedata, int location, int action, boolean second_cube, boolean cross_over) {
 
 		SmartDashboard.putString("Game Message: ", gamedata);
 
@@ -47,9 +49,9 @@ public class AutoChooser {
 				}else if (gamedata.charAt(0) != 'L' && gamedata.charAt(1) == 'L') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
-					scaleauto = new Scale('L', second_cube);
+					scaleauto = new Scale('L', second_cube, false);
 					whattorun = 2;
-
+					
 					// If all else fails
 				}else {
 
@@ -66,9 +68,16 @@ public class AutoChooser {
 				if (gamedata.charAt(1) == 'L') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_LEFT);
-					scaleauto = new Scale('L', second_cube);
+					scaleauto = new Scale('L', second_cube, false);
 					whattorun = 2;
 
+					//if the scale is not on the left, but we want to cross over
+				} else if(gamedata.charAt(1) == 'R' && cross_over) {
+					
+					SmartDashboard.putString("Autonomous Status: ",  AUTO_MESSAGE_SCALE_LEFT_CROSSOVER);
+					scaleauto = new Scale('L', second_cube, true);
+					whattorun = 2;
+					
 					// If the scale is not on the left but the switch is
 				} else if (gamedata.charAt(1) != 'L' && gamedata.charAt(0) == 'L') {
 
@@ -155,10 +164,10 @@ public class AutoChooser {
 					whattorun = 1;
 
 					// If the switch is not on the left but the scale is
-				} else if (gamedata.charAt(0) != 'R' && gamedata.charAt(1) == 'R') {
+				}else if (gamedata.charAt(0) != 'R' && gamedata.charAt(1) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
-					scaleauto = new Scale('R', second_cube);
+					scaleauto = new Scale('R', second_cube, false);
 					whattorun = 2;
 
 					// If all else fails
@@ -177,11 +186,18 @@ public class AutoChooser {
 				if (gamedata.charAt(1) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SCALE_RIGHT);
-					scaleauto = new Scale('R', second_cube);
+					scaleauto = new Scale('R', second_cube, false);
 					whattorun = 2;
 
+					// if the scale is not on the left, but we want to cross over
+				}  else if(gamedata.charAt(1) == 'L' && cross_over) {
+					
+					SmartDashboard.putString("Autonomous Status: ",  AUTO_MESSAGE_SCALE_RIGHT_CROSSOVER);
+					scaleauto = new Scale('R', second_cube, true);
+					whattorun = 2;
+					
 					// If the scale is not on the left but the switch is
-				} else if (gamedata.charAt(1) != 'R' && gamedata.charAt(0) == 'R') {
+				}  else if (gamedata.charAt(1) != 'R' && gamedata.charAt(0) == 'R') {
 
 					SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_SWITCH_RIGHT);
 					switchauto = new Switch('R', gamedata.charAt(0), second_cube);

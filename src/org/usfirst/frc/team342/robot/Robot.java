@@ -62,6 +62,7 @@ public class Robot extends TimedRobot {
 	SendableChooser<Integer> location = new SendableChooser<>();
 	SendableChooser<Integer> action = new SendableChooser<>();
 	//SendableChooser<Boolean> second_cube = new SendableChooser<>();
+	SendableChooser<Boolean> cross_over = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be used
@@ -93,10 +94,14 @@ public class Robot extends TimedRobot {
 		
 		//second_cube.addDefault("Single Cube", false);
 		//second_cube.addObject("Second Cube", true);
+		
+		cross_over.addDefault("Cross Over YEAH!", true);
+		cross_over.addObject("Cross Over Nah...", false);
 
 		SmartDashboard.putData("Location: ", location);
 		SmartDashboard.putData("Auto Action: ", action);
 		//SmartDashboard.putData("Second Cube Chooser: ", second_cube);
+		SmartDashboard.putData("Cross Over Chooser: ", cross_over);
 		
 		SmartDashboard.putData("Gyro: ", drivesystem.getNavX());
 		
@@ -138,7 +143,7 @@ public class Robot extends TimedRobot {
 		
 		//SmartDashboard.putBoolean("Selecte", second_cube.getSelected());
 		
-		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected(), false);
+		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected(), false, cross_over.getSelected());
 		// He's not the messiah, he's a very naughty boy!
 		if (whattodo == 1) {
 			chooser.switchauto.start();
