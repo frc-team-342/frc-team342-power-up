@@ -162,15 +162,6 @@ public class DriveSystem extends Subsystem {
 
 	public void drive(double Left_Speed, double Right_Speed, double Center_Speed) {
 		
-		/*
-		if(Left_Speed > 0) {
-			Left_Speed *= 0.8;
-		}
-		if(Right_Speed > 0) {
-			Right_Speed *= 0.8;
-		}
-		*/
-		
 		// Check if the slow boolean is set to true to cut the robot's speed in half.
 		if (slow) {
 
