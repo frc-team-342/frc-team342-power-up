@@ -22,12 +22,8 @@ public class DriveSystem extends Subsystem {
 	// Motor Controllers.
 	private TalonSRX leftMaster;
 	private TalonSRX leftFollow_1;
-	private TalonSRX leftFollow_2;
-	private TalonSRX leftFollow_3;
 	private TalonSRX rightMaster;
 	private TalonSRX rightFollow_1;
-	private TalonSRX rightFollow_2;
-	private TalonSRX rightFollow_3;
 	//private TalonSRX centerWheel;
 
 	// Pneumatic Solenoid.
@@ -87,12 +83,8 @@ public class DriveSystem extends Subsystem {
 		// Instantiate Motor Controllers, Sensors, Pneumatics, and the NavX.
 		leftMaster = new TalonSRX(RobotMap.LEFTMASTER);
 		leftFollow_1 = new TalonSRX(RobotMap.LEFTFOLLOW_1);
-		leftFollow_2 = new TalonSRX(RobotMap.LEFTFOLLOW_2);
-		leftFollow_3 = new TalonSRX(RobotMap.LEFTFOLLOW_3);
 		rightMaster = new TalonSRX(RobotMap.RIGHTMASTER);
 		rightFollow_1 = new TalonSRX(RobotMap.RIGHTFOLLOW_1);
-		rightFollow_2 = new TalonSRX(RobotMap.RIGHTFOLLOW_2);
-		rightFollow_3 = new TalonSRX(RobotMap.RIGHTFOLLOW_3);
 	//	centerWheel = new TalonSRX(RobotMap.CENTERWHEEL);
 		pneumaticSuspension = new DoubleSolenoid(RobotMap.PNEUMATICWHEEL_UP, RobotMap.PNEUMATICWHEEL_DOWN);
 		ultrasonicOne = new AnalogInput(RobotMap.ULTRASONIC_ONE);
@@ -103,9 +95,6 @@ public class DriveSystem extends Subsystem {
 		// direction.
 		leftMaster.setInverted(true);
 		leftFollow_1.setInverted(true);
-		leftFollow_2.setInverted(true);
-		leftFollow_3.setInverted(true);
-
 		// Configures the encoder onto the master motor controllers.
 		leftMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
 		rightMaster.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, 0, 0);
@@ -122,16 +111,6 @@ public class DriveSystem extends Subsystem {
 		leftFollow_1.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		leftFollow_1.enableCurrentLimit(true);
 		
-		leftFollow_2.configPeakCurrentLimit(ZERO, ZERO);
-		leftFollow_2.configPeakCurrentDuration(ZERO, ZERO);
-		leftFollow_2.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
-		leftFollow_2.enableCurrentLimit(true);
-		
-		leftFollow_3.configPeakCurrentLimit(ZERO, ZERO);
-		leftFollow_3.configPeakCurrentDuration(ZERO, ZERO);
-		leftFollow_3.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
-		leftFollow_3.enableCurrentLimit(true);
-		
 		rightMaster.configPeakCurrentLimit(ZERO, ZERO);
 		rightMaster.configPeakCurrentDuration(ZERO, ZERO);
 		rightMaster.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
@@ -141,27 +120,13 @@ public class DriveSystem extends Subsystem {
 		rightFollow_1.configPeakCurrentDuration(ZERO, ZERO);
 		rightFollow_1.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
 		rightFollow_1.enableCurrentLimit(true);
-
-		rightFollow_2.configPeakCurrentLimit(ZERO, ZERO);
-		rightFollow_2.configPeakCurrentDuration(ZERO, ZERO);
-		rightFollow_2.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
-		rightFollow_2.enableCurrentLimit(true);
-
-		rightFollow_3.configPeakCurrentLimit(ZERO, ZERO);
-		rightFollow_3.configPeakCurrentDuration(ZERO, ZERO);
-		rightFollow_3.configContinuousCurrentLimit(AMPS, TIMEOUT_MS);
-		rightFollow_3.enableCurrentLimit(true);
 	
 		// Configures the open loop ramp to set the motor to ramp up to speed after a
 		// specified time other than jerking to full speed.
 		leftMaster.configOpenloopRamp(RAMP_TIME, 0);
 		leftFollow_1.configOpenloopRamp(RAMP_TIME, 0);
-		leftFollow_2.configOpenloopRamp(RAMP_TIME, 0);
-		leftFollow_3.configOpenloopRamp(RAMP_TIME, 0);
 		rightMaster.configOpenloopRamp(RAMP_TIME, 0);
 		rightFollow_1.configOpenloopRamp(RAMP_TIME, 0);
-		rightFollow_2.configOpenloopRamp(RAMP_TIME, 0);
-		rightFollow_3.configOpenloopRamp(RAMP_TIME, 0);
 
 		// Controls the current of the center wheel. To change any of these change the
 		// constants at the top of the class.
@@ -183,19 +148,11 @@ public class DriveSystem extends Subsystem {
 		
 		leftMaster.set(ControlMode.PercentOutput, 0.0);
 		leftFollow_1.set(ControlMode.PercentOutput, 0.0);
-		leftFollow_2.set(ControlMode.PercentOutput, 0.0);
-		leftFollow_3.set(ControlMode.PercentOutput, 0.0);
 		leftFollow_1.follow(leftMaster);
-		leftFollow_2.follow(leftMaster);
-		leftFollow_3.follow(leftMaster);
 		
 		rightMaster.set(ControlMode.PercentOutput, 0.0);
 		rightFollow_1.set(ControlMode.PercentOutput, 0.0);
-		rightFollow_2.set(ControlMode.PercentOutput, 0.0);
-		rightFollow_3.set(ControlMode.PercentOutput, 0.0);
 		rightFollow_1.follow(rightMaster);
-		rightFollow_2.follow(rightMaster);
-		rightFollow_3.follow(rightMaster);
 	}
 
 	public void setslow(boolean slow) {
