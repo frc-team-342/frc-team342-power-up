@@ -20,8 +20,6 @@ import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelDOWN;
 import org.usfirst.frc.team342.robot.commands.drive.ManipulateWheelUP;
 import org.usfirst.frc.team342.robot.commands.drive.Reverse;
 import org.usfirst.frc.team342.robot.commands.drive.SlowDrive;
-import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition;
-import org.usfirst.frc.team342.robot.commands.lift.LiftToPosition.LiftHeight;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
