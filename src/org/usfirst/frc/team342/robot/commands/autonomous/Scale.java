@@ -16,8 +16,8 @@ public class Scale extends CommandGroup {
 	// Angles for various positions in autonomous
 	private static final int LEFT_ANGLE = 90;
 	private static final int RIGHT_ANGLE = 270;
-	private static final int NINTEY = 94;
-	private static final int TWO_SEVENTY = 274;
+	private static final int NINTEY = 90;
+	private static final int TWO_SEVENTY = 270;
 	
 	// Time for raising the lift
 	//OLD = 3875
@@ -110,7 +110,7 @@ public class Scale extends CommandGroup {
     		addSequential(rotate_to_platform_zone);
     		addSequential(drive_across_platform_zone);
     		addSequential(rotate_to_scale);
-    		addSequential(lift_to_position);
+    		//addSequential(lift_to_position);
     		addSequential(lift_up_timed);
     		addSequential(drive_to_scale_platform_zone);
     		addSequential(dispense_cube_timed);
@@ -135,7 +135,7 @@ public class Scale extends CommandGroup {
     		addSequential(rotate_to_platform_zone);
     		addSequential(drive_across_platform_zone);
     		addSequential(rotate_to_scale);
-    		addSequential(lift_to_position);
+    		//addSequential(lift_to_position);
     		addSequential(lift_up_timed);
     		addSequential(drive_to_scale_platform_zone);
     		addSequential(dispense_cube_timed);

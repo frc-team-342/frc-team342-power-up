@@ -14,7 +14,7 @@ public class RotateToAngle extends Command {
 	private boolean TurnRight;
 	
 	private static final double RotateSpeed = 1.0;
-	private static final double RotateSlowSpeed=0.35;
+	private static final double RotateSlowSpeed=0.4;
 	private static final double margin = 10;
 	private static final double slowmargin=120;
 	
@@ -36,7 +36,7 @@ public class RotateToAngle extends Command {
 		
 		drive.resetGyro();
 		
-		gyro_angle = drive.getGyro();
+		gyro_angle = drive.getGyro(false);
 
 		if (Math.abs(angle) > 180) {
 
@@ -53,7 +53,7 @@ public class RotateToAngle extends Command {
 		double CurrentDriveSpeed;
 		boolean slowdown = (gyro_angle) <= (angle) + slowmargin && (gyro_angle) >= (angle) - slowmargin;
 		
-		gyro_angle = drive.getGyro();
+		gyro_angle = drive.getGyro(false);
 		
 		if (slowdown) {
 			CurrentDriveSpeed=RotateSlowSpeed;
