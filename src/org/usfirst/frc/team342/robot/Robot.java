@@ -8,6 +8,7 @@
 package org.usfirst.frc.team342.robot;
 
 import org.usfirst.frc.team342.robot.commands.autonomous.AutoChooser;
+import org.usfirst.frc.team342.robot.commands.autonomous.RotateToAngle;
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithJoystick;
 import org.usfirst.frc.team342.robot.commands.drive.DriveWithLogitech;
 import org.usfirst.frc.team342.robot.commands.lift.LiftWithJoystick;
@@ -45,6 +46,8 @@ public class Robot extends TimedRobot {
 	private static DriveWithJoystick drivewithjoystick;
 	private static LiftWithJoystick liftwithjoystick;
 	private static DriveWithLogitech drivewithlogitech;
+	
+	private static RotateToAngle rotate;
 
 	private AutoChooser chooser;
 
@@ -106,6 +109,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putData("Gyro: ", drivesystem.getNavX());
 		
 		CameraServer.getInstance().startAutomaticCapture().setVideoMode(PixelFormat.kMJPEG, 320, 240, 15);
+		
+		SmartDashboard.putNumber("Rotate To: ", 0.0);
+		
 	}
 
 	/**
@@ -141,8 +147,7 @@ public class Robot extends TimedRobot {
 		
 		gamedata = DriverStation.getInstance().getGameSpecificMessage();
 		
-		//SmartDashboard.putBoolean("Selecte", second_cube.getSelected());
-		
+		/*
 		int whattodo = chooser.calculateWhatToDo(gamedata, location.getSelected(), action.getSelected(), false, cross_over.getSelected());
 		// He's not the messiah, he's a very naughty boy!
 		if (whattodo == 1) {
@@ -154,6 +159,10 @@ public class Robot extends TimedRobot {
 		} else {
 			SmartDashboard.putString("Autonomous Status: ", AUTO_MESSAGE_FAILURE);
 		}
+		*/
+		
+		rotate = new RotateToAngle((int)SmartDashboard.getNumber("Rotate To: ", 0.0));
+		rotate.start();
 
 	}
 
